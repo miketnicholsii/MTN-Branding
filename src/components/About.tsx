@@ -1,49 +1,70 @@
-import { motion } from "framer-motion";
-import { useInView } from "framer-motion";
+import { motion, useInView, useScroll, useTransform } from "framer-motion";
 import { useRef } from "react";
+import AnimatedCounter from "./AnimatedCounter";
+import TextReveal from "./TextReveal";
 
 const stats = [
-  { value: "10+", label: "Years Experience" },
-  { value: "18K+", label: "Connections" },
-  { value: "6", label: "Companies Led" },
+  { value: 10, suffix: "+", label: "Years Experience" },
+  { value: 18, suffix: "K+", label: "Connections" },
+  { value: 6, suffix: "", label: "Companies Led" },
 ];
 
 const About = () => {
   const ref = useRef(null);
+  const containerRef = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-100px" });
+  
+  const { scrollYProgress } = useScroll({
+    target: containerRef,
+    offset: ["start end", "end start"],
+  });
+
+  const imageY = useTransform(scrollYProgress, [0, 1], [100, -100]);
 
   return (
-    <section id="about" className="py-32 lg:py-40 relative overflow-hidden">
-      {/* Background accent */}
-      <div className="absolute top-0 right-0 w-1/2 h-full bg-gradient-to-l from-primary/5 to-transparent" />
+    <section id="about" className="py-32 lg:py-40 relative overflow-hidden" ref={containerRef}>
+      {/* Parallax background elements */}
+      <motion.div
+        style={{ y: imageY }}
+        className="absolute top-0 right-0 w-1/2 h-full"
+      >
+        <div className="absolute inset-0 bg-gradient-to-l from-primary/5 to-transparent" />
+        <motion.div
+          animate={{ rotate: 360 }}
+          transition={{ duration: 50, repeat: Infinity, ease: "linear" }}
+          className="absolute top-20 right-20 w-64 h-64 border border-accent/10 rounded-full"
+        />
+      </motion.div>
       
       <div className="container mx-auto px-6 lg:px-8 relative" ref={ref}>
         <div className="grid lg:grid-cols-2 gap-16 lg:gap-24 items-center">
-          {/* Left column - Main text */}
+          {/* Left column */}
           <div>
             <motion.span
-              initial={{ opacity: 0, y: 20 }}
-              animate={isInView ? { opacity: 1, y: 0 } : {}}
+              initial={{ opacity: 0, x: -20 }}
+              animate={isInView ? { opacity: 1, x: 0 } : {}}
               transition={{ duration: 0.6 }}
               className="inline-block px-4 py-1.5 bg-accent/10 text-accent text-sm font-semibold rounded-full mb-6"
             >
               About Me
             </motion.span>
             
-            <motion.h2
-              initial={{ opacity: 0, y: 30 }}
-              animate={isInView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.6, delay: 0.1 }}
-              className="text-4xl md:text-5xl lg:text-6xl font-bold text-foreground leading-tight mb-8"
-            >
-              I solve problems with 
-              <span className="text-gradient"> clarity</span> — and occasionally a dad joke.
-            </motion.h2>
+            <TextReveal className="mb-8">
+              <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-foreground leading-tight">
+                I solve problems with 
+                <span className="text-gradient"> clarity</span> —
+              </h2>
+            </TextReveal>
+            <TextReveal delay={0.1} className="mb-8">
+              <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-foreground leading-tight">
+                and occasionally a dad joke.
+              </h2>
+            </TextReveal>
             
             <motion.div
               initial={{ opacity: 0, y: 30 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.6, delay: 0.2 }}
+              transition={{ duration: 0.6, delay: 0.3 }}
               className="space-y-6 text-body text-lg leading-relaxed"
             >
               <p>
@@ -59,45 +80,66 @@ const About = () => {
             </motion.div>
           </div>
 
-          {/* Right column - Stats & facts */}
+          {/* Right column */}
           <motion.div
             initial={{ opacity: 0, x: 40 }}
             animate={isInView ? { opacity: 1, x: 0 } : {}}
             transition={{ duration: 0.8, delay: 0.3 }}
           >
-            {/* Stats grid */}
+            {/* Stats grid with animated counters */}
             <div className="grid grid-cols-3 gap-4 mb-8">
               {stats.map((stat, index) => (
-                <div
+                <motion.div
                   key={index}
-                  className="text-center p-6 bg-card rounded-2xl border border-border hover-lift"
+                  whileHover={{ y: -8, scale: 1.02 }}
+                  transition={{ type: "spring", stiffness: 300 }}
+                  className="text-center p-6 bg-card rounded-2xl border border-border cursor-default group"
                 >
-                  <div className="text-3xl lg:text-4xl font-bold text-primary mb-2">{stat.value}</div>
+                  <div className="text-3xl lg:text-4xl font-bold text-primary mb-2 group-hover:text-accent transition-colors">
+                    <AnimatedCounter value={stat.value} suffix={stat.suffix} />
+                  </div>
                   <div className="text-subtle text-sm font-medium">{stat.label}</div>
-                </div>
+                </motion.div>
               ))}
             </div>
 
             {/* Quick facts card */}
-            <div className="bg-card rounded-3xl p-8 border border-border hover-lift">
-              <h3 className="text-xl font-bold text-foreground mb-6">
+            <motion.div
+              whileHover={{ scale: 1.02 }}
+              transition={{ type: "spring", stiffness: 300 }}
+              className="bg-card rounded-3xl p-8 border border-border relative overflow-hidden group"
+            >
+              {/* Hover gradient effect */}
+              <motion.div
+                initial={{ opacity: 0 }}
+                whileHover={{ opacity: 1 }}
+                className="absolute inset-0 bg-gradient-to-br from-primary/5 to-accent/5 pointer-events-none"
+              />
+              
+              <h3 className="text-xl font-bold text-foreground mb-6 relative">
                 At a glance
               </h3>
               
-              <dl className="space-y-4">
+              <dl className="space-y-4 relative">
                 {[
                   { dt: "Education", dd: "Notre Dame '14, Mendoza College" },
                   { dt: "Certification", dd: "Certified Scrum Master" },
                   { dt: "Location", dd: "United States" },
                   { dt: "Recognition", dd: "Vanguard Award for Leadership" },
-                ].map((item) => (
-                  <div key={item.dt} className="flex justify-between items-center py-3 border-b border-border last:border-0">
-                    <dt className="text-subtle text-sm font-medium">{item.dt}</dt>
+                ].map((item, index) => (
+                  <motion.div
+                    key={item.dt}
+                    initial={{ opacity: 0, x: -20 }}
+                    animate={isInView ? { opacity: 1, x: 0 } : {}}
+                    transition={{ duration: 0.4, delay: 0.5 + index * 0.1 }}
+                    className="flex justify-between items-center py-3 border-b border-border last:border-0 group/item"
+                  >
+                    <dt className="text-subtle text-sm font-medium group-hover/item:text-primary transition-colors">{item.dt}</dt>
                     <dd className="text-foreground text-sm font-medium text-right">{item.dd}</dd>
-                  </div>
+                  </motion.div>
                 ))}
               </dl>
-            </div>
+            </motion.div>
           </motion.div>
         </div>
       </div>
