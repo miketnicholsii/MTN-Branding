@@ -1,38 +1,38 @@
 import { motion, useInView } from "framer-motion";
-import { useRef, useState } from "react";
+import { useRef } from "react";
 import { Target, Users, Brain, Palette, Rocket, Zap } from "lucide-react";
-import ParallaxText from "./ParallaxText";
+import TextReveal from "./TextReveal";
 
 const capabilities = [
   {
     icon: Target,
     title: "Product Strategy",
-    description: "Translating vision into actionable roadmaps that align business objectives with user needs.",
+    description: "Translating vision into actionable roadmaps aligned with user needs.",
   },
   {
     icon: Users,
     title: "Agile Leadership",
-    description: "Coaching teams and driving efficient delivery through Scrum, Kanban, and hybrid methodologies.",
+    description: "Coaching teams through Scrum, Kanban, and hybrid methodologies.",
   },
   {
     icon: Brain,
     title: "Systems Thinking",
-    description: "Breaking down complex systems into clear requirements, data flows, and actionable specs.",
+    description: "Breaking down complexity into clear requirements and specs.",
   },
   {
     icon: Palette,
     title: "UX Collaboration",
-    description: "Partnering with designers to create intuitive experiences backed by research and data.",
+    description: "Creating intuitive experiences backed by research and data.",
   },
   {
     icon: Rocket,
     title: "Go-to-Market",
-    description: "Orchestrating teams to bring products from beta to successful market launch.",
+    description: "Orchestrating teams from beta to successful market launch.",
   },
   {
     icon: Zap,
     title: "Process Optimization",
-    description: "Identifying inefficiencies and implementing scalable solutions and automations.",
+    description: "Implementing scalable solutions and automations.",
   },
 ];
 
@@ -48,121 +48,76 @@ const tools = [
 const Capabilities = () => {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-100px" });
-  const [activeCard, setActiveCard] = useState<number | null>(null);
 
   return (
     <section id="capabilities" className="py-32 lg:py-40 relative overflow-hidden">
-      {/* Animated background shapes */}
-      <motion.div
-        animate={{ rotate: 360 }}
-        transition={{ duration: 60, repeat: Infinity, ease: "linear" }}
-        className="absolute -bottom-40 -left-40 w-80 h-80 border border-secondary/20 rounded-full"
-      />
-      <motion.div
-        animate={{ rotate: -360 }}
-        transition={{ duration: 45, repeat: Infinity, ease: "linear" }}
-        className="absolute -top-20 -right-20 w-60 h-60 border border-accent/20 rounded-full"
-      />
-      
-      {/* Parallax scrolling text */}
-      <div className="absolute top-0 left-0 right-0 overflow-hidden pointer-events-none opacity-50">
-        <ParallaxText baseVelocity={1}>STRATEGY • PRODUCT • DESIGN •</ParallaxText>
-      </div>
+      {/* Background glow */}
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-secondary/10 rounded-full blur-[150px]" />
       
       <div className="container mx-auto px-6 lg:px-8 relative" ref={ref}>
-        {/* Section header */}
+        {/* Section label */}
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
+          initial={{ opacity: 0, y: 20 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6 }}
-          className="text-center mb-20"
+          className="text-center mb-6"
         >
-          <span className="inline-block px-4 py-1.5 bg-secondary/20 text-secondary-foreground text-sm font-semibold rounded-full mb-6">
-            Capabilities
-          </span>
-          <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-foreground mb-6">
-            What I bring to the table
-          </h2>
-          <p className="text-body text-xl max-w-2xl mx-auto">
-            A blend of strategic thinking, technical understanding, and people skills.
-          </p>
+          <span className="text-primary text-sm font-medium tracking-wider uppercase">Capabilities</span>
         </motion.div>
 
-        {/* Capabilities grid with 3D tilt effect */}
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mb-20">
+        {/* Main headline */}
+        <div className="text-center mb-6 max-w-3xl mx-auto">
+          <TextReveal>
+            <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-foreground">
+              Everything you need.
+            </h2>
+          </TextReveal>
+        </div>
+
+        <motion.p
+          initial={{ opacity: 0, y: 20 }}
+          animate={isInView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.6, delay: 0.2 }}
+          className="text-body text-lg text-center max-w-2xl mx-auto mb-16"
+        >
+          From strategy to execution, I provide the tools and guidance for every stage.
+        </motion.p>
+
+        {/* Capabilities grid */}
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4 mb-16">
           {capabilities.map((cap, index) => (
-            <motion.article
+            <motion.div
               key={index}
               initial={{ opacity: 0, y: 30 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.6, delay: index * 0.1 }}
-              onHoverStart={() => setActiveCard(index)}
-              onHoverEnd={() => setActiveCard(null)}
-              whileHover={{ y: -12, rotateX: 5, rotateY: -5 }}
-              className="group p-8 bg-card rounded-3xl border border-border relative overflow-hidden cursor-pointer"
-              style={{ perspective: 1000, transformStyle: "preserve-3d" }}
+              className="group glass-card rounded-2xl p-6 hover:bg-white/5 transition-all cursor-default"
             >
-              {/* Animated gradient background */}
-              <motion.div
-                initial={{ opacity: 0, scale: 0 }}
-                animate={{ 
-                  opacity: activeCard === index ? 0.1 : 0,
-                  scale: activeCard === index ? 2 : 0,
-                }}
-                transition={{ duration: 0.4 }}
-                className="absolute top-0 left-0 w-full h-full bg-gradient-to-br from-primary to-accent rounded-full"
-              />
-
-              {/* Icon with animated background */}
-              <motion.div
-                whileHover={{ scale: 1.2, rotate: 10 }}
-                className="relative w-16 h-16 rounded-2xl bg-gradient-to-br from-primary to-accent flex items-center justify-center mb-6 shadow-lg shadow-primary/20"
-              >
-                <cap.icon size={28} className="text-white" />
-                
-                {/* Pulsing ring effect */}
-                <motion.div
-                  animate={{ scale: [1, 1.5], opacity: [0.5, 0] }}
-                  transition={{ duration: 2, repeat: Infinity }}
-                  className="absolute inset-0 rounded-2xl border-2 border-primary"
-                />
-              </motion.div>
-
-              <h3 className="text-xl font-bold text-foreground mb-3 relative">
-                {cap.title}
-              </h3>
-              <p className="text-body leading-relaxed relative">{cap.description}</p>
-
-              {/* Number indicator */}
-              <div className="absolute top-6 right-6 text-6xl font-bold text-foreground/5 group-hover:text-primary/10 transition-colors">
-                {String(index + 1).padStart(2, "0")}
+              <div className="w-12 h-12 rounded-xl bg-primary/20 flex items-center justify-center mb-4 group-hover:bg-primary/30 transition-colors">
+                <cap.icon size={24} className="text-primary" />
               </div>
-            </motion.article>
+              <h3 className="text-lg font-bold text-foreground mb-2">{cap.title}</h3>
+              <p className="text-body text-sm leading-relaxed">{cap.description}</p>
+            </motion.div>
           ))}
         </div>
 
-        {/* Tools section with stagger animation */}
+        {/* Tools section */}
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
+          initial={{ opacity: 0, y: 20 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6, delay: 0.5 }}
           className="text-center"
         >
-          <h3 className="text-2xl font-bold text-foreground mb-8">
-            Tools & Frameworks
-          </h3>
+          <h3 className="text-xl font-bold text-foreground mb-6">Tools & Frameworks</h3>
           <div className="flex flex-wrap justify-center gap-3">
-            {tools.map((tool, index) => (
-              <motion.span
+            {tools.map((tool) => (
+              <span
                 key={tool}
-                initial={{ opacity: 0, scale: 0.8 }}
-                animate={isInView ? { opacity: 1, scale: 1 } : {}}
-                transition={{ duration: 0.4, delay: 0.6 + index * 0.1 }}
-                whileHover={{ scale: 1.1, y: -4 }}
-                className="px-6 py-3 bg-muted text-foreground text-sm font-medium rounded-full cursor-default hover:bg-gradient-to-r hover:from-primary hover:to-accent hover:text-white transition-all duration-300"
+                className="px-5 py-2.5 glass-pill rounded-full text-body text-sm font-medium hover:text-foreground hover:bg-white/10 transition-all cursor-default"
               >
                 {tool}
-              </motion.span>
+              </span>
             ))}
           </div>
         </motion.div>
