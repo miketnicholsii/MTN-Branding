@@ -42,7 +42,7 @@ const Header = () => {
             href="#"
             className="text-xl lg:text-2xl font-bold text-foreground hover:text-primary transition-colors"
           >
-            Mike<span className="text-primary">.</span>
+            Mike Nichols<span className="text-primary">.</span>
           </a>
 
           {/* Desktop Navigation */}
