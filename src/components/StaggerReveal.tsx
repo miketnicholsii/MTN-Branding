@@ -4,7 +4,6 @@ import { useRef, ReactNode } from "react";
 interface StaggerRevealProps {
   children: ReactNode;
   className?: string;
-  staggerDelay?: number;
 }
 
 const containerVariants: Variants = {
@@ -12,8 +11,8 @@ const containerVariants: Variants = {
   visible: {
     opacity: 1,
     transition: {
-      staggerChildren: 0.1,
-      delayChildren: 0.1,
+      staggerChildren: 0.08,
+      delayChildren: 0.05,
     },
   },
 };
@@ -21,23 +20,21 @@ const containerVariants: Variants = {
 const itemVariants: Variants = {
   hidden: { 
     opacity: 0, 
-    y: 40,
-    filter: "blur(10px)",
+    y: 20,
   },
   visible: { 
     opacity: 1, 
     y: 0,
-    filter: "blur(0px)",
     transition: {
-      duration: 0.8,
-      ease: [0.16, 1, 0.3, 1],
+      duration: 0.5,
+      ease: [0.25, 0.46, 0.45, 0.94],
     },
   },
 };
 
 export const StaggerContainer = ({ children, className = "" }: StaggerRevealProps) => {
   const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, margin: "-50px" });
+  const isInView = useInView(ref, { once: true, margin: "-80px" });
 
   return (
     <motion.div
