@@ -18,7 +18,7 @@ const Footer = () => {
             whileHover={{ scale: 1.05 }}
             className="text-2xl font-bold text-background hover:text-secondary transition-colors"
           >
-            Mike<span className="text-secondary">.</span>
+            Mike Nichols<span className="text-secondary">.</span>
           </motion.a>
 
           {/* Navigation */}
