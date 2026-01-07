@@ -30,9 +30,9 @@ const Header = () => {
             href="#"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            className="text-xl font-bold text-foreground"
+            className="text-xl font-bold text-foreground flex items-baseline gap-0.5"
           >
-            MN<span className="text-primary">.</span>
+            MN<span className="text-primary">.</span><span className="text-xs text-primary/60 font-medium tracking-tight">II</span>
           </motion.a>
 
           {/* Center Navigation - Pill style like NEKO */}

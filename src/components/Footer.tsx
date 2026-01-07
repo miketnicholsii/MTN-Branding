@@ -9,9 +9,9 @@ const Footer = () => {
           <motion.a
             href="#"
             whileHover={{ scale: 1.05 }}
-            className="text-xl font-bold text-foreground"
+            className="text-xl font-bold text-foreground flex items-baseline gap-0.5"
           >
-            Mike Nichols<span className="text-primary">.</span>
+            Mike T. Nichols<span className="text-primary">.</span><span className="text-xs text-primary/60 font-medium tracking-tight">II</span>
           </motion.a>
 
           {/* Navigation */}
@@ -29,7 +29,7 @@ const Footer = () => {
 
           {/* Copyright */}
           <p className="text-subtle text-sm">
-            © {new Date().getFullYear()} Mike Nichols
+            © {new Date().getFullYear()} Mike T. Nichols II
           </p>
         </div>
       </div>

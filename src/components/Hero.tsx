@@ -32,7 +32,7 @@ const Hero = () => {
           {/* Main headline */}
           <StaggerItem>
             <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold text-foreground leading-[1.1] mb-2">
-              Hi, I'm Mike Nichols.
+              Hi, I'm Mike T. Nichols <span className="text-primary/50 text-4xl md:text-5xl lg:text-6xl">II</span>
             </h1>
           </StaggerItem>
           

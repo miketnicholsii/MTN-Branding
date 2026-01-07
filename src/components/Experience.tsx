@@ -10,6 +10,7 @@ const experiences = [
     role: "Strategist",
     period: "2022 — Present",
     description: "Leading strategic initiatives and product development at a forward-thinking consultancy.",
+    featured: true,
   },
   {
     number: "02",
@@ -78,11 +79,21 @@ const Experience = () => {
               {experiences.map((exp, index) => (
                 <StaggerItem key={index}>
                   <div
-                    className="group glass-card rounded-2xl p-6 md:p-8 cursor-default transition-transform duration-300 hover:translate-x-2"
+                    className={`group glass-card rounded-2xl p-6 md:p-8 cursor-default transition-transform duration-300 hover:translate-x-2 ${
+                      exp.featured ? 'ring-1 ring-primary/30 relative overflow-hidden' : ''
+                    }`}
                   >
+                    {/* Featured badge for NÈKO */}
+                    {exp.featured && (
+                      <div className="absolute top-4 right-4 px-3 py-1 bg-primary/20 text-primary text-xs font-semibold rounded-full">
+                        Current
+                      </div>
+                    )}
                     <div className="flex items-start gap-6">
                       {/* Number */}
-                      <div className="text-4xl font-bold text-primary/30 group-hover:text-primary transition-colors duration-300">
+                      <div className={`text-4xl font-bold transition-colors duration-300 ${
+                        exp.featured ? 'text-primary' : 'text-primary/30 group-hover:text-primary'
+                      }`}>
                         {exp.number}
                       </div>
                       
@@ -90,7 +101,9 @@ const Experience = () => {
                       <div className="flex-1">
                         <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-2 mb-3">
                           <div>
-                            <h3 className="text-xl font-bold text-foreground group-hover:text-primary transition-colors duration-300">{exp.company}</h3>
+                            <h3 className={`text-xl font-bold transition-colors duration-300 ${
+                              exp.featured ? 'text-primary' : 'text-foreground group-hover:text-primary'
+                            }`}>{exp.company}</h3>
                             <p className="text-primary text-sm font-medium">{exp.role}</p>
                           </div>
                           <span className="text-subtle text-sm">{exp.period}</span>
