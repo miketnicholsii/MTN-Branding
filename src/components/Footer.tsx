@@ -1,46 +1,31 @@
 const Footer = () => {
   return (
-    <footer className="py-12 border-t border-border">
+    <footer className="py-8 bg-foreground">
       <div className="container mx-auto px-6 lg:px-8">
         <div className="flex flex-col md:flex-row items-center justify-between gap-6">
-          {/* Logo / Name */}
+          {/* Logo */}
           <a
             href="#"
-            className="font-serif text-xl font-medium text-foreground hover:text-primary transition-colors"
+            className="text-xl font-bold text-background hover:text-secondary transition-colors"
           >
-            Mike Nichols
+            Mike<span className="text-secondary">.</span>
           </a>
 
           {/* Navigation */}
-          <nav className="flex items-center gap-8">
-            <a
-              href="#about"
-              className="text-sm text-body hover:text-foreground transition-colors"
-            >
-              About
-            </a>
-            <a
-              href="#experience"
-              className="text-sm text-body hover:text-foreground transition-colors"
-            >
-              Experience
-            </a>
-            <a
-              href="#capabilities"
-              className="text-sm text-body hover:text-foreground transition-colors"
-            >
-              Capabilities
-            </a>
-            <a
-              href="#contact"
-              className="text-sm text-body hover:text-foreground transition-colors"
-            >
-              Contact
-            </a>
+          <nav className="flex items-center gap-6">
+            {["About", "Experience", "Capabilities", "Contact"].map((item) => (
+              <a
+                key={item}
+                href={`#${item.toLowerCase()}`}
+                className="text-sm text-background/60 hover:text-background transition-colors"
+              >
+                {item}
+              </a>
+            ))}
           </nav>
 
           {/* Copyright */}
-          <p className="text-subtle text-sm">
+          <p className="text-background/40 text-sm">
             © {new Date().getFullYear()} Mike Nichols
           </p>
         </div>
