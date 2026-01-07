@@ -9,13 +9,12 @@ export default {
       center: true,
       padding: "2rem",
       screens: {
-        "2xl": "1200px",
+        "2xl": "1400px",
       },
     },
     extend: {
       fontFamily: {
-        sans: ["Inter", "system-ui", "sans-serif"],
-        serif: ["Playfair Display", "Georgia", "serif"],
+        sans: ["Sora", "Inter", "system-ui", "sans-serif"],
       },
       colors: {
         border: "hsl(var(--border))",
@@ -27,14 +26,13 @@ export default {
         body: "hsl(var(--body))",
         subtle: "hsl(var(--subtle))",
         divider: "hsl(var(--divider))",
-        // Brand colors
         teal: {
-          DEFAULT: "#227C9D",
-          light: "#17C3B2",
+          DEFAULT: "hsl(195, 65%, 37%)",
+          light: "hsl(173, 79%, 43%)",
         },
-        cream: "#FEF9EF",
-        gold: "#FFCB77",
-        coral: "#FE6D73",
+        cream: "hsl(43, 82%, 96%)",
+        gold: "hsl(38, 100%, 73%)",
+        coral: "hsl(357, 98%, 71%)",
         primary: {
           DEFAULT: "hsl(var(--primary))",
           foreground: "hsl(var(--primary-foreground))",
@@ -78,6 +76,8 @@ export default {
         lg: "var(--radius)",
         md: "calc(var(--radius) - 2px)",
         sm: "calc(var(--radius) - 4px)",
+        "2xl": "1.5rem",
+        "3xl": "2rem",
       },
       keyframes: {
         "accordion-down": {
@@ -88,15 +88,10 @@ export default {
           from: { height: "var(--radix-accordion-content-height)" },
           to: { height: "0" },
         },
-        fadeUp: {
-          from: { opacity: "0", transform: "translateY(20px)" },
-          to: { opacity: "1", transform: "translateY(0)" },
-        },
       },
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
-        "fade-up": "fadeUp 0.6s ease-out forwards",
       },
     },
   },

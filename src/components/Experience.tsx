@@ -1,89 +1,118 @@
+import { motion } from "framer-motion";
+import { useInView } from "framer-motion";
+import { useRef } from "react";
+import { ArrowUpRight, Building2 } from "lucide-react";
+
 const experiences = [
   {
     company: "NÈKO",
     role: "Strategist",
     period: "2022 — Present",
-    location: "Brooklyn, NY",
     description: "Leading strategic initiatives and product development at a forward-thinking consultancy.",
+    highlight: true,
   },
   {
     company: "Worldpay for Platforms",
     role: "Senior Product Manager",
     period: "2021 — 2022",
-    location: "Atlanta, GA",
-    description:
-      "Led product management with a focus on UX and streamlined development. Managed cross-functional team through full product lifecycle. Spearheaded comprehensive rebranding strategy, revamping UI and standardizing backend code for enhanced consistency.",
+    description: "Led product management with a focus on UX. Spearheaded comprehensive rebranding strategy, revamping UI and standardizing backend code.",
   },
   {
     company: "Slalom",
     role: "Consultant",
     period: "2020 — 2021",
-    location: "Atlanta, GA",
-    description:
-      "Dispatched as Business Analyst to major telecom. Managed $1M+ project budgets, designed innovative processes, and developed data-driven analytics to identify high-value business opportunities.",
+    description: "Managed $1M+ project budgets, designed innovative processes, and developed data-driven analytics for major telecom.",
   },
   {
     company: "Equifax",
     role: "Senior Product Manager",
     period: "2016 — 2019",
-    location: "Atlanta, GA",
-    description:
-      "Led identity protection initiative with 300 employees nationwide. Launched Canadian consumer products achieving 115% attainment and $500K projected revenue. Managed legacy platform enabling access for 700K consumers.",
+    description: "Led identity protection initiative with 300 employees. Launched Canadian products achieving 115% attainment and $500K revenue.",
   },
   {
     company: "Mercedes-Benz USA",
     role: "Business Analyst",
     period: "2015 — 2016",
-    location: "Atlanta, GA",
-    description:
-      "Transformed dealer performance scorecard software deployed across 370 dealerships. Designed UX interfaces and technical requirements, custom-tailoring the system to dealer size and market segments.",
+    description: "Transformed dealer performance scorecard software deployed across 370 dealerships with custom UX interfaces.",
   },
   {
     company: "Target",
     role: "Scrum Master & Agile Coach",
     period: "2014 — 2015",
-    location: "Minneapolis, MN",
-    description:
-      "Spearheaded the company's transition to Agile, coaching 16 employees in developing strategic roadmaps and implementing efficient, structured approaches.",
+    description: "Spearheaded the company's transition to Agile, coaching 16 employees in developing strategic roadmaps.",
   },
 ];
 
 const Experience = () => {
+  const ref = useRef(null);
+  const isInView = useInView(ref, { once: true, margin: "-100px" });
+
   return (
-    <section id="experience" className="py-24 lg:py-32 bg-card/50">
-      <div className="container mx-auto px-6 lg:px-8">
+    <section id="experience" className="py-32 lg:py-40 bg-muted/30 relative overflow-hidden">
+      {/* Background decoration */}
+      <div className="absolute inset-0 geometric-grid opacity-50" />
+      
+      <div className="container mx-auto px-6 lg:px-8 relative" ref={ref}>
         {/* Section header */}
-        <div className="mb-16">
-          <span className="text-subtle text-sm font-medium tracking-widest uppercase">
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          animate={isInView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.6 }}
+          className="mb-16"
+        >
+          <span className="inline-block px-4 py-1.5 bg-primary/10 text-primary text-sm font-semibold rounded-full mb-6">
             Experience
           </span>
-          <h2 className="font-serif text-3xl md:text-4xl lg:text-5xl font-medium text-foreground mt-4">
-            A decade of building and leading
+          <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-foreground">
+            A decade of building
+            <br />
+            <span className="text-gradient">and leading</span>
           </h2>
-        </div>
+        </motion.div>
 
-        {/* Experience list */}
-        <div className="space-y-0">
+        {/* Experience cards */}
+        <div className="grid md:grid-cols-2 gap-6">
           {experiences.map((exp, index) => (
-            <article
+            <motion.article
               key={index}
-              className="group py-10 border-t border-border last:border-b transition-colors hover:bg-muted/30"
+              initial={{ opacity: 0, y: 30 }}
+              animate={isInView ? { opacity: 1, y: 0 } : {}}
+              transition={{ duration: 0.6, delay: index * 0.1 }}
+              className={`group p-8 rounded-3xl border transition-all duration-300 hover-lift ${
+                exp.highlight
+                  ? "bg-primary text-primary-foreground border-primary"
+                  : "bg-card border-border hover:border-primary/30"
+              }`}
             >
-              <div className="grid md:grid-cols-12 gap-6 md:gap-8">
-                {/* Left - Meta info */}
-                <div className="md:col-span-4 lg:col-span-3">
-                  <p className="text-foreground font-medium">{exp.company}</p>
-                  <p className="text-body text-sm mt-1">{exp.role}</p>
-                  <p className="text-subtle text-sm mt-2">{exp.period}</p>
-                  <p className="text-subtle text-sm">{exp.location}</p>
+              <div className="flex items-start justify-between mb-6">
+                <div className={`w-12 h-12 rounded-2xl flex items-center justify-center ${
+                  exp.highlight ? "bg-white/20" : "bg-primary/10"
+                }`}>
+                  <Building2 size={24} className={exp.highlight ? "text-white" : "text-primary"} />
                 </div>
-
-                {/* Right - Description */}
-                <div className="md:col-span-8 lg:col-span-9">
-                  <p className="text-body leading-relaxed">{exp.description}</p>
-                </div>
+                <span className={`text-sm font-medium ${
+                  exp.highlight ? "text-white/80" : "text-subtle"
+                }`}>
+                  {exp.period}
+                </span>
               </div>
-            </article>
+              
+              <h3 className={`text-xl font-bold mb-2 ${
+                exp.highlight ? "text-white" : "text-foreground"
+              }`}>
+                {exp.company}
+              </h3>
+              <p className={`text-sm font-semibold mb-4 ${
+                exp.highlight ? "text-white/80" : "text-primary"
+              }`}>
+                {exp.role}
+              </p>
+              <p className={`leading-relaxed ${
+                exp.highlight ? "text-white/90" : "text-body"
+              }`}>
+                {exp.description}
+              </p>
+            </motion.article>
           ))}
         </div>
       </div>

@@ -1,64 +1,104 @@
-import { ArrowDown } from "lucide-react";
+import { motion } from "framer-motion";
+import { ArrowDown, Sparkles } from "lucide-react";
 
 const Hero = () => {
   return (
     <section className="min-h-screen flex flex-col justify-center relative overflow-hidden">
-      {/* Subtle gradient overlay */}
-      <div className="absolute inset-0 bg-gradient-to-b from-background via-background to-background/95" />
+      {/* Geometric background */}
+      <div className="absolute inset-0 geometric-grid" />
       
-      {/* Ambient glow effect */}
-      <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[600px] h-[600px] bg-primary/5 rounded-full blur-3xl" />
+      {/* Floating blobs */}
+      <div className="absolute top-20 right-10 w-72 h-72 bg-primary/10 blob floating opacity-60" />
+      <div className="absolute bottom-32 left-10 w-96 h-96 bg-accent/10 blob floating opacity-40" style={{ animationDelay: "-3s" }} />
+      <div className="absolute top-1/2 right-1/4 w-48 h-48 bg-secondary/20 blob floating opacity-50" style={{ animationDelay: "-5s" }} />
 
       <div className="container mx-auto px-6 lg:px-8 relative z-10">
-        <div className="max-w-4xl">
-          {/* Eyebrow */}
-          <p className="text-subtle text-sm font-medium tracking-widest uppercase mb-6 animate-fade-up">
-            Product Leader · Strategist · Builder
-          </p>
+        <div className="max-w-5xl">
+          {/* Eyebrow badge */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+            className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 border border-primary/20 mb-8"
+          >
+            <Sparkles size={14} className="text-primary" />
+            <span className="text-primary text-sm font-medium">Product Leader · Strategist · Builder</span>
+          </motion.div>
 
           {/* Main headline */}
-          <h1 className="font-serif text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-medium text-foreground leading-[1.1] mb-8 animate-fade-up-delay-1">
+          <motion.h1
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.1 }}
+            className="text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-bold text-foreground leading-[1.05] mb-8"
+          >
             Hi, I'm Mike.
             <br />
             <span className="text-gradient">
-              I build products that matter.
+              I build products
             </span>
-          </h1>
+            <br />
+            <span className="text-gradient">
+              that matter.
+            </span>
+          </motion.h1>
 
           {/* Subheadline */}
-          <p className="text-body text-lg md:text-xl lg:text-2xl leading-relaxed max-w-2xl mb-12 animate-fade-up-delay-2">
+          <motion.p
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.2 }}
+            className="text-body text-xl md:text-2xl leading-relaxed max-w-2xl mb-12"
+          >
             High-performance platforms, cross-functional teams, and business solutions — 
             with clarity, empathy, and a bias toward action.
-          </p>
+          </motion.p>
 
           {/* CTAs */}
-          <div className="flex flex-wrap gap-4 animate-fade-up-delay-3">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.3 }}
+            className="flex flex-wrap gap-4"
+          >
             <a
               href="#contact"
-              className="inline-flex items-center gap-2 px-7 py-3.5 bg-primary text-primary-foreground font-medium rounded-full hover:bg-primary/90 transition-all hover:shadow-lg hover:shadow-primary/20"
+              className="group inline-flex items-center gap-2 px-8 py-4 bg-primary text-primary-foreground font-semibold rounded-full hover:bg-primary/90 transition-all hover:shadow-xl hover:shadow-primary/30 hover:-translate-y-1"
             >
               Get in touch
+              <span className="group-hover:translate-x-1 transition-transform">→</span>
             </a>
             <a
               href="#experience"
-              className="inline-flex items-center gap-2 px-7 py-3.5 border border-border text-foreground font-medium rounded-full hover:bg-secondary transition-colors"
+              className="inline-flex items-center gap-2 px-8 py-4 bg-card border-2 border-border text-foreground font-semibold rounded-full hover:border-primary/50 hover:bg-primary/5 transition-all hover:-translate-y-1"
             >
               View experience
             </a>
-          </div>
+          </motion.div>
         </div>
       </div>
 
       {/* Scroll indicator */}
-      <div className="absolute bottom-12 left-1/2 -translate-x-1/2 animate-fade-up-delay-4">
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 1, delay: 0.8 }}
+        className="absolute bottom-12 left-1/2 -translate-x-1/2"
+      >
         <a
           href="#about"
-          className="flex flex-col items-center gap-2 text-subtle hover:text-body transition-colors"
+          className="flex flex-col items-center gap-3 text-subtle hover:text-primary transition-colors group"
         >
-          <span className="text-xs font-medium tracking-widest uppercase">Scroll</span>
-          <ArrowDown size={16} className="animate-bounce" />
+          <span className="text-xs font-semibold tracking-widest uppercase">Scroll</span>
+          <div className="w-6 h-10 rounded-full border-2 border-current flex justify-center pt-2">
+            <motion.div
+              animate={{ y: [0, 8, 0] }}
+              transition={{ duration: 1.5, repeat: Infinity }}
+              className="w-1.5 h-1.5 bg-current rounded-full"
+            />
+          </div>
         </a>
-      </div>
+      </motion.div>
     </section>
   );
 };
