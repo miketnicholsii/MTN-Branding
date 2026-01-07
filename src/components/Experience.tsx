@@ -1,7 +1,9 @@
-import { motion, useInView } from "framer-motion";
+import { useInView } from "framer-motion";
 import { useRef } from "react";
+import { Download } from "lucide-react";
 import { StaggerContainer, StaggerItem } from "./StaggerReveal";
 import SectionTransition from "./SectionTransition";
+import { Link } from "react-router-dom";
 
 const experiences = [
   {
@@ -67,10 +69,23 @@ const Experience = () => {
 
             {/* Main headline */}
             <StaggerItem>
-              <div className="text-center mb-16">
+              <div className="text-center mb-8">
                 <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-foreground">
                   The Path Forward
                 </h2>
+              </div>
+            </StaggerItem>
+
+            {/* Resume download button */}
+            <StaggerItem>
+              <div className="text-center mb-16">
+                <Link
+                  to="/resume"
+                  className="inline-flex items-center gap-2 px-6 py-3 glass-pill rounded-full text-body text-sm font-medium hover:text-foreground hover:bg-white/10 transition-all duration-300"
+                >
+                  <Download size={16} className="text-primary" />
+                  View & Download Resume
+                </Link>
               </div>
             </StaggerItem>
 
