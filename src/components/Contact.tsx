@@ -1,7 +1,7 @@
 import { motion } from "framer-motion";
 import { useInView } from "framer-motion";
 import { useRef } from "react";
-import { Mail, Linkedin, ArrowUpRight, Phone } from "lucide-react";
+import { Linkedin, ArrowUpRight } from "lucide-react";
 
 const Contact = () => {
   const ref = useRef(null);
@@ -53,44 +53,21 @@ const Contact = () => {
             initial={{ opacity: 0, y: 30 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.6, delay: 0.3 }}
-            className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-10"
+            className="flex items-center justify-center"
           >
-            <a
-              href="mailto:miketnicholsii@gmail.com"
-              className="group inline-flex items-center gap-3 px-8 py-4 bg-white text-primary font-semibold rounded-full hover:bg-secondary transition-all hover:shadow-xl hover:-translate-y-1 w-full sm:w-auto justify-center"
-            >
-              <Mail size={20} />
-              <span>miketnicholsii@gmail.com</span>
-              <ArrowUpRight
-                size={18}
-                className="opacity-50 group-hover:opacity-100 group-hover:translate-x-1 group-hover:-translate-y-1 transition-all"
-              />
-            </a>
-
             <a
               href="https://www.linkedin.com/in/miketnicholsii/"
               target="_blank"
               rel="noopener noreferrer"
-              className="group inline-flex items-center gap-3 px-8 py-4 border-2 border-white/30 text-white font-semibold rounded-full hover:bg-white/10 transition-all hover:-translate-y-1 w-full sm:w-auto justify-center"
+              className="group inline-flex items-center gap-3 px-8 py-4 bg-white text-primary font-semibold rounded-full hover:bg-secondary transition-all hover:shadow-xl hover:-translate-y-1"
             >
               <Linkedin size={20} />
-              <span>LinkedIn</span>
+              <span>Connect on LinkedIn</span>
               <ArrowUpRight
                 size={18}
                 className="opacity-50 group-hover:opacity-100 group-hover:translate-x-1 group-hover:-translate-y-1 transition-all"
               />
             </a>
-          </motion.div>
-
-          {/* Phone */}
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={isInView ? { opacity: 1 } : {}}
-            transition={{ duration: 0.6, delay: 0.4 }}
-            className="flex items-center justify-center gap-2 text-white/60"
-          >
-            <Phone size={16} />
-            <span className="text-sm">336-880-2162</span>
           </motion.div>
         </div>
       </div>
