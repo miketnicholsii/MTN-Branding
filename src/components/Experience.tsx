@@ -1,6 +1,7 @@
 import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
-import TextReveal from "./TextReveal";
+import { StaggerContainer, StaggerItem } from "./StaggerReveal";
+import SectionTransition from "./SectionTransition";
 
 const experiences = [
   {
@@ -52,62 +53,72 @@ const Experience = () => {
   const isInView = useInView(ref, { once: true, margin: "-100px" });
 
   return (
-    <section id="experience" className="py-32 lg:py-40 relative overflow-hidden">
-      {/* Background glow */}
-      <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[800px] h-[400px] bg-accent/10 rounded-full blur-[150px]" />
-      
-      <div className="container mx-auto px-6 lg:px-8 relative" ref={ref}>
-        {/* Section label */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.6 }}
-          className="text-center mb-6"
-        >
-          <span className="text-primary text-sm font-medium tracking-wider uppercase">Experience</span>
-        </motion.div>
-
-        {/* Main headline */}
-        <div className="text-center mb-16 max-w-3xl mx-auto">
-          <TextReveal>
-            <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-foreground">
-              Your Journey
-            </h2>
-          </TextReveal>
-        </div>
-
-        {/* Experience list - NEKO numbered style */}
-        <div className="max-w-3xl mx-auto space-y-6">
-          {experiences.map((exp, index) => (
-            <motion.div
-              key={index}
-              initial={{ opacity: 0, y: 30 }}
-              animate={isInView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.6, delay: index * 0.1 }}
-              className="group glass-card rounded-2xl p-6 md:p-8 hover:bg-white/5 transition-all cursor-default"
-            >
-              <div className="flex items-start gap-6">
-                {/* Number */}
-                <div className="text-4xl font-bold text-primary/30 group-hover:text-primary transition-colors">
-                  {exp.number}
-                </div>
-                
-                {/* Content */}
-                <div className="flex-1">
-                  <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-2 mb-3">
-                    <div>
-                      <h3 className="text-xl font-bold text-foreground">{exp.company}</h3>
-                      <p className="text-primary text-sm font-medium">{exp.role}</p>
-                    </div>
-                    <span className="text-subtle text-sm">{exp.period}</span>
-                  </div>
-                  <p className="text-body leading-relaxed">{exp.description}</p>
-                </div>
+    <section id="experience" className="py-32 lg:py-40 relative overflow-hidden" ref={ref}>
+      <SectionTransition>
+        <div className="container mx-auto px-6 lg:px-8 relative">
+          <StaggerContainer>
+            {/* Section label */}
+            <StaggerItem>
+              <div className="text-center mb-6">
+                <span className="text-primary text-sm font-medium tracking-wider uppercase">Experience</span>
               </div>
-            </motion.div>
-          ))}
+            </StaggerItem>
+
+            {/* Main headline */}
+            <StaggerItem>
+              <div className="text-center mb-16">
+                <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-foreground">
+                  Your Journey
+                </h2>
+              </div>
+            </StaggerItem>
+
+            {/* Experience list */}
+            <div className="max-w-3xl mx-auto space-y-4">
+              {experiences.map((exp, index) => (
+                <StaggerItem key={index}>
+                  <motion.div
+                    whileHover={{ x: 8, scale: 1.01 }}
+                    transition={{ type: "spring", stiffness: 300 }}
+                    className="group glass-card rounded-2xl p-6 md:p-8 cursor-default"
+                  >
+                    <div className="flex items-start gap-6">
+                      {/* Number */}
+                      <motion.div 
+                        className="text-4xl font-bold text-primary/30 group-hover:text-primary transition-colors duration-300"
+                        whileHover={{ scale: 1.1 }}
+                      >
+                        {exp.number}
+                      </motion.div>
+                      
+                      {/* Content */}
+                      <div className="flex-1">
+                        <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-2 mb-3">
+                          <div>
+                            <h3 className="text-xl font-bold text-foreground group-hover:text-primary transition-colors">{exp.company}</h3>
+                            <p className="text-primary text-sm font-medium">{exp.role}</p>
+                          </div>
+                          <span className="text-subtle text-sm">{exp.period}</span>
+                        </div>
+                        <p className="text-body leading-relaxed">{exp.description}</p>
+                      </div>
+
+                      {/* Hover arrow */}
+                      <motion.div
+                        initial={{ opacity: 0, x: -10 }}
+                        whileHover={{ opacity: 1, x: 0 }}
+                        className="hidden md:block text-primary opacity-0 group-hover:opacity-100 transition-opacity"
+                      >
+                        →
+                      </motion.div>
+                    </div>
+                  </motion.div>
+                </StaggerItem>
+              ))}
+            </div>
+          </StaggerContainer>
         </div>
-      </div>
+      </SectionTransition>
     </section>
   );
 };
