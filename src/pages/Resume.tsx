@@ -26,8 +26,8 @@ const Resume = () => {
           <header className="border-b border-[hsl(168,30%,25%)] print:border-gray-200 pb-8 mb-8">
             <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-4">
               <div>
-                <h1 className="text-4xl md:text-5xl font-bold text-white print:text-gray-900 mb-2">
-                  Mike T. Nichols <span className="text-[hsl(168,70%,45%)] print:text-teal-600 text-3xl">II</span>
+                <h1 className="text-4xl md:text-5xl font-bold text-white print:text-gray-900 mb-2 flex items-baseline gap-2">
+                  Mike T. Nichols <span className="text-[hsl(168,70%,45%)] print:text-teal-600 text-2xl font-semibold tracking-wide">II</span>
                 </h1>
                 <p className="text-xl text-[hsl(168,70%,45%)] print:text-teal-600 font-medium">
                   Product Leader · Strategist · Builder
