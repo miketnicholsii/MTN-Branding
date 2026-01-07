@@ -1,7 +1,6 @@
 import { motion, useScroll, useTransform } from "framer-motion";
 import { Sparkles, TrendingUp, Target, Zap } from "lucide-react";
 import MagneticButton from "./MagneticButton";
-import TextReveal from "./TextReveal";
 import { StaggerContainer, StaggerItem } from "./StaggerReveal";
 import { useRef } from "react";
 
@@ -12,31 +11,22 @@ const Hero = () => {
     offset: ["start start", "end start"],
   });
 
-  const y = useTransform(scrollYProgress, [0, 1], [0, 300]);
-  const opacity = useTransform(scrollYProgress, [0, 0.5], [1, 0]);
-  const scale = useTransform(scrollYProgress, [0, 0.5], [1, 0.9]);
+  const y = useTransform(scrollYProgress, [0, 1], [0, 150]);
+  const opacity = useTransform(scrollYProgress, [0, 0.4], [1, 0]);
 
   return (
     <section ref={containerRef} className="min-h-screen flex flex-col justify-center relative overflow-hidden">
       <motion.div
-        style={{ y, opacity, scale }}
+        style={{ y, opacity }}
         className="container mx-auto px-6 lg:px-8 relative z-10"
       >
         <StaggerContainer className="max-w-4xl mx-auto text-center">
           {/* Eyebrow badge */}
           <StaggerItem>
-            <motion.div
-              whileHover={{ scale: 1.05 }}
-              className="inline-flex items-center gap-2 px-5 py-2.5 glass-pill rounded-full mb-8"
-            >
-              <motion.div
-                animate={{ rotate: [0, 10, -10, 0] }}
-                transition={{ duration: 2, repeat: Infinity }}
-              >
-                <Sparkles size={16} className="text-primary" />
-              </motion.div>
+            <div className="inline-flex items-center gap-2 px-5 py-2.5 glass-pill rounded-full mb-8 hover:bg-white/5 transition-colors duration-300">
+              <Sparkles size={16} className="text-primary" />
               <span className="text-body text-sm font-medium">Product Leader · Strategist · Builder</span>
-            </motion.div>
+            </div>
           </StaggerItem>
 
           {/* Main headline */}
@@ -65,20 +55,14 @@ const Hero = () => {
             <div className="flex flex-wrap justify-center gap-4 mb-16">
               <MagneticButton
                 href="#contact"
-                className="group inline-flex items-center gap-2 px-8 py-4 bg-primary text-primary-foreground font-semibold rounded-full transition-all hover:shadow-lg hover:shadow-primary/30"
+                className="group inline-flex items-center gap-2 px-8 py-4 bg-primary text-primary-foreground font-semibold rounded-full transition-all duration-300 hover:shadow-lg hover:shadow-primary/30"
               >
                 Get in Touch
-                <motion.span
-                  className="inline-block"
-                  animate={{ x: [0, 4, 0] }}
-                  transition={{ duration: 1.5, repeat: Infinity }}
-                >
-                  →
-                </motion.span>
+                <span className="inline-block transition-transform duration-300 group-hover:translate-x-1">→</span>
               </MagneticButton>
               <MagneticButton
                 href="#experience"
-                className="inline-flex items-center gap-2 px-8 py-4 glass-pill text-foreground font-semibold rounded-full hover:bg-white/10 transition-all"
+                className="inline-flex items-center gap-2 px-8 py-4 glass-pill text-foreground font-semibold rounded-full hover:bg-white/10 transition-all duration-300"
               >
                 View Experience
               </MagneticButton>
@@ -93,14 +77,13 @@ const Hero = () => {
                 { icon: TrendingUp, text: "Proven Results" },
                 { icon: Zap, text: "Rapid Execution" },
               ].map((item, index) => (
-                <motion.div
+                <div
                   key={index}
-                  whileHover={{ y: -2, scale: 1.05 }}
-                  className="flex items-center gap-2 text-subtle text-sm cursor-default"
+                  className="flex items-center gap-2 text-subtle text-sm cursor-default transition-colors duration-300 hover:text-body"
                 >
                   <item.icon size={16} className="text-primary" />
                   <span>{item.text}</span>
-                </motion.div>
+                </div>
               ))}
             </div>
           </StaggerItem>
@@ -111,19 +94,15 @@ const Hero = () => {
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
-        transition={{ duration: 1, delay: 1.5 }}
+        transition={{ duration: 0.6, delay: 1 }}
         className="absolute bottom-12 left-1/2 -translate-x-1/2"
       >
         <a
           href="#about"
-          className="flex flex-col items-center gap-3 text-subtle hover:text-primary transition-colors"
+          className="flex flex-col items-center gap-3 text-subtle hover:text-primary transition-colors duration-300"
         >
           <div className="w-5 h-8 rounded-full border border-current flex justify-center pt-1.5">
-            <motion.div
-              animate={{ y: [0, 8, 0], opacity: [1, 0.3, 1] }}
-              transition={{ duration: 1.5, repeat: Infinity }}
-              className="w-1 h-1 bg-current rounded-full"
-            />
+            <div className="w-1 h-1 bg-current rounded-full animate-bounce" />
           </div>
         </a>
       </motion.div>
