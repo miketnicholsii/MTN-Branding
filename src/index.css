@@ -6,85 +6,94 @@
 
 @layer base {
   :root {
-    /* Editorial dark palette - sophisticated charcoal with warm cream accents */
-    --background: 220 10% 8%;
-    --foreground: 45 20% 94%;
+    /* Brand palette from Mike's colors */
+    /* #227C9D - Deep teal (primary) */
+    /* #FEF9EF - Warm cream (background) */
+    /* #17C3B2 - Vibrant teal (accent) */
+    /* #FFCB77 - Warm gold (secondary) */
+    /* #FE6D73 - Coral (highlight/destructive) */
 
-    --card: 220 10% 11%;
-    --card-foreground: 45 20% 94%;
+    --background: 43 82% 96%;
+    --foreground: 195 65% 20%;
 
-    --popover: 220 10% 11%;
-    --popover-foreground: 45 20% 94%;
+    --card: 43 60% 98%;
+    --card-foreground: 195 65% 20%;
 
-    /* Warm cream accent */
-    --primary: 42 30% 85%;
-    --primary-foreground: 220 10% 8%;
+    --popover: 43 60% 98%;
+    --popover-foreground: 195 65% 20%;
 
-    --secondary: 220 8% 16%;
-    --secondary-foreground: 45 15% 80%;
+    /* Deep teal as primary */
+    --primary: 195 65% 37%;
+    --primary-foreground: 43 82% 96%;
 
-    --muted: 220 8% 18%;
-    --muted-foreground: 220 8% 55%;
+    /* Warm gold as secondary */
+    --secondary: 38 100% 73%;
+    --secondary-foreground: 195 65% 20%;
 
-    --accent: 42 25% 75%;
-    --accent-foreground: 220 10% 8%;
+    --muted: 43 40% 92%;
+    --muted-foreground: 195 30% 45%;
 
-    --destructive: 0 62.8% 50%;
-    --destructive-foreground: 45 20% 94%;
+    /* Vibrant teal as accent */
+    --accent: 173 79% 43%;
+    --accent-foreground: 43 82% 96%;
 
-    --border: 220 8% 20%;
-    --input: 220 8% 20%;
-    --ring: 42 30% 85%;
+    /* Coral as destructive */
+    --destructive: 357 98% 71%;
+    --destructive-foreground: 43 82% 96%;
+
+    --border: 195 20% 85%;
+    --input: 195 20% 85%;
+    --ring: 195 65% 37%;
 
     --radius: 0.5rem;
 
     /* Custom semantic tokens */
-    --headline: 45 20% 94%;
-    --body: 220 8% 72%;
-    --subtle: 220 8% 45%;
-    --divider: 220 8% 18%;
+    --headline: 195 65% 20%;
+    --body: 195 30% 35%;
+    --subtle: 195 20% 55%;
+    --divider: 195 15% 88%;
     
     /* Gradients */
-    --gradient-hero: linear-gradient(180deg, hsl(220 10% 8%) 0%, hsl(220 10% 6%) 100%);
-    --gradient-card: linear-gradient(145deg, hsl(220 10% 12%) 0%, hsl(220 10% 9%) 100%);
-    --gradient-text: linear-gradient(135deg, hsl(45 20% 94%) 0%, hsl(42 25% 75%) 100%);
+    --gradient-hero: linear-gradient(180deg, hsl(43 82% 96%) 0%, hsl(43 60% 94%) 100%);
+    --gradient-card: linear-gradient(145deg, hsl(43 60% 99%) 0%, hsl(43 60% 96%) 100%);
+    --gradient-text: linear-gradient(135deg, hsl(195 65% 37%) 0%, hsl(173 79% 43%) 100%);
     
     /* Shadows */
-    --shadow-subtle: 0 2px 8px hsl(220 10% 2% / 0.3);
-    --shadow-elevated: 0 8px 32px hsl(220 10% 2% / 0.4);
-    --shadow-glow: 0 0 40px hsl(42 30% 85% / 0.08);
+    --shadow-subtle: 0 2px 8px hsl(195 65% 20% / 0.06);
+    --shadow-elevated: 0 8px 32px hsl(195 65% 20% / 0.08);
+    --shadow-glow: 0 0 40px hsl(173 79% 43% / 0.15);
 
-    --sidebar-background: 220 10% 8%;
-    --sidebar-foreground: 45 20% 94%;
-    --sidebar-primary: 42 30% 85%;
-    --sidebar-primary-foreground: 220 10% 8%;
-    --sidebar-accent: 220 8% 16%;
-    --sidebar-accent-foreground: 45 20% 94%;
-    --sidebar-border: 220 8% 20%;
-    --sidebar-ring: 42 30% 85%;
+    --sidebar-background: 43 82% 96%;
+    --sidebar-foreground: 195 65% 20%;
+    --sidebar-primary: 195 65% 37%;
+    --sidebar-primary-foreground: 43 82% 96%;
+    --sidebar-accent: 173 79% 43%;
+    --sidebar-accent-foreground: 43 82% 96%;
+    --sidebar-border: 195 20% 85%;
+    --sidebar-ring: 195 65% 37%;
   }
 
   .dark {
-    /* Same as root - this is a dark-first design */
-    --background: 220 10% 8%;
-    --foreground: 45 20% 94%;
-    --card: 220 10% 11%;
-    --card-foreground: 45 20% 94%;
-    --popover: 220 10% 11%;
-    --popover-foreground: 45 20% 94%;
-    --primary: 42 30% 85%;
-    --primary-foreground: 220 10% 8%;
-    --secondary: 220 8% 16%;
-    --secondary-foreground: 45 15% 80%;
-    --muted: 220 8% 18%;
-    --muted-foreground: 220 8% 55%;
-    --accent: 42 25% 75%;
-    --accent-foreground: 220 10% 8%;
-    --destructive: 0 62.8% 50%;
-    --destructive-foreground: 45 20% 94%;
-    --border: 220 8% 20%;
-    --input: 220 8% 20%;
-    --ring: 42 30% 85%;
+    /* Dark mode with deep teal background */
+    --background: 195 65% 15%;
+    --foreground: 43 82% 96%;
+    --card: 195 60% 18%;
+    --card-foreground: 43 82% 96%;
+    --popover: 195 60% 18%;
+    --popover-foreground: 43 82% 96%;
+    --primary: 173 79% 50%;
+    --primary-foreground: 195 65% 15%;
+    --secondary: 38 100% 73%;
+    --secondary-foreground: 195 65% 15%;
+    --muted: 195 50% 22%;
+    --muted-foreground: 43 40% 70%;
+    --accent: 173 79% 43%;
+    --accent-foreground: 195 65% 15%;
+    --destructive: 357 98% 71%;
+    --destructive-foreground: 195 65% 15%;
+    --border: 195 40% 25%;
+    --input: 195 40% 25%;
+    --ring: 173 79% 50%;
   }
 }
 

@@ -27,6 +27,14 @@ export default {
         body: "hsl(var(--body))",
         subtle: "hsl(var(--subtle))",
         divider: "hsl(var(--divider))",
+        // Brand colors
+        teal: {
+          DEFAULT: "#227C9D",
+          light: "#17C3B2",
+        },
+        cream: "#FEF9EF",
+        gold: "#FFCB77",
+        coral: "#FE6D73",
         primary: {
           DEFAULT: "hsl(var(--primary))",
           foreground: "hsl(var(--primary-foreground))",
