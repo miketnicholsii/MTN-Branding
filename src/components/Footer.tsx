@@ -9,9 +9,9 @@ const Footer = () => {
           <motion.a
             href="#"
             whileHover={{ scale: 1.05 }}
-            className="text-xl font-bold text-foreground flex items-baseline gap-0.5"
+            className="text-xl font-bold text-foreground flex items-baseline gap-1"
           >
-            Mike T. Nichols<span className="text-primary">.</span><span className="text-xs text-primary/60 font-medium tracking-tight">II</span>
+            Mike Nichols<span className="text-primary">.</span><span className="text-sm text-primary font-semibold tracking-wide">II</span>
           </motion.a>
 
           {/* Navigation */}
