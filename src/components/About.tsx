@@ -27,20 +27,20 @@ const About = () => {
 
             {/* Main headline */}
             <StaggerItem>
-              <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-foreground leading-tight mb-12 max-w-3xl mx-auto">
+              <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-foreground leading-tight mb-8 sm:mb-12 max-w-3xl mx-auto px-2">
                 I solve problems with clarity.
               </h2>
             </StaggerItem>
             
             {/* Description */}
             <StaggerItem>
-              <div className="max-w-2xl mx-auto mb-16">
-                <p className="text-body text-lg leading-relaxed mb-6">
+              <div className="max-w-2xl mx-auto mb-12 sm:mb-16 px-2">
+                <p className="text-body text-base sm:text-lg leading-relaxed mb-5 sm:mb-6">
                   I'm a product and strategy leader who thrives on turning ambiguity into action. 
                   With over a decade of experience across fintech, enterprise software, and consulting, 
                   I've led cross-functional teams to ship complex platforms and deliver measurable results.
                 </p>
-                <p className="text-body text-lg leading-relaxed">
+                <p className="text-body text-base sm:text-lg leading-relaxed">
                   My work lives at the intersection of strategy, data, and user-centered design. 
                   Whether I'm roadmapping a product, coaching a team, or diving into data, I bring the 
                   same rigor and empathy to the table.
@@ -50,24 +50,24 @@ const About = () => {
 
             {/* Stats grid */}
             <StaggerItem>
-              <div className="grid grid-cols-3 gap-4 max-w-2xl mx-auto mb-16">
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 sm:gap-4 max-w-2xl mx-auto mb-12 sm:mb-16 px-2">
                 {stats.map((stat, index) => {
                   const CardWrapper = stat.isLinkedIn ? 'a' : 'div';
                   const cardProps = stat.isLinkedIn 
-                    ? { href: 'https://www.linkedin.com/in/nathancrews/', target: '_blank', rel: 'noopener noreferrer' } 
+                    ? { href: 'https://www.linkedin.com/in/miketnicholsii/', target: '_blank', rel: 'noopener noreferrer' } 
                     : {};
                   
                   return (
                     <CardWrapper key={index} {...cardProps}>
                       <motion.div
                         whileHover={{ y: -4, scale: 1.02 }}
-                        className={`text-center p-6 glass-card rounded-2xl ${stat.isLinkedIn ? 'cursor-pointer hover:ring-1 hover:ring-primary/30 transition-all' : 'cursor-default'}`}
+                        className={`text-center p-4 sm:p-6 glass-card rounded-2xl ${stat.isLinkedIn ? 'cursor-pointer hover:ring-1 hover:ring-primary/30 transition-all' : 'cursor-default'}`}
                       >
-                        <div className="text-3xl lg:text-4xl font-bold text-primary mb-2 flex items-center justify-center gap-2">
+                        <div className="text-2xl sm:text-3xl lg:text-4xl font-bold text-primary mb-1 sm:mb-2 flex items-center justify-center gap-2">
                           <AnimatedCounter value={stat.value} suffix={stat.suffix} />
-                          {stat.isLinkedIn && <Linkedin size={24} className="opacity-70" />}
+                          {stat.isLinkedIn && <Linkedin size={20} className="opacity-70 sm:w-6 sm:h-6" />}
                         </div>
-                        <div className="text-subtle text-sm font-medium">{stat.label}</div>
+                        <div className="text-subtle text-xs sm:text-sm font-medium">{stat.label}</div>
                       </motion.div>
                     </CardWrapper>
                   );
