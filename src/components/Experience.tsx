@@ -13,6 +13,7 @@ const experiences = [
     period: "2022 — Present",
     description: "Leading strategic initiatives and product development at a forward-thinking consultancy.",
     featured: true,
+    link: "https://helloneko.co",
   },
   {
     number: "02",
@@ -108,49 +109,68 @@ const Experience = () => {
 
             {/* Experience list */}
             <div className="max-w-3xl mx-auto space-y-4">
-              {experiences.map((exp, index) => (
-                <StaggerItem key={index}>
-                  <div
-                    className={`group glass-card rounded-2xl p-6 md:p-8 cursor-default transition-transform duration-300 hover:translate-x-2 ${
-                      exp.featured ? 'ring-1 ring-primary/30 relative overflow-hidden' : ''
-                    }`}
-                  >
-                    {/* Featured badge for NÈKO */}
-                    {exp.featured && (
-                      <div className="absolute top-4 right-4 px-3 py-1 bg-primary/20 text-primary text-xs font-semibold rounded-full">
-                        Current
-                      </div>
-                    )}
-                    <div className="flex items-start gap-6">
-                      {/* Number */}
-                      <div className={`text-4xl font-bold transition-colors duration-300 ${
-                        exp.featured ? 'text-primary' : 'text-primary/30 group-hover:text-primary'
-                      }`}>
-                        {exp.number}
-                      </div>
+              {experiences.map((exp, index) => {
+                const CardWrapper = exp.link ? 'a' : 'div';
+                const cardProps = exp.link ? { href: exp.link, target: '_blank', rel: 'noopener noreferrer' } : {};
+                
+                return (
+                  <StaggerItem key={index}>
+                    <CardWrapper
+                      {...cardProps}
+                      className={`group block rounded-2xl p-6 md:p-8 transition-all duration-300 hover:translate-x-2 ${
+                        exp.featured 
+                          ? 'relative overflow-hidden bg-gradient-to-br from-primary/20 via-primary/10 to-transparent ring-2 ring-primary/40 shadow-lg shadow-primary/10 cursor-pointer hover:ring-primary/60 hover:shadow-primary/20' 
+                          : 'glass-card cursor-default'
+                      }`}
+                    >
+                      {/* Animated gradient overlay for featured */}
+                      {exp.featured && (
+                        <>
+                          <div className="absolute inset-0 bg-gradient-to-r from-primary/5 via-transparent to-primary/5 animate-pulse" />
+                          <div className="absolute -top-24 -right-24 w-48 h-48 bg-primary/10 rounded-full blur-3xl" />
+                          <div className="absolute -bottom-24 -left-24 w-48 h-48 bg-primary/5 rounded-full blur-3xl" />
+                        </>
+                      )}
                       
-                      {/* Content */}
-                      <div className="flex-1">
-                        <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-2 mb-3">
-                          <div>
-                            <h3 className={`text-xl font-bold transition-colors duration-300 ${
-                              exp.featured ? 'text-primary' : 'text-foreground group-hover:text-primary'
-                            }`}>{exp.company}</h3>
-                            <p className="text-primary text-sm font-medium">{exp.role}</p>
-                          </div>
-                          <span className="text-subtle text-sm">{exp.period}</span>
+                      {/* Featured badge for NÈKO */}
+                      {exp.featured && (
+                        <div className="absolute top-4 right-4 px-3 py-1 bg-primary/30 text-primary text-xs font-semibold rounded-full border border-primary/30">
+                          Current
                         </div>
-                        <p className="text-body leading-relaxed">{exp.description}</p>
-                      </div>
+                      )}
+                      <div className="flex items-start gap-6 relative z-10">
+                        {/* Number */}
+                        <div className={`text-4xl font-bold transition-colors duration-300 ${
+                          exp.featured ? 'text-primary' : 'text-primary/30 group-hover:text-primary'
+                        }`}>
+                          {exp.number}
+                        </div>
+                        
+                        {/* Content */}
+                        <div className="flex-1">
+                          <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-2 mb-3">
+                            <div>
+                              <h3 className={`text-xl font-bold transition-colors duration-300 ${
+                                exp.featured ? 'text-primary' : 'text-foreground group-hover:text-primary'
+                              }`}>{exp.company}</h3>
+                              <p className="text-primary text-sm font-medium">{exp.role}</p>
+                            </div>
+                            <span className="text-subtle text-sm">{exp.period}</span>
+                          </div>
+                          <p className="text-body leading-relaxed">{exp.description}</p>
+                        </div>
 
-                      {/* Hover arrow */}
-                      <div className="hidden md:block text-primary opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                        →
+                        {/* Hover arrow */}
+                        <div className={`hidden md:block text-primary transition-opacity duration-300 ${
+                          exp.featured ? 'opacity-100' : 'opacity-0 group-hover:opacity-100'
+                        }`}>
+                          →
+                        </div>
                       </div>
-                    </div>
-                  </div>
-                </StaggerItem>
-              ))}
+                    </CardWrapper>
+                  </StaggerItem>
+                );
+              })}
             </div>
           </StaggerContainer>
         </div>
