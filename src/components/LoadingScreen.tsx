@@ -9,10 +9,11 @@ const LoadingScreen = ({ onLoadingComplete }: LoadingScreenProps) => {
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
+    // Faster loading - 600ms total instead of 1800ms
     const timer = setTimeout(() => {
       setIsLoading(false);
-      setTimeout(onLoadingComplete, 600);
-    }, 1200);
+      setTimeout(onLoadingComplete, 300);
+    }, 600);
 
     return () => clearTimeout(timer);
   }, [onLoadingComplete]);

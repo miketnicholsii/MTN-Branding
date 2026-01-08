@@ -11,12 +11,8 @@ const Contact = () => {
 
   return (
     <section id="contact" className="py-20 sm:py-32 lg:py-40 relative overflow-hidden" ref={ref}>
-      {/* Subtle accent glow for contact section - light theme friendly */}
-      <motion.div
-        animate={{ scale: [1, 1.1, 1], opacity: [0.1, 0.2, 0.1] }}
-        transition={{ duration: 8, repeat: Infinity }}
-        className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[300px] sm:w-[600px] h-[300px] sm:h-[600px] bg-primary/10 rounded-full blur-[100px] sm:blur-[180px]"
-      />
+      {/* Subtle accent glow - CSS only for performance */}
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[300px] sm:w-[500px] h-[300px] sm:h-[500px] bg-primary/8 rounded-full blur-[80px]" />
       
       <SectionTransition>
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative">
@@ -55,25 +51,16 @@ const Contact = () => {
                 >
                   <Linkedin size={20} className="sm:w-6 sm:h-6" />
                   <span>Connect on LinkedIn</span>
-                  <motion.div
-                    animate={{ x: [0, 4, 0], y: [0, -4, 0] }}
-                    transition={{ duration: 1.5, repeat: Infinity }}
-                  >
-                    <ArrowUpRight size={18} className="sm:w-5 sm:h-5" />
-                  </motion.div>
+                  <ArrowUpRight size={18} className="sm:w-5 sm:h-5 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
                 </MagneticButton>
               </div>
             </StaggerItem>
 
             {/* Decorative tagline */}
             <StaggerItem>
-              <motion.p
-                animate={{ opacity: [0.4, 0.6, 0.4] }}
-                transition={{ duration: 3, repeat: Infinity }}
-                className="mt-10 sm:mt-16 text-subtle text-xs sm:text-sm tracking-widest uppercase"
-              >
+              <p className="mt-10 sm:mt-16 text-subtle text-xs sm:text-sm tracking-widest uppercase">
                 Let's create something amazing
-              </motion.p>
+              </p>
             </StaggerItem>
           </StaggerContainer>
         </div>

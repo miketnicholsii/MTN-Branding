@@ -81,17 +81,14 @@ const Capabilities = () => {
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4 mb-10 sm:mb-16">
               {capabilities.map((cap, index) => (
                 <StaggerItem key={index}>
-                  <motion.div
-                    whileHover={{ y: -8, scale: 1.02 }}
-                    transition={{ type: "spring", stiffness: 300 }}
-                    className="group glass-card rounded-xl sm:rounded-2xl p-4 sm:p-6 cursor-default h-full"
-                  >
-                    <motion.div 
-                      className="w-10 h-10 sm:w-12 sm:h-12 rounded-lg sm:rounded-xl bg-primary/20 flex items-center justify-center mb-3 sm:mb-4 group-hover:bg-primary/40 group-hover:scale-110 transition-all duration-300"
-                      whileHover={{ rotate: 10 }}
+                    <motion.div
+                      whileHover={{ y: -4 }}
+                      transition={{ type: "spring", stiffness: 400, damping: 25 }}
+                      className="group glass-card rounded-xl sm:rounded-2xl p-4 sm:p-6 cursor-default h-full"
                     >
-                      <cap.icon size={20} className="text-primary sm:w-6 sm:h-6" />
-                    </motion.div>
+                      <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-lg sm:rounded-xl bg-primary/20 flex items-center justify-center mb-3 sm:mb-4 group-hover:bg-primary/30 transition-colors duration-200">
+                        <cap.icon size={20} className="text-primary sm:w-6 sm:h-6" />
+                      </div>
                     <h3 className="text-base sm:text-lg font-bold text-foreground mb-1.5 sm:mb-2 group-hover:text-primary transition-colors">{cap.title}</h3>
                     <p className="text-body text-xs sm:text-sm leading-relaxed">{cap.description}</p>
                   </motion.div>
@@ -104,14 +101,13 @@ const Capabilities = () => {
               <div className="text-center px-2">
                 <h3 className="text-lg sm:text-xl font-bold text-foreground mb-4 sm:mb-6">Tools & Frameworks</h3>
                 <div className="flex flex-wrap justify-center gap-2 sm:gap-3">
-                  {tools.map((tool, index) => (
-                    <motion.span
+                  {tools.map((tool) => (
+                    <span
                       key={tool}
-                      whileHover={{ scale: 1.1, y: -2 }}
-                      className="px-3 sm:px-5 py-2 sm:py-2.5 glass-pill rounded-full text-body text-xs sm:text-sm font-medium hover:text-foreground hover:bg-white/10 transition-all cursor-default"
+                      className="px-3 sm:px-5 py-2 sm:py-2.5 glass-pill rounded-full text-body text-xs sm:text-sm font-medium hover:text-foreground hover:bg-muted/50 transition-colors cursor-default"
                     >
                       {tool}
-                    </motion.span>
+                    </span>
                   ))}
                 </div>
               </div>

@@ -33,15 +33,13 @@ const SectionTransition = ({
       opacity: 0, 
       y: offset.y,
       x: offset.x,
-      filter: "blur(8px)"
     },
     visible: { 
       opacity: 1, 
       y: 0,
       x: 0,
-      filter: "blur(0px)",
       transition: {
-        duration: 0.8,
+        duration: 0.6,
         delay,
         ease: [0.25, 0.46, 0.45, 0.94]
       }
