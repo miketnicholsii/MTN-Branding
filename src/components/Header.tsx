@@ -1,18 +1,11 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { Menu, X } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 
 const Header = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-
-  useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 20);
-    };
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
+  const [activeSection, setActiveSection] = useState("");
 
   const navLinks = [
     { label: "About", href: "#about" },
@@ -21,6 +14,47 @@ const Header = () => {
     { label: "Contact", href: "#contact" },
   ];
 
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 20);
+
+      // Detect active section
+      const sections = navLinks.map(link => link.href.replace("#", ""));
+      const scrollPosition = window.scrollY + 100;
+
+      for (let i = sections.length - 1; i >= 0; i--) {
+        const section = document.getElementById(sections[i]);
+        if (section && section.offsetTop <= scrollPosition) {
+          setActiveSection(sections[i]);
+          return;
+        }
+      }
+      setActiveSection("");
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    handleScroll(); // Check initial position
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  const scrollToSection = useCallback((e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
+    e.preventDefault();
+    const targetId = href.replace("#", "");
+    const element = targetId ? document.getElementById(targetId) : null;
+    
+    if (element) {
+      const offsetTop = element.offsetTop - 80;
+      window.scrollTo({
+        top: offsetTop,
+        behavior: "smooth"
+      });
+    } else if (href === "#") {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+    
+    setIsMobileMenuOpen(false);
+  }, []);
+
   return (
     <header className="fixed top-0 left-0 right-0 z-50 py-3 sm:py-4">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
@@ -28,6 +62,7 @@ const Header = () => {
           {/* Logo */}
           <motion.a
             href="#"
+            onClick={(e) => scrollToSection(e, "#")}
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             className="text-lg sm:text-xl font-bold text-foreground flex items-baseline gap-0.5 sm:gap-1"
@@ -45,11 +80,16 @@ const Header = () => {
             className="hidden md:block"
           >
             <ul className="flex items-center gap-1 px-2 py-2 glass-pill rounded-full">
-              {navLinks.map((link, index) => (
+              {navLinks.map((link) => (
                 <li key={link.href}>
                   <a
                     href={link.href}
-                    className="px-5 py-2 text-sm font-medium text-body hover:text-foreground hover:bg-muted rounded-full transition-all"
+                    onClick={(e) => scrollToSection(e, link.href)}
+                    className={`px-5 py-2 text-sm font-medium rounded-full transition-all ${
+                      activeSection === link.href.replace("#", "")
+                        ? "bg-primary text-primary-foreground"
+                        : "text-body hover:text-foreground hover:bg-muted"
+                    }`}
                   >
                     {link.label}
                   </a>
@@ -66,6 +106,7 @@ const Header = () => {
           >
             <a
               href="#contact"
+              onClick={(e) => scrollToSection(e, "#contact")}
               className="group inline-flex items-center gap-2 px-6 py-2.5 bg-primary text-primary-foreground text-sm font-semibold rounded-full hover:bg-primary/90 transition-all"
             >
               <span>Let's Talk</span>
@@ -98,8 +139,12 @@ const Header = () => {
                   <li key={link.href}>
                     <a
                       href={link.href}
-                      onClick={() => setIsMobileMenuOpen(false)}
-                      className="block px-4 py-3 text-lg font-medium text-body hover:text-foreground hover:bg-muted rounded-xl transition-colors"
+                      onClick={(e) => scrollToSection(e, link.href)}
+                      className={`block px-4 py-3 text-lg font-medium rounded-xl transition-colors ${
+                        activeSection === link.href.replace("#", "")
+                          ? "bg-primary text-primary-foreground"
+                          : "text-body hover:text-foreground hover:bg-muted"
+                      }`}
                     >
                       {link.label}
                     </a>
@@ -108,7 +153,7 @@ const Header = () => {
                 <li className="pt-2 px-4">
                   <a
                     href="#contact"
-                    onClick={() => setIsMobileMenuOpen(false)}
+                    onClick={(e) => scrollToSection(e, "#contact")}
                     className="block text-center text-sm font-semibold px-6 py-3 bg-primary text-primary-foreground rounded-full"
                   >
                     Let's Talk
