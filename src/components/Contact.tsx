@@ -11,11 +11,11 @@ const Contact = () => {
 
   return (
     <section id="contact" className="py-20 sm:py-32 lg:py-40 relative overflow-hidden" ref={ref}>
-      {/* Extra glow for contact section */}
+      {/* Subtle accent glow for contact section - light theme friendly */}
       <motion.div
-        animate={{ scale: [1, 1.1, 1], opacity: [0.3, 0.5, 0.3] }}
+        animate={{ scale: [1, 1.1, 1], opacity: [0.1, 0.2, 0.1] }}
         transition={{ duration: 8, repeat: Infinity }}
-        className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[300px] sm:w-[600px] h-[300px] sm:h-[600px] bg-primary/30 rounded-full blur-[100px] sm:blur-[180px]"
+        className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[300px] sm:w-[600px] h-[300px] sm:h-[600px] bg-primary/10 rounded-full blur-[100px] sm:blur-[180px]"
       />
       
       <SectionTransition>

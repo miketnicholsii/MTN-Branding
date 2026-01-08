@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Outfit:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=DM+Sans:wght@400;500;600;700&display=swap');
 
 @tailwind base;
 @tailwind components;
@@ -6,51 +6,55 @@
 
 @layer base {
   :root {
-    /* NEKO-inspired dark gradient palette */
-    --background: 168 50% 12%;
-    --foreground: 0 0% 100%;
+    /* NÈKO-inspired light palette with teal accents */
+    --background: 60 10% 97%;
+    --foreground: 200 20% 18%;
 
-    --card: 168 45% 15%;
-    --card-foreground: 0 0% 100%;
+    --card: 0 0% 100%;
+    --card-foreground: 200 20% 18%;
 
-    --popover: 168 45% 15%;
-    --popover-foreground: 0 0% 100%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 200 20% 18%;
 
-    --primary: 168 70% 45%;
+    --primary: 168 72% 36%;
     --primary-foreground: 0 0% 100%;
 
-    --secondary: 38 100% 73%;
-    --secondary-foreground: 168 50% 12%;
+    --secondary: 60 10% 94%;
+    --secondary-foreground: 200 20% 18%;
 
-    --muted: 168 40% 18%;
-    --muted-foreground: 168 20% 70%;
+    --muted: 60 8% 92%;
+    --muted-foreground: 200 10% 50%;
 
-    --accent: 173 79% 50%;
+    --accent: 168 72% 36%;
     --accent-foreground: 0 0% 100%;
 
-    --destructive: 357 98% 71%;
+    --destructive: 0 84% 60%;
     --destructive-foreground: 0 0% 100%;
 
-    --border: 168 30% 25%;
-    --input: 168 30% 25%;
-    --ring: 168 70% 45%;
+    --border: 200 10% 88%;
+    --input: 200 10% 88%;
+    --ring: 168 72% 36%;
 
-    --radius: 1rem;
+    --radius: 0.75rem;
 
-    /* Semantic tokens */
-    --headline: 0 0% 100%;
-    --body: 168 15% 80%;
-    --subtle: 168 15% 55%;
-    --divider: 168 20% 25%;
+    /* Semantic tokens - NÈKO style */
+    --headline: 200 25% 15%;
+    --body: 200 10% 45%;
+    --subtle: 200 8% 60%;
+    --divider: 200 10% 88%;
 
-    --sidebar-background: 168 50% 12%;
-    --sidebar-foreground: 0 0% 100%;
-    --sidebar-primary: 168 70% 45%;
+    --sidebar-background: 0 0% 100%;
+    --sidebar-foreground: 200 20% 18%;
+    --sidebar-primary: 168 72% 36%;
     --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 173 79% 50%;
+    --sidebar-accent: 168 72% 36%;
     --sidebar-accent-foreground: 0 0% 100%;
-    --sidebar-border: 168 30% 25%;
-    --sidebar-ring: 168 70% 45%;
+    --sidebar-border: 200 10% 88%;
+    --sidebar-ring: 168 72% 36%;
+
+    /* Dark card variant */
+    --card-dark: 168 50% 20%;
+    --card-dark-foreground: 0 0% 100%;
   }
 }
 
@@ -66,47 +70,55 @@
   body {
     @apply text-foreground font-sans antialiased;
     font-feature-settings: "cv02", "cv03", "cv04", "cv11";
-    background: hsl(168, 50%, 8%);
+    background: hsl(60, 10%, 97%);
   }
 
   h1, h2, h3, h4, h5, h6 {
     @apply font-sans font-semibold tracking-tight;
+    color: hsl(200, 25%, 15%);
   }
 }
 
 @layer components {
   .text-gradient {
-    background: linear-gradient(135deg, hsl(0 0% 100%) 0%, hsl(168 20% 70%) 100%);
+    background: linear-gradient(135deg, hsl(200 25% 15%) 0%, hsl(200 10% 45%) 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
   }
 
   .text-gradient-brand {
-    background: linear-gradient(135deg, hsl(168 70% 45%) 0%, hsl(173 79% 50%) 100%);
+    background: linear-gradient(135deg, hsl(168 72% 36%) 0%, hsl(168 60% 45%) 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
   }
 
   .glass-card {
-    background: hsl(168 45% 15% / 0.6);
-    backdrop-filter: blur(20px);
-    border: 1px solid hsl(168 30% 30% / 0.5);
+    background: hsl(0 0% 100%);
+    border: 1px solid hsl(200 10% 88%);
+    box-shadow: 0 4px 24px hsl(200 20% 10% / 0.06);
   }
 
   .glass-pill {
-    background: hsl(168 45% 18% / 0.8);
-    backdrop-filter: blur(12px);
-    border: 1px solid hsl(168 30% 30% / 0.4);
+    background: hsl(0 0% 100%);
+    border: 1px solid hsl(200 10% 88%);
+    box-shadow: 0 2px 8px hsl(200 20% 10% / 0.04);
+  }
+
+  /* Dark featured card - like NÈKO's highlighted pricing */
+  .card-featured {
+    background: linear-gradient(135deg, hsl(168 50% 22%) 0%, hsl(168 55% 18%) 100%);
+    border: none;
+    box-shadow: 0 8px 32px hsl(168 50% 20% / 0.3);
   }
 
   .glow-primary {
-    box-shadow: 0 0 80px hsl(168 70% 45% / 0.3);
+    box-shadow: 0 4px 24px hsl(168 72% 36% / 0.15);
   }
 
   .glow-accent {
-    box-shadow: 0 0 60px hsl(173 79% 50% / 0.2);
+    box-shadow: 0 4px 16px hsl(168 72% 36% / 0.1);
   }
 
   .hover-lift {
@@ -115,14 +127,15 @@
 
   .hover-lift:hover {
     transform: translateY(-4px);
+    box-shadow: 0 8px 32px hsl(200 20% 10% / 0.1);
   }
 
   .gradient-radial {
-    background: radial-gradient(ellipse at center, hsl(168 50% 20% / 0.5) 0%, transparent 70%);
+    background: radial-gradient(ellipse at center, hsl(168 30% 90% / 0.5) 0%, transparent 70%);
   }
 
   .gradient-glow {
-    background: radial-gradient(circle at 50% 0%, hsl(168 70% 40% / 0.15) 0%, transparent 50%);
+    background: radial-gradient(circle at 50% 0%, hsl(168 50% 85% / 0.3) 0%, transparent 50%);
   }
 }
 

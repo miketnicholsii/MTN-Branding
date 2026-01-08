@@ -61,7 +61,7 @@ const About = () => {
                     <CardWrapper key={index} {...cardProps}>
                       <motion.div
                         whileHover={{ y: -4, scale: 1.02 }}
-                        className={`text-center p-4 sm:p-6 glass-card rounded-2xl ${stat.isLinkedIn ? 'cursor-pointer hover:ring-1 hover:ring-primary/30 transition-all' : 'cursor-default'}`}
+                        className={`text-center p-4 sm:p-6 glass-card rounded-2xl ${stat.isLinkedIn ? 'cursor-pointer hover:shadow-md transition-all' : 'cursor-default'}`}
                       >
                         <div className="text-2xl sm:text-3xl lg:text-4xl font-bold text-primary mb-1 sm:mb-2 flex items-center justify-center gap-2">
                           <AnimatedCounter value={stat.value} suffix={stat.suffix} />

@@ -99,7 +99,7 @@ const Experience = () => {
               <div className="text-center mb-10 sm:mb-16">
                 <Link
                   to="/resume"
-                  className="inline-flex items-center gap-2 px-5 sm:px-6 py-2.5 sm:py-3 glass-pill rounded-full text-body text-xs sm:text-sm font-medium hover:text-foreground hover:bg-white/10 transition-all duration-300"
+                  className="inline-flex items-center gap-2 px-5 sm:px-6 py-2.5 sm:py-3 glass-pill rounded-full text-body text-xs sm:text-sm font-medium hover:text-foreground hover:shadow-md transition-all duration-300"
                 >
                   <Download size={14} className="text-primary sm:w-4 sm:h-4" />
                   View & Download Resume
@@ -119,29 +119,20 @@ const Experience = () => {
                       {...cardProps}
                       className={`group block rounded-xl sm:rounded-2xl p-4 sm:p-6 md:p-8 transition-all duration-300 hover:translate-x-1 sm:hover:translate-x-2 ${
                         exp.featured 
-                          ? 'relative overflow-hidden bg-gradient-to-br from-primary/20 via-primary/10 to-transparent ring-2 ring-primary/40 shadow-lg shadow-primary/10 cursor-pointer hover:ring-primary/60 hover:shadow-primary/20' 
-                          : 'glass-card cursor-default'
+                          ? 'relative overflow-hidden card-featured text-white cursor-pointer hover:shadow-xl' 
+                          : 'glass-card cursor-default hover:shadow-md'
                       }`}
                     >
-                      {/* Animated gradient overlay for featured */}
-                      {exp.featured && (
-                        <>
-                          <div className="absolute inset-0 bg-gradient-to-r from-primary/5 via-transparent to-primary/5 animate-pulse" />
-                          <div className="absolute -top-24 -right-24 w-48 h-48 bg-primary/10 rounded-full blur-3xl" />
-                          <div className="absolute -bottom-24 -left-24 w-48 h-48 bg-primary/5 rounded-full blur-3xl" />
-                        </>
-                      )}
-                      
                       {/* Featured badge for NÈKO */}
                       {exp.featured && (
-                        <div className="absolute top-3 right-3 sm:top-4 sm:right-4 px-2 sm:px-3 py-0.5 sm:py-1 bg-primary/30 text-primary text-[10px] sm:text-xs font-semibold rounded-full border border-primary/30">
+                        <div className="absolute top-3 right-3 sm:top-4 sm:right-4 px-2 sm:px-3 py-0.5 sm:py-1 bg-white/20 text-white text-[10px] sm:text-xs font-semibold rounded-full">
                           Current
                         </div>
                       )}
-                      <div className={`flex items-start gap-3 sm:gap-6 relative z-10 ${exp.featured ? 'pt-6 sm:pt-8' : ''}`}>
+                      <div className={`flex items-start gap-3 sm:gap-6 relative z-10 ${exp.featured ? 'pt-4 sm:pt-6' : ''}`}>
                         {/* Number */}
                         <div className={`text-2xl sm:text-4xl font-bold transition-colors duration-300 ${
-                          exp.featured ? 'text-primary' : 'text-primary/30 group-hover:text-primary'
+                          exp.featured ? 'text-white/60' : 'text-primary/30 group-hover:text-primary'
                         }`}>
                           {exp.number}
                         </div>
@@ -152,19 +143,19 @@ const Experience = () => {
                             <div className="flex items-start justify-between gap-2">
                               <div>
                                 <h3 className={`text-base sm:text-xl font-bold transition-colors duration-300 ${
-                                  exp.featured ? 'text-primary' : 'text-foreground group-hover:text-primary'
+                                  exp.featured ? 'text-white' : 'text-foreground group-hover:text-primary'
                                 }`}>{exp.company}</h3>
-                                <p className="text-primary text-xs sm:text-sm font-medium">{exp.role}</p>
+                                <p className={`text-xs sm:text-sm font-medium ${exp.featured ? 'text-white/70' : 'text-primary'}`}>{exp.role}</p>
                               </div>
-                              <span className="text-subtle text-[10px] sm:text-sm whitespace-nowrap">{exp.period}</span>
+                              <span className={`text-[10px] sm:text-sm whitespace-nowrap ${exp.featured ? 'text-white/50' : 'text-subtle'}`}>{exp.period}</span>
                             </div>
                           </div>
-                          <p className="text-body text-sm sm:text-base leading-relaxed">{exp.description}</p>
+                          <p className={`text-sm sm:text-base leading-relaxed ${exp.featured ? 'text-white/80' : 'text-body'}`}>{exp.description}</p>
                         </div>
 
                         {/* External link icon for featured, hover arrow for others */}
                         {exp.featured ? (
-                          <div className="hidden sm:flex items-center gap-1 text-primary">
+                          <div className="hidden sm:flex items-center gap-1 text-white/70">
                             <ExternalLink size={18} />
                           </div>
                         ) : (
