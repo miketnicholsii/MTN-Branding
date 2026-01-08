@@ -32,9 +32,10 @@ const LoadingScreen = ({ onLoadingComplete }: LoadingScreenProps) => {
               initial={{ opacity: 0, scale: 0.8 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.4, ease: "easeOut" }}
-              className="text-4xl font-bold tracking-tight"
+              className="text-3xl sm:text-4xl font-bold tracking-tight flex items-baseline"
             >
-              <span className="text-gradient-brand">MN.</span>
+              <span className="text-headline">MTN</span>
+              <span className="text-primary ml-1" style={{ fontFamily: 'Georgia, "Times New Roman", serif' }}>II</span>
             </motion.div>
 
             {/* Loading bar */}
