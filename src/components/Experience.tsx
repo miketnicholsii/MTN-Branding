@@ -138,7 +138,7 @@ const Experience = () => {
                           Current
                         </div>
                       )}
-                      <div className="flex items-start gap-6 relative z-10">
+                      <div className={`flex items-start gap-6 relative z-10 ${exp.featured ? 'pt-8' : ''}`}>
                         {/* Number */}
                         <div className={`text-4xl font-bold transition-colors duration-300 ${
                           exp.featured ? 'text-primary' : 'text-primary/30 group-hover:text-primary'
@@ -160,12 +160,12 @@ const Experience = () => {
                           <p className="text-body leading-relaxed">{exp.description}</p>
                         </div>
 
-                        {/* Hover arrow */}
-                        <div className={`hidden md:block text-primary transition-opacity duration-300 ${
-                          exp.featured ? 'opacity-100' : 'opacity-0 group-hover:opacity-100'
-                        }`}>
-                          →
-                        </div>
+                        {/* Hover arrow - only show for non-featured items */}
+                        {!exp.featured && (
+                          <div className="hidden md:block text-primary opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                            →
+                          </div>
+                        )}
                       </div>
                     </CardWrapper>
                   </StaggerItem>
