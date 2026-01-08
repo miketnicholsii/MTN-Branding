@@ -63,16 +63,33 @@ const Experience = () => {
             {/* Section label */}
             <StaggerItem>
               <div className="text-center mb-6">
-                <span className="text-primary text-sm font-medium tracking-wider uppercase">Experience</span>
+                <span className="text-primary text-sm font-medium tracking-wider uppercase">Where I've Been</span>
               </div>
             </StaggerItem>
 
             {/* Main headline */}
             <StaggerItem>
-              <div className="text-center mb-8">
+              <div className="text-center mb-4">
                 <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-foreground">
-                  The Path Forward
+                  A Few Stops Along the Way
                 </h2>
+              </div>
+            </StaggerItem>
+            
+            {/* Subtext with NÈKO link */}
+            <StaggerItem>
+              <div className="text-center mb-8">
+                <p className="text-body text-lg">
+                  Currently crafting strategy at{" "}
+                  <a 
+                    href="https://helloneko.co" 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    className="text-primary font-semibold hover:underline transition-all"
+                  >
+                    NÈKO
+                  </a>
+                </p>
               </div>
             </StaggerItem>
 
