@@ -31,20 +31,20 @@ const Hero = () => {
 
           {/* Main headline */}
           <StaggerItem>
-            <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold text-foreground leading-[1.1] mb-2">
-              Hi, I'm Mike T. Nichols <span className="text-primary/50 text-4xl md:text-5xl lg:text-6xl">II</span>
+            <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-foreground leading-[1.1] mb-2">
+              Hi, I'm Mike T. Nichols <span className="text-primary/50 text-3xl sm:text-4xl md:text-5xl lg:text-6xl" style={{ fontFamily: 'Georgia, "Times New Roman", serif' }}>II</span>
             </h1>
           </StaggerItem>
           
           <StaggerItem>
-            <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold leading-[1.1] text-gradient mb-8">
+            <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold leading-[1.1] text-gradient mb-6 sm:mb-8">
               I build products that matter.
             </h1>
           </StaggerItem>
 
           {/* Subheadline */}
           <StaggerItem>
-            <p className="text-body text-lg md:text-xl leading-relaxed max-w-2xl mx-auto mb-10">
+            <p className="text-body text-base sm:text-lg md:text-xl leading-relaxed max-w-2xl mx-auto mb-8 sm:mb-10 px-2">
               High-performance platforms, cross-functional teams, and business solutions — 
               with clarity, empathy, and a bias toward action.
             </p>
@@ -52,17 +52,17 @@ const Hero = () => {
 
           {/* CTAs */}
           <StaggerItem>
-            <div className="flex flex-wrap justify-center gap-4 mb-16">
+            <div className="flex flex-col sm:flex-row flex-wrap justify-center gap-3 sm:gap-4 mb-12 sm:mb-16 px-4">
               <MagneticButton
                 href="#contact"
-                className="group inline-flex items-center gap-2 px-8 py-4 bg-primary text-primary-foreground font-semibold rounded-full transition-all duration-300 hover:shadow-lg hover:shadow-primary/30"
+                className="group inline-flex items-center justify-center gap-2 px-6 sm:px-8 py-3.5 sm:py-4 bg-primary text-primary-foreground font-semibold rounded-full transition-all duration-300 hover:shadow-lg hover:shadow-primary/30 text-sm sm:text-base"
               >
                 Get in Touch
                 <span className="inline-block transition-transform duration-300 group-hover:translate-x-1">→</span>
               </MagneticButton>
               <MagneticButton
                 href="#experience"
-                className="inline-flex items-center gap-2 px-8 py-4 glass-pill text-foreground font-semibold rounded-full hover:bg-white/10 transition-all duration-300"
+                className="inline-flex items-center justify-center gap-2 px-6 sm:px-8 py-3.5 sm:py-4 glass-pill text-foreground font-semibold rounded-full hover:bg-white/10 transition-all duration-300 text-sm sm:text-base"
               >
                 View Experience
               </MagneticButton>

@@ -30,9 +30,12 @@ const Header = () => {
             href="#"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            className="text-xl font-bold text-foreground flex items-baseline gap-1"
+            className="text-lg sm:text-xl font-bold text-foreground flex items-baseline gap-0.5 sm:gap-1"
           >
-            Mike T. Nichols<span className="text-primary">.</span><span className="text-sm text-primary font-semibold tracking-wide" style={{ fontFamily: 'Georgia, "Times New Roman", serif' }}>II</span>
+            <span className="hidden sm:inline">Mike T. Nichols</span>
+            <span className="sm:hidden">MTN</span>
+            <span className="text-primary">.</span>
+            <span className="text-xs sm:text-sm text-primary font-semibold tracking-wide" style={{ fontFamily: 'Georgia, "Times New Roman", serif' }}>II</span>
           </motion.a>
 
           {/* Center Navigation - Pill style like NEKO */}

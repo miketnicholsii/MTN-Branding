@@ -28,19 +28,19 @@ const Contact = () => {
             
             {/* Main headline */}
             <StaggerItem>
-              <h2 className="text-4xl md:text-5xl lg:text-7xl font-bold text-foreground mb-2">
+              <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-7xl font-bold text-foreground mb-2 px-2">
                 Let's build something
               </h2>
             </StaggerItem>
             
             <StaggerItem>
-              <h2 className="text-4xl md:text-5xl lg:text-7xl font-bold text-gradient-brand mb-8">
+              <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-7xl font-bold text-gradient-brand mb-6 sm:mb-8 px-2">
                 together.
               </h2>
             </StaggerItem>
             
             <StaggerItem>
-              <p className="text-body text-lg mb-12 max-w-xl mx-auto">
+              <p className="text-body text-base sm:text-lg mb-8 sm:mb-12 max-w-xl mx-auto px-4">
                 Want to build something, fix something, or talk through an idea? 
                 I'm always open to a good conversation.
               </p>
@@ -48,18 +48,18 @@ const Contact = () => {
 
             {/* CTA */}
             <StaggerItem>
-              <div className="flex justify-center">
+              <div className="flex justify-center px-4">
                 <MagneticButton
                   href="https://www.linkedin.com/in/miketnicholsii/"
-                  className="group inline-flex items-center gap-3 px-10 py-5 bg-primary text-primary-foreground font-semibold rounded-full transition-all text-lg hover:shadow-xl hover:shadow-primary/40"
+                  className="group inline-flex items-center gap-2 sm:gap-3 px-6 sm:px-10 py-4 sm:py-5 bg-primary text-primary-foreground font-semibold rounded-full transition-all text-base sm:text-lg hover:shadow-xl hover:shadow-primary/40"
                 >
-                  <Linkedin size={24} />
+                  <Linkedin size={20} className="sm:w-6 sm:h-6" />
                   <span>Connect on LinkedIn</span>
                   <motion.div
                     animate={{ x: [0, 4, 0], y: [0, -4, 0] }}
                     transition={{ duration: 1.5, repeat: Infinity }}
                   >
-                    <ArrowUpRight size={20} />
+                    <ArrowUpRight size={18} className="sm:w-5 sm:h-5" />
                   </motion.div>
                 </MagneticButton>
               </div>

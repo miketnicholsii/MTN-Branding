@@ -70,8 +70,8 @@ const Experience = () => {
 
             {/* Main headline */}
             <StaggerItem>
-              <div className="text-center mb-4">
-                <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-foreground">
+              <div className="text-center mb-4 px-2">
+                <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-foreground">
                   A Few Stops Along the Way
                 </h2>
               </div>
