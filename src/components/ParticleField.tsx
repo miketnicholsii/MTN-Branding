@@ -31,7 +31,7 @@ const ParticleField = () => {
       {particles.map((particle) => (
         <div
           key={particle.id}
-          className="absolute rounded-full bg-primary/20 animate-float"
+          className="absolute rounded-full bg-primary/10 animate-float"
           style={{
             left: `${particle.x}%`,
             top: `${particle.y}%`,

@@ -23,7 +23,7 @@ const Hero = () => {
         <StaggerContainer className="max-w-4xl mx-auto text-center">
           {/* Eyebrow badge */}
           <StaggerItem>
-            <div className="inline-flex items-center gap-1.5 sm:gap-2 px-3 sm:px-5 py-2 sm:py-2.5 glass-pill rounded-full mb-6 sm:mb-8 hover:bg-white/5 transition-colors duration-300">
+            <div className="inline-flex items-center gap-1.5 sm:gap-2 px-3 sm:px-5 py-2 sm:py-2.5 glass-pill rounded-full mb-6 sm:mb-8 hover:shadow-md transition-all duration-300">
               <Sparkles size={14} className="text-primary sm:w-4 sm:h-4" />
               <span className="text-body text-xs sm:text-sm font-medium">Product Leader · Strategist · Builder</span>
             </div>
@@ -31,13 +31,13 @@ const Hero = () => {
 
           {/* Main headline */}
           <StaggerItem>
-            <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-foreground leading-[1.1] mb-2">
-              Hi, I'm Mike T. Nichols <span className="text-primary/50 text-3xl sm:text-4xl md:text-5xl lg:text-6xl" style={{ fontFamily: 'Georgia, "Times New Roman", serif' }}>II</span>
+            <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold leading-[1.1] mb-2">
+              Hi, I'm Mike T. Nichols <span className="text-primary text-3xl sm:text-4xl md:text-5xl lg:text-6xl" style={{ fontFamily: 'Georgia, "Times New Roman", serif' }}>II</span>
             </h1>
           </StaggerItem>
           
           <StaggerItem>
-            <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold leading-[1.1] text-gradient mb-6 sm:mb-8">
+            <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold leading-[1.1] text-gradient-brand mb-6 sm:mb-8">
               I build products that matter.
             </h1>
           </StaggerItem>
@@ -62,7 +62,7 @@ const Hero = () => {
               </MagneticButton>
               <MagneticButton
                 href="#experience"
-                className="inline-flex items-center justify-center gap-2 px-6 sm:px-8 py-3.5 sm:py-4 glass-pill text-foreground font-semibold rounded-full hover:bg-white/10 transition-all duration-300 text-sm sm:text-base"
+                className="inline-flex items-center justify-center gap-2 px-6 sm:px-8 py-3.5 sm:py-4 glass-pill text-foreground font-semibold rounded-full hover:shadow-md transition-all duration-300 text-sm sm:text-base"
               >
                 View Experience
               </MagneticButton>

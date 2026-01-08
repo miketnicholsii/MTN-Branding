@@ -49,7 +49,7 @@ const Header = () => {
                 <li key={link.href}>
                   <a
                     href={link.href}
-                    className="px-5 py-2 text-sm font-medium text-body hover:text-foreground hover:bg-white/5 rounded-full transition-all"
+                    className="px-5 py-2 text-sm font-medium text-body hover:text-foreground hover:bg-muted rounded-full transition-all"
                   >
                     {link.label}
                   </a>
@@ -99,7 +99,7 @@ const Header = () => {
                     <a
                       href={link.href}
                       onClick={() => setIsMobileMenuOpen(false)}
-                      className="block px-4 py-3 text-lg font-medium text-body hover:text-foreground hover:bg-white/5 rounded-xl transition-colors"
+                      className="block px-4 py-3 text-lg font-medium text-body hover:text-foreground hover:bg-muted rounded-xl transition-colors"
                     >
                       {link.label}
                     </a>
