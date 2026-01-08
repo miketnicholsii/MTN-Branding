@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import Header from "@/components/Header";
 import Hero from "@/components/Hero";
 import About from "@/components/About";
@@ -12,31 +12,63 @@ import AnimatedBackground from "@/components/AnimatedBackground";
 import ParticleField from "@/components/ParticleField";
 import LoadingScreen from "@/components/LoadingScreen";
 
+const pageVariants = {
+  hidden: { 
+    opacity: 0,
+  },
+  visible: { 
+    opacity: 1,
+    transition: {
+      duration: 0.6,
+      ease: [0.25, 0.46, 0.45, 0.94] as const,
+      staggerChildren: 0.15,
+    }
+  },
+};
+
+const sectionVariants = {
+  hidden: { opacity: 0 },
+  visible: { 
+    opacity: 1,
+    transition: {
+      duration: 0.5,
+      ease: [0.25, 0.46, 0.45, 0.94] as const,
+    }
+  },
+};
+
 const Index = () => {
   const [isLoaded, setIsLoaded] = useState(false);
 
   return (
     <>
       <LoadingScreen onLoadingComplete={() => setIsLoaded(true)} />
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: isLoaded ? 1 : 0 }}
-        transition={{ duration: 0.5, ease: "easeOut" }}
-        className="min-h-screen relative"
-      >
-        <AnimatedBackground />
-        <ParticleField />
-        <ScrollProgress />
-        <Header />
-        <main className="relative z-10">
-          <Hero />
-          <About />
-          <Experience />
-          <Capabilities />
-          <Contact />
-        </main>
-        <Footer />
-      </motion.div>
+      <AnimatePresence>
+        {isLoaded && (
+          <motion.div
+            initial="hidden"
+            animate="visible"
+            variants={pageVariants}
+            className="min-h-screen relative"
+          >
+            <AnimatedBackground />
+            <ParticleField />
+            <ScrollProgress />
+            <Header />
+            <motion.main 
+              className="relative z-10"
+              variants={sectionVariants}
+            >
+              <Hero />
+              <About />
+              <Experience />
+              <Capabilities />
+              <Contact />
+            </motion.main>
+            <Footer />
+          </motion.div>
+        )}
+      </AnimatePresence>
     </>
   );
 };
