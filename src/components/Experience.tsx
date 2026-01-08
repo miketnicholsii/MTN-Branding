@@ -57,9 +57,9 @@ const Experience = () => {
   const isInView = useInView(ref, { once: true, margin: "-100px" });
 
   return (
-    <section id="experience" className="py-32 lg:py-40 relative overflow-hidden" ref={ref}>
+    <section id="experience" className="py-20 sm:py-32 lg:py-40 relative overflow-hidden" ref={ref}>
       <SectionTransition>
-        <div className="container mx-auto px-6 lg:px-8 relative">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative">
           <StaggerContainer>
             {/* Section label */}
             <StaggerItem>
@@ -96,19 +96,19 @@ const Experience = () => {
 
             {/* Resume download button */}
             <StaggerItem>
-              <div className="text-center mb-16">
+              <div className="text-center mb-10 sm:mb-16">
                 <Link
                   to="/resume"
-                  className="inline-flex items-center gap-2 px-6 py-3 glass-pill rounded-full text-body text-sm font-medium hover:text-foreground hover:bg-white/10 transition-all duration-300"
+                  className="inline-flex items-center gap-2 px-5 sm:px-6 py-2.5 sm:py-3 glass-pill rounded-full text-body text-xs sm:text-sm font-medium hover:text-foreground hover:bg-white/10 transition-all duration-300"
                 >
-                  <Download size={16} className="text-primary" />
+                  <Download size={14} className="text-primary sm:w-4 sm:h-4" />
                   View & Download Resume
                 </Link>
               </div>
             </StaggerItem>
 
             {/* Experience list */}
-            <div className="max-w-3xl mx-auto space-y-4">
+            <div className="max-w-3xl mx-auto space-y-3 sm:space-y-4">
               {experiences.map((exp, index) => {
                 const CardWrapper = exp.link ? 'a' : 'div';
                 const cardProps = exp.link ? { href: exp.link, target: '_blank', rel: 'noopener noreferrer' } : {};
@@ -117,7 +117,7 @@ const Experience = () => {
                   <StaggerItem key={index}>
                     <CardWrapper
                       {...cardProps}
-                      className={`group block rounded-2xl p-6 md:p-8 transition-all duration-300 hover:translate-x-2 ${
+                      className={`group block rounded-xl sm:rounded-2xl p-4 sm:p-6 md:p-8 transition-all duration-300 hover:translate-x-1 sm:hover:translate-x-2 ${
                         exp.featured 
                           ? 'relative overflow-hidden bg-gradient-to-br from-primary/20 via-primary/10 to-transparent ring-2 ring-primary/40 shadow-lg shadow-primary/10 cursor-pointer hover:ring-primary/60 hover:shadow-primary/20' 
                           : 'glass-card cursor-default'
@@ -134,35 +134,37 @@ const Experience = () => {
                       
                       {/* Featured badge for NÈKO */}
                       {exp.featured && (
-                        <div className="absolute top-4 right-4 px-3 py-1 bg-primary/30 text-primary text-xs font-semibold rounded-full border border-primary/30">
+                        <div className="absolute top-3 right-3 sm:top-4 sm:right-4 px-2 sm:px-3 py-0.5 sm:py-1 bg-primary/30 text-primary text-[10px] sm:text-xs font-semibold rounded-full border border-primary/30">
                           Current
                         </div>
                       )}
-                      <div className={`flex items-start gap-6 relative z-10 ${exp.featured ? 'pt-8' : ''}`}>
+                      <div className={`flex items-start gap-3 sm:gap-6 relative z-10 ${exp.featured ? 'pt-6 sm:pt-8' : ''}`}>
                         {/* Number */}
-                        <div className={`text-4xl font-bold transition-colors duration-300 ${
+                        <div className={`text-2xl sm:text-4xl font-bold transition-colors duration-300 ${
                           exp.featured ? 'text-primary' : 'text-primary/30 group-hover:text-primary'
                         }`}>
                           {exp.number}
                         </div>
                         
                         {/* Content */}
-                        <div className="flex-1">
-                          <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-2 mb-3">
-                            <div>
-                              <h3 className={`text-xl font-bold transition-colors duration-300 ${
-                                exp.featured ? 'text-primary' : 'text-foreground group-hover:text-primary'
-                              }`}>{exp.company}</h3>
-                              <p className="text-primary text-sm font-medium">{exp.role}</p>
+                        <div className="flex-1 min-w-0">
+                          <div className="flex flex-col gap-1 sm:gap-2 mb-2 sm:mb-3">
+                            <div className="flex items-start justify-between gap-2">
+                              <div>
+                                <h3 className={`text-base sm:text-xl font-bold transition-colors duration-300 ${
+                                  exp.featured ? 'text-primary' : 'text-foreground group-hover:text-primary'
+                                }`}>{exp.company}</h3>
+                                <p className="text-primary text-xs sm:text-sm font-medium">{exp.role}</p>
+                              </div>
+                              <span className="text-subtle text-[10px] sm:text-sm whitespace-nowrap">{exp.period}</span>
                             </div>
-                            <span className="text-subtle text-sm">{exp.period}</span>
                           </div>
-                          <p className="text-body leading-relaxed">{exp.description}</p>
+                          <p className="text-body text-sm sm:text-base leading-relaxed">{exp.description}</p>
                         </div>
 
                         {/* External link icon for featured, hover arrow for others */}
                         {exp.featured ? (
-                          <div className="hidden md:flex items-center gap-1 text-primary">
+                          <div className="hidden sm:flex items-center gap-1 text-primary">
                             <ExternalLink size={18} />
                           </div>
                         ) : (

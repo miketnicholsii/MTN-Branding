@@ -15,17 +15,17 @@ const Hero = () => {
   const opacity = useTransform(scrollYProgress, [0, 0.4], [1, 0]);
 
   return (
-    <section ref={containerRef} className="min-h-screen flex flex-col justify-center relative overflow-hidden">
+    <section ref={containerRef} className="min-h-screen flex flex-col justify-center relative overflow-hidden pt-20 sm:pt-0">
       <motion.div
         style={{ y, opacity }}
-        className="container mx-auto px-6 lg:px-8 relative z-10"
+        className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10"
       >
         <StaggerContainer className="max-w-4xl mx-auto text-center">
           {/* Eyebrow badge */}
           <StaggerItem>
-            <div className="inline-flex items-center gap-2 px-5 py-2.5 glass-pill rounded-full mb-8 hover:bg-white/5 transition-colors duration-300">
-              <Sparkles size={16} className="text-primary" />
-              <span className="text-body text-sm font-medium">Product Leader · Strategist · Builder</span>
+            <div className="inline-flex items-center gap-1.5 sm:gap-2 px-3 sm:px-5 py-2 sm:py-2.5 glass-pill rounded-full mb-6 sm:mb-8 hover:bg-white/5 transition-colors duration-300">
+              <Sparkles size={14} className="text-primary sm:w-4 sm:h-4" />
+              <span className="text-body text-xs sm:text-sm font-medium">Product Leader · Strategist · Builder</span>
             </div>
           </StaggerItem>
 
@@ -71,7 +71,7 @@ const Hero = () => {
 
           {/* Feature pills */}
           <StaggerItem>
-            <div className="flex flex-wrap justify-center gap-6">
+            <div className="flex flex-wrap justify-center gap-4 sm:gap-6 px-2">
               {[
                 { icon: Target, text: "Strategic Vision" },
                 { icon: TrendingUp, text: "Proven Results" },
@@ -79,9 +79,9 @@ const Hero = () => {
               ].map((item, index) => (
                 <div
                   key={index}
-                  className="flex items-center gap-2 text-subtle text-sm cursor-default transition-colors duration-300 hover:text-body"
+                  className="flex items-center gap-1.5 sm:gap-2 text-subtle text-xs sm:text-sm cursor-default transition-colors duration-300 hover:text-body"
                 >
-                  <item.icon size={16} className="text-primary" />
+                  <item.icon size={14} className="text-primary sm:w-4 sm:h-4" />
                   <span>{item.text}</span>
                 </div>
               ))}
@@ -90,12 +90,12 @@ const Hero = () => {
         </StaggerContainer>
       </motion.div>
 
-      {/* Scroll indicator */}
+      {/* Scroll indicator - hide on mobile */}
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 0.6, delay: 1 }}
-        className="absolute bottom-12 left-1/2 -translate-x-1/2"
+        className="hidden sm:block absolute bottom-8 sm:bottom-12 left-1/2 -translate-x-1/2"
       >
         <a
           href="#about"

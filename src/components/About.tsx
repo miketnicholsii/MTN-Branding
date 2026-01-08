@@ -16,9 +16,9 @@ const About = () => {
   const isInView = useInView(ref, { once: true, margin: "-100px" });
 
   return (
-    <section id="about" className="py-32 lg:py-40 relative overflow-hidden" ref={ref}>
+    <section id="about" className="py-20 sm:py-32 lg:py-40 relative overflow-hidden" ref={ref}>
       <SectionTransition>
-        <div className="container mx-auto px-6 lg:px-8 relative">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative">
           <StaggerContainer className="text-center">
             {/* Section label */}
             <StaggerItem>
@@ -77,7 +77,7 @@ const About = () => {
 
             {/* Quick facts pills */}
             <StaggerItem>
-              <div className="flex flex-wrap justify-center gap-3">
+              <div className="flex flex-wrap justify-center gap-2 sm:gap-3 px-2">
                 {[
                   "Notre Dame '14",
                   "Certified Scrum Master",
@@ -86,7 +86,7 @@ const About = () => {
                   <motion.span
                     key={item}
                     whileHover={{ scale: 1.05 }}
-                    className="px-5 py-2.5 glass-pill rounded-full text-body text-sm font-medium cursor-default"
+                    className="px-3 sm:px-5 py-2 sm:py-2.5 glass-pill rounded-full text-body text-xs sm:text-sm font-medium cursor-default"
                   >
                     {item}
                   </motion.span>
