@@ -32,7 +32,7 @@ const Header = () => {
             animate={{ opacity: 1 }}
             className="text-xl font-bold text-foreground flex items-baseline gap-1"
           >
-            Mike Nichols<span className="text-primary">.</span><span className="text-sm text-primary font-semibold tracking-wide">II</span>
+            Mike T. Nichols<span className="text-primary">.</span><span className="text-sm text-primary font-semibold tracking-wide italic">II</span>
           </motion.a>
 
           {/* Center Navigation - Pill style like NEKO */}
