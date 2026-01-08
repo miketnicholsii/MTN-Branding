@@ -13,7 +13,7 @@ const ParticleField = () => {
   // Reduced particle count and use CSS animations instead of framer-motion
   const particles = useMemo(() => {
     const newParticles: Particle[] = [];
-    for (let i = 0; i < 15; i++) {
+    for (let i = 0; i < 10; i++) {
       newParticles.push({
         id: i,
         x: Math.random() * 100,

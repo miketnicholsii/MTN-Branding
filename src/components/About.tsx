@@ -60,8 +60,8 @@ const About = () => {
                   return (
                     <CardWrapper key={index} {...cardProps}>
                       <motion.div
-                        whileHover={{ y: -4, scale: 1.02 }}
-                        className={`text-center p-4 sm:p-6 glass-card rounded-2xl ${stat.isLinkedIn ? 'cursor-pointer hover:shadow-md transition-all' : 'cursor-default'}`}
+                        whileHover={{ y: -2 }}
+                        className={`text-center p-4 sm:p-6 glass-card rounded-2xl ${stat.isLinkedIn ? 'cursor-pointer hover:shadow-md transition-shadow' : 'cursor-default'}`}
                       >
                         <div className="text-2xl sm:text-3xl lg:text-4xl font-bold text-primary mb-1 sm:mb-2 flex items-center justify-center gap-2">
                           <AnimatedCounter value={stat.value} suffix={stat.suffix} />
@@ -83,13 +83,12 @@ const About = () => {
                   "Certified Scrum Master",
                   "Vanguard Award Winner",
                 ].map((item, index) => (
-                  <motion.span
+                  <span
                     key={item}
-                    whileHover={{ scale: 1.05 }}
-                    className="px-3 sm:px-5 py-2 sm:py-2.5 glass-pill rounded-full text-body text-xs sm:text-sm font-medium cursor-default"
+                    className="px-3 sm:px-5 py-2 sm:py-2.5 glass-pill rounded-full text-body text-xs sm:text-sm font-medium cursor-default hover:bg-muted/50 transition-colors"
                   >
                     {item}
-                  </motion.span>
+                  </span>
                 ))}
               </div>
             </StaggerItem>
