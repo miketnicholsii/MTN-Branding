@@ -1,13 +1,14 @@
 import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
+import { Linkedin } from "lucide-react";
 import AnimatedCounter from "./AnimatedCounter";
 import { StaggerContainer, StaggerItem } from "./StaggerReveal";
 import SectionTransition from "./SectionTransition";
 
 const stats = [
   { value: 10, suffix: "+", label: "Years Experience" },
-  { value: 18, suffix: "K+", label: "Connections" },
-  { value: 6, suffix: "", label: "Companies Led" },
+  { value: 18, suffix: "K+", label: "LinkedIn Connections", isLinkedIn: true },
+  { value: 6, suffix: "", label: "Industries" },
 ];
 
 const About = () => {
@@ -50,18 +51,27 @@ const About = () => {
             {/* Stats grid */}
             <StaggerItem>
               <div className="grid grid-cols-3 gap-4 max-w-2xl mx-auto mb-16">
-                {stats.map((stat, index) => (
-                  <motion.div
-                    key={index}
-                    whileHover={{ y: -4, scale: 1.02 }}
-                    className="text-center p-6 glass-card rounded-2xl cursor-default"
-                  >
-                    <div className="text-3xl lg:text-4xl font-bold text-primary mb-2">
-                      <AnimatedCounter value={stat.value} suffix={stat.suffix} />
-                    </div>
-                    <div className="text-subtle text-sm font-medium">{stat.label}</div>
-                  </motion.div>
-                ))}
+                {stats.map((stat, index) => {
+                  const CardWrapper = stat.isLinkedIn ? 'a' : 'div';
+                  const cardProps = stat.isLinkedIn 
+                    ? { href: 'https://www.linkedin.com/in/nathancrews/', target: '_blank', rel: 'noopener noreferrer' } 
+                    : {};
+                  
+                  return (
+                    <CardWrapper key={index} {...cardProps}>
+                      <motion.div
+                        whileHover={{ y: -4, scale: 1.02 }}
+                        className={`text-center p-6 glass-card rounded-2xl ${stat.isLinkedIn ? 'cursor-pointer hover:ring-1 hover:ring-primary/30 transition-all' : 'cursor-default'}`}
+                      >
+                        <div className="text-3xl lg:text-4xl font-bold text-primary mb-2 flex items-center justify-center gap-2">
+                          <AnimatedCounter value={stat.value} suffix={stat.suffix} />
+                          {stat.isLinkedIn && <Linkedin size={24} className="opacity-70" />}
+                        </div>
+                        <div className="text-subtle text-sm font-medium">{stat.label}</div>
+                      </motion.div>
+                    </CardWrapper>
+                  );
+                })}
               </div>
             </StaggerItem>
 
