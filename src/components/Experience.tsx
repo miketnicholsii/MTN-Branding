@@ -1,6 +1,6 @@
 import { useInView } from "framer-motion";
 import { useRef } from "react";
-import { Download } from "lucide-react";
+import { Download, ExternalLink } from "lucide-react";
 import { StaggerContainer, StaggerItem } from "./StaggerReveal";
 import SectionTransition from "./SectionTransition";
 import { Link } from "react-router-dom";
@@ -160,8 +160,12 @@ const Experience = () => {
                           <p className="text-body leading-relaxed">{exp.description}</p>
                         </div>
 
-                        {/* Hover arrow - only show for non-featured items */}
-                        {!exp.featured && (
+                        {/* External link icon for featured, hover arrow for others */}
+                        {exp.featured ? (
+                          <div className="hidden md:flex items-center gap-1 text-primary">
+                            <ExternalLink size={18} />
+                          </div>
+                        ) : (
                           <div className="hidden md:block text-primary opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                             →
                           </div>
