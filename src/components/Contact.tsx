@@ -10,16 +10,16 @@ const Contact = () => {
   const isInView = useInView(ref, { once: true, margin: "-100px" });
 
   return (
-    <section id="contact" className="py-32 lg:py-40 relative overflow-hidden" ref={ref}>
+    <section id="contact" className="py-20 sm:py-32 lg:py-40 relative overflow-hidden" ref={ref}>
       {/* Extra glow for contact section */}
       <motion.div
         animate={{ scale: [1, 1.1, 1], opacity: [0.3, 0.5, 0.3] }}
         transition={{ duration: 8, repeat: Infinity }}
-        className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-primary/30 rounded-full blur-[180px]"
+        className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[300px] sm:w-[600px] h-[300px] sm:h-[600px] bg-primary/30 rounded-full blur-[100px] sm:blur-[180px]"
       />
       
       <SectionTransition>
-        <div className="container mx-auto px-6 lg:px-8 relative">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative">
           <StaggerContainer className="max-w-3xl mx-auto text-center">
             {/* Section label */}
             <StaggerItem>
@@ -70,7 +70,7 @@ const Contact = () => {
               <motion.p
                 animate={{ opacity: [0.4, 0.6, 0.4] }}
                 transition={{ duration: 3, repeat: Infinity }}
-                className="mt-16 text-subtle text-sm tracking-widest uppercase"
+                className="mt-10 sm:mt-16 text-subtle text-xs sm:text-sm tracking-widest uppercase"
               >
                 Let's create something amazing
               </motion.p>
