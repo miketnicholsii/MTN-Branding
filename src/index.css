@@ -37,10 +37,10 @@
 
     --radius: 0.75rem;
 
-    /* Semantic tokens - NÈKO style */
-    --headline: 200 25% 15%;
+    /* Semantic tokens - NÈKO style with better contrast */
+    --headline: 200 15% 35%;
     --body: 200 10% 45%;
-    --subtle: 200 8% 60%;
+    --subtle: 200 8% 55%;
     --divider: 200 10% 88%;
 
     --sidebar-background: 0 0% 100%;
@@ -75,7 +75,11 @@
 
   h1, h2, h3, h4, h5, h6 {
     @apply font-sans font-semibold tracking-tight;
-    color: hsl(200, 25%, 15%);
+    color: hsl(var(--headline));
+  }
+  
+  .text-headline {
+    color: hsl(var(--headline));
   }
 }
 

@@ -31,13 +31,14 @@ const Hero = () => {
 
           {/* Main headline */}
           <StaggerItem>
-            <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold leading-[1.1] mb-2">
-              Hi, I'm Mike T. Nichols <span className="text-primary text-3xl sm:text-4xl md:text-5xl lg:text-6xl" style={{ fontFamily: 'Georgia, "Times New Roman", serif' }}>II</span>
+            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold leading-[1.15] mb-1 sm:mb-2 text-headline">
+              Hi, I'm Mike T. Nichols{" "}
+              <span className="text-primary text-2xl sm:text-3xl md:text-4xl lg:text-5xl align-baseline" style={{ fontFamily: 'Georgia, "Times New Roman", serif' }}>II</span>
             </h1>
           </StaggerItem>
           
           <StaggerItem>
-            <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold leading-[1.1] text-gradient-brand mb-6 sm:mb-8">
+            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold leading-[1.15] text-gradient-brand mb-5 sm:mb-8">
               I build products that matter.
             </h1>
           </StaggerItem>
