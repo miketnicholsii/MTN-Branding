@@ -51,9 +51,13 @@ const Capabilities = () => {
   const isInView = useInView(ref, { once: true, margin: "-100px" });
 
   return (
-    <section id="capabilities" className="py-28 sm:py-36 lg:py-44 relative overflow-hidden" ref={ref}>
-      {/* Background */}
-      <div className="absolute bottom-0 right-1/4 w-[600px] h-[600px] bg-forest-sage/4 rounded-full blur-[120px]" />
+    <section id="capabilities" className="py-28 sm:py-36 lg:py-44 relative overflow-hidden section-dark" ref={ref}>
+      {/* Background with green tones */}
+      <div className="absolute top-0 left-0 w-full h-full overflow-hidden">
+        <div className="absolute top-1/4 right-0 w-[600px] h-[600px] bg-forest-sage/25 rounded-full blur-[120px]" />
+        <div className="absolute bottom-0 left-1/4 w-[500px] h-[500px] bg-orange-gold/12 rounded-full blur-[100px]" />
+        <div className="absolute top-1/2 left-1/3 w-[400px] h-[400px] bg-forest-dark/20 rounded-full blur-[80px]" />
+      </div>
       
       <SectionTransition>
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative">
@@ -68,14 +72,14 @@ const Capabilities = () => {
             {/* Main headline */}
             <StaggerItem>
               <div className="text-center mb-6">
-                <h2 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-forest-deep">
+                <h2 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-white">
                   Everything you need.
                 </h2>
               </div>
             </StaggerItem>
 
             <StaggerItem>
-              <p className="text-body text-lg text-center max-w-2xl mx-auto mb-20 font-medium">
+              <p className="text-white/80 text-lg text-center max-w-2xl mx-auto mb-20 font-medium">
                 From strategy to execution, I provide the tools and guidance for every stage.
               </p>
             </StaggerItem>
@@ -87,13 +91,13 @@ const Capabilities = () => {
                   <motion.div
                     whileHover={{ y: -8 }}
                     transition={{ duration: 0.4, ease: "easeOut" }}
-                    className="group glass-card rounded-3xl p-8 cursor-default h-full hover:shadow-xl transition-shadow duration-500"
+                    className="group glass-card-dark rounded-3xl p-8 cursor-default h-full hover:bg-forest-sage/20 transition-all duration-500"
                   >
-                    <div className="w-14 h-14 rounded-2xl bg-forest-deep flex items-center justify-center mb-6 group-hover:bg-forest-dark transition-colors duration-300">
+                    <div className="w-14 h-14 rounded-2xl bg-orange-gold/20 border border-orange-gold/30 flex items-center justify-center mb-6 group-hover:bg-orange-gold/30 transition-colors duration-300">
                       <cap.icon size={26} className="text-orange-gold" />
                     </div>
-                    <h3 className="text-lg font-bold text-forest-deep mb-3 group-hover:text-forest-dark transition-colors duration-300">{cap.title}</h3>
-                    <p className="text-body text-sm leading-relaxed font-medium">{cap.description}</p>
+                    <h3 className="text-lg font-bold text-white mb-3">{cap.title}</h3>
+                    <p className="text-white/70 text-sm leading-relaxed font-medium">{cap.description}</p>
                   </motion.div>
                 </StaggerItem>
               ))}
@@ -102,12 +106,12 @@ const Capabilities = () => {
             {/* Tools section */}
             <StaggerItem>
               <div className="text-center">
-                <h3 className="text-lg font-bold text-forest-deep mb-10">Tools & Frameworks</h3>
+                <h3 className="text-lg font-bold text-white mb-10">Tools & Frameworks</h3>
                 <div className="flex flex-wrap justify-center gap-3">
                   {tools.map((tool) => (
                     <motion.span
                       key={tool}
-                      className="px-6 py-3 glass-card rounded-full text-sm font-semibold text-forest-deep hover:text-forest-dark hover:bg-forest-sage/5 transition-all duration-300"
+                      className="px-6 py-3 glass-card-dark rounded-full text-sm font-semibold text-white/90 hover:text-white hover:bg-forest-sage/20 transition-all duration-300"
                       whileHover={{ y: -4 }}
                       transition={{ duration: 0.3 }}
                     >

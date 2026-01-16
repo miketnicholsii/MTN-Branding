@@ -20,13 +20,13 @@
     /* #ED5005 - Deep Orange */
     --orange-deep: 20 96% 47%;
 
-    --background: 60 12% 97%;
+    --background: 130 8% 97%;
     --foreground: 120 8% 18%;
 
-    --card: 0 0% 100%;
+    --card: 130 6% 99%;
     --card-foreground: 120 8% 18%;
 
-    --popover: 0 0% 100%;
+    --popover: 130 6% 99%;
     --popover-foreground: 120 8% 18%;
 
     --primary: 120 8% 18%;
@@ -35,34 +35,34 @@
     --accent: 35 93% 50%;
     --accent-foreground: 0 0% 100%;
 
-    --secondary: 123 10% 94%;
+    --secondary: 130 12% 94%;
     --secondary-foreground: 120 8% 18%;
 
-    --muted: 120 8% 92%;
-    --muted-foreground: 123 10% 45%;
+    --muted: 130 10% 92%;
+    --muted-foreground: 130 10% 45%;
 
     --destructive: 20 96% 47%;
     --destructive-foreground: 0 0% 100%;
 
-    --border: 123 8% 88%;
-    --input: 123 8% 88%;
+    --border: 130 12% 86%;
+    --input: 130 12% 86%;
     --ring: 35 93% 50%;
 
     --radius: 0.875rem;
 
     /* Semantic tokens */
     --headline: 120 8% 18%;
-    --body: 123 10% 40%;
-    --subtle: 123 8% 55%;
-    --divider: 123 8% 88%;
+    --body: 130 12% 38%;
+    --subtle: 130 10% 52%;
+    --divider: 130 12% 86%;
 
-    --sidebar-background: 0 0% 100%;
+    --sidebar-background: 130 6% 99%;
     --sidebar-foreground: 120 8% 18%;
     --sidebar-primary: 120 8% 18%;
     --sidebar-primary-foreground: 0 0% 100%;
     --sidebar-accent: 35 93% 50%;
     --sidebar-accent-foreground: 0 0% 100%;
-    --sidebar-border: 123 8% 88%;
+    --sidebar-border: 130 12% 86%;
     --sidebar-ring: 35 93% 50%;
 
     --card-dark: 120 8% 18%;
@@ -82,7 +82,7 @@
   body {
     @apply text-foreground font-sans antialiased;
     font-feature-settings: "cv02", "cv03", "cv04", "cv11";
-    background: linear-gradient(180deg, hsl(60, 12%, 97%) 0%, hsl(60, 8%, 95%) 100%);
+    background: linear-gradient(180deg, hsl(130, 8%, 97%) 0%, hsl(130, 6%, 95%) 100%);
     letter-spacing: -0.01em;
   }
 
@@ -115,19 +115,31 @@
   }
 
   .glass-card {
-    background: hsla(0, 0%, 100%, 0.92);
+    background: hsla(130, 8%, 99%, 0.92);
     backdrop-filter: blur(16px);
-    border: 1px solid hsl(123 8% 90%);
+    border: 1px solid hsl(130 12% 88%);
     box-shadow: 
-      0 4px 32px hsl(var(--forest-deep) / 0.05),
-      0 1px 3px hsl(var(--forest-deep) / 0.03);
+      0 4px 32px hsl(var(--forest-deep) / 0.06),
+      0 1px 3px hsl(var(--forest-deep) / 0.04);
   }
 
   .glass-pill {
-    background: hsla(0, 0%, 100%, 0.96);
+    background: hsla(130, 8%, 99%, 0.96);
     backdrop-filter: blur(12px);
-    border: 1px solid hsl(123 8% 90%);
-    box-shadow: 0 2px 12px hsl(var(--forest-deep) / 0.04);
+    border: 1px solid hsl(130 12% 88%);
+    box-shadow: 0 2px 12px hsl(var(--forest-deep) / 0.05);
+  }
+
+  .section-dark {
+    background: linear-gradient(145deg, #2A312A 0%, #28382B 100%);
+    color: white;
+  }
+
+  .glass-card-dark {
+    background: hsla(130, 12%, 22%, 0.6);
+    backdrop-filter: blur(16px);
+    border: 1px solid hsl(130 14% 28% / 0.5);
+    box-shadow: 0 4px 32px hsl(var(--forest-deep) / 0.3);
   }
 
   .card-featured {

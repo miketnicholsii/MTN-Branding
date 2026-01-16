@@ -11,9 +11,10 @@ const Contact = () => {
 
   return (
     <section id="contact" className="py-28 sm:py-36 lg:py-44 relative overflow-hidden" ref={ref}>
-      {/* Ambient background */}
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[700px] bg-orange-gold/6 rounded-full blur-[140px]" />
-      <div className="absolute top-1/3 right-1/4 w-[400px] h-[400px] bg-forest-sage/5 rounded-full blur-[100px]" />
+      {/* Ambient background with more green */}
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[700px] bg-forest-sage/10 rounded-full blur-[140px]" />
+      <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-forest-dark/8 rounded-full blur-[100px]" />
+      <div className="absolute bottom-0 left-0 w-[400px] h-[400px] bg-orange-gold/6 rounded-full blur-[80px]" />
       
       <SectionTransition>
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative">
