@@ -97,15 +97,15 @@ const Hero = () => {
             
             <StaggerItem>
               <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-[3.5rem] xl:text-7xl font-bold leading-[1.08] text-gradient-brand mb-10">
-                I build products that matter.
+                Agile PM & Business Analyst
               </h1>
             </StaggerItem>
 
             {/* Subheadline */}
             <StaggerItem>
               <p className="text-body text-lg md:text-xl leading-relaxed max-w-xl mx-auto lg:mx-0 mb-12 font-medium">
-                High-performance platforms, cross-functional teams, and business solutions — 
-                with clarity, empathy, and a bias toward action.
+                I solve problems with a smile and a dad joke or two. Building high-performance platforms 
+                and innovative solutions that drive growth — with clarity, empathy, and purpose.
               </p>
             </StaggerItem>
 

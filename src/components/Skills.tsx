@@ -11,12 +11,12 @@ import {
 } from "recharts";
 
 const skillCategories = [
-  { name: "Product Strategy", level: 95 },
-  { name: "Agile & Scrum", level: 92 },
-  { name: "Data Analysis", level: 88 },
-  { name: "UX Research", level: 85 },
-  { name: "Technical Writing", level: 90 },
-  { name: "Stakeholder Management", level: 94 },
+  { name: "Strategic Product Roadmapping", level: 95 },
+  { name: "Agile Program Management", level: 92 },
+  { name: "Data Analysis & Insights", level: 88 },
+  { name: "Business Development", level: 90 },
+  { name: "Go-to-Market Execution", level: 87 },
+  { name: "Process Optimization", level: 94 },
 ];
 
 const radarData = [
@@ -25,7 +25,7 @@ const radarData = [
   { skill: "Analytics", value: 88, fullMark: 100 },
   { skill: "UX/Design", value: 85, fullMark: 100 },
   { skill: "Technical", value: 87, fullMark: 100 },
-  { skill: "Communication", value: 94, fullMark: 100 },
+  { skill: "Business Dev", value: 90, fullMark: 100 },
 ];
 
 const AnimatedSkillBar = ({ name, level, delay }: { name: string; level: number; delay: number }) => {
@@ -185,8 +185,8 @@ const Skills = () => {
                 <h3 className="text-lg font-bold text-forest-deep mb-10">Tools & Technologies</h3>
                 <div className="flex flex-wrap justify-center gap-3">
                   {[
-                    "Jira", "Confluence", "Figma", "Miro", "SQL", "Tableau",
-                    "Amplitude", "Mixpanel", "Notion", "Monday.com", "Azure DevOps", "GitHub"
+                    "JIRA", "Confluence", "Figma", "Miro", "SQL", "Tableau",
+                    "Squarespace", "HTML", "VBA", "Office Suite", "Azure DevOps", "GitHub"
                   ].map((tool) => (
                     <motion.span
                       key={tool}

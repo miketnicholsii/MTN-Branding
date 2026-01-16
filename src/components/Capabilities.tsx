@@ -7,43 +7,43 @@ import SectionTransition from "./SectionTransition";
 const capabilities = [
   {
     icon: Target,
-    title: "Product Strategy",
-    description: "Translating vision into actionable roadmaps aligned with user needs.",
+    title: "Business Development",
+    description: "Strategic partnerships and revenue growth through innovative solutions.",
   },
   {
     icon: Users,
     title: "Agile Leadership",
-    description: "Coaching teams through Scrum, Kanban, and hybrid methodologies.",
+    description: "Program & project management with Scrum, Kanban, and hybrid methodologies.",
   },
   {
     icon: Brain,
-    title: "Systems Thinking",
-    description: "Breaking down complexity into clear requirements and specs.",
+    title: "Data Analysis & Insights",
+    description: "Turning complex data into actionable business intelligence.",
   },
   {
     icon: Palette,
     title: "UX Collaboration",
-    description: "Creating intuitive experiences backed by research and data.",
+    description: "User-centered design backed by research and prototyping.",
   },
   {
     icon: Rocket,
-    title: "Go-to-Market",
+    title: "Go-to-Market Execution",
     description: "Orchestrating teams from beta to successful market launch.",
   },
   {
     icon: Zap,
     title: "Process Optimization",
-    description: "Implementing scalable solutions and automations.",
+    description: "Platform testing, automation, and scalable solutions.",
   },
 ];
 
 const tools = [
-  "Jira & Confluence",
-  "Scrum & Kanban",
+  "Agile & Scrum",
+  "JIRA & Confluence",
   "UX Prototyping",
-  "Data Analysis",
   "Technical Docs",
-  "Stakeholder Comms",
+  "Website Design",
+  "Office Automation",
 ];
 
 const Capabilities = () => {
