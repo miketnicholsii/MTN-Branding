@@ -1,4 +1,4 @@
-import { motion, useInView } from "framer-motion";
+import { motion, useInView, useScroll, useTransform } from "framer-motion";
 import { useRef } from "react";
 import { Target, Users, Brain, Palette, Rocket, Zap } from "lucide-react";
 import { StaggerContainer, StaggerItem } from "./StaggerReveal";
@@ -50,13 +50,34 @@ const Capabilities = () => {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-100px" });
 
+  const { scrollYProgress } = useScroll({
+    target: ref,
+    offset: ["start end", "end start"],
+  });
+
+  // Parallax transforms
+  const bg1Y = useTransform(scrollYProgress, [0, 1], [-120, 180]);
+  const bg2Y = useTransform(scrollYProgress, [0, 1], [80, -140]);
+  const bg3Y = useTransform(scrollYProgress, [0, 1], [-60, 100]);
+  const bg1Scale = useTransform(scrollYProgress, [0, 0.5, 1], [0.85, 1.1, 0.95]);
+  const bg2Rotate = useTransform(scrollYProgress, [0, 1], [-10, 20]);
+
   return (
     <section id="capabilities" className="py-28 sm:py-36 lg:py-44 relative overflow-hidden section-dark" ref={ref}>
-      {/* Background with green tones */}
+      {/* Parallax background with green tones */}
       <div className="absolute top-0 left-0 w-full h-full overflow-hidden">
-        <div className="absolute top-1/4 right-0 w-[600px] h-[600px] bg-forest-sage/25 rounded-full blur-[120px]" />
-        <div className="absolute bottom-0 left-1/4 w-[500px] h-[500px] bg-orange-gold/12 rounded-full blur-[100px]" />
-        <div className="absolute top-1/2 left-1/3 w-[400px] h-[400px] bg-forest-dark/20 rounded-full blur-[80px]" />
+        <motion.div 
+          style={{ y: bg1Y, scale: bg1Scale }}
+          className="absolute top-1/4 right-0 w-[600px] h-[600px] bg-forest-sage/25 rounded-full blur-[120px]" 
+        />
+        <motion.div 
+          style={{ y: bg2Y, rotate: bg2Rotate }}
+          className="absolute bottom-0 left-1/4 w-[500px] h-[500px] bg-orange-gold/12 rounded-full blur-[100px]" 
+        />
+        <motion.div 
+          style={{ y: bg3Y }}
+          className="absolute top-1/2 left-1/3 w-[400px] h-[400px] bg-forest-dark/20 rounded-full blur-[80px]" 
+        />
       </div>
       
       <SectionTransition>

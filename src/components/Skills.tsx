@@ -1,4 +1,4 @@
-import { motion, useInView } from "framer-motion";
+import { motion, useInView, useScroll, useTransform } from "framer-motion";
 import { useRef } from "react";
 import { StaggerContainer, StaggerItem } from "./StaggerReveal";
 import SectionTransition from "./SectionTransition";
@@ -67,12 +67,32 @@ const Skills = () => {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-100px" });
 
+  const { scrollYProgress } = useScroll({
+    target: ref,
+    offset: ["start end", "end start"],
+  });
+
+  // Parallax transforms
+  const bg1Y = useTransform(scrollYProgress, [0, 1], [-80, 120]);
+  const bg2Y = useTransform(scrollYProgress, [0, 1], [60, -100]);
+  const bg3Y = useTransform(scrollYProgress, [0, 1], [-40, 80]);
+  const bg1Scale = useTransform(scrollYProgress, [0, 0.5, 1], [0.95, 1.05, 1]);
+
   return (
     <section id="skills" className="py-28 sm:py-36 lg:py-44 relative overflow-hidden" ref={ref}>
-      {/* Background with more green */}
-      <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-forest-sage/8 rounded-full blur-[120px]" />
-      <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-forest-dark/6 rounded-full blur-[100px]" />
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[400px] h-[400px] bg-orange-gold/5 rounded-full blur-[80px]" />
+      {/* Parallax background with more green */}
+      <motion.div 
+        style={{ y: bg1Y, scale: bg1Scale }}
+        className="absolute top-0 right-0 w-[600px] h-[600px] bg-forest-sage/8 rounded-full blur-[120px]" 
+      />
+      <motion.div 
+        style={{ y: bg2Y }}
+        className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-forest-dark/6 rounded-full blur-[100px]" 
+      />
+      <motion.div 
+        style={{ y: bg3Y }}
+        className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[400px] h-[400px] bg-orange-gold/5 rounded-full blur-[80px]" 
+      />
       
       <SectionTransition>
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative">
