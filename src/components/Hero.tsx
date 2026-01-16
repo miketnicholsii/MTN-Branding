@@ -17,6 +17,14 @@ const Hero = () => {
   const imageY = useTransform(scrollYProgress, [0, 1], [0, 50]);
   const imageScale = useTransform(scrollYProgress, [0, 0.5], [1, 0.96]);
 
+  // Parallax for background elements
+  const bg1Y = useTransform(scrollYProgress, [0, 1], [0, 150]);
+  const bg2Y = useTransform(scrollYProgress, [0, 1], [0, -100]);
+  const bg3Y = useTransform(scrollYProgress, [0, 1], [0, 80]);
+  const bg4Y = useTransform(scrollYProgress, [0, 1], [0, -60]);
+  const bg1Scale = useTransform(scrollYProgress, [0, 1], [1, 1.2]);
+  const bg2Scale = useTransform(scrollYProgress, [0, 1], [1, 0.9]);
+
   // Mouse parallax
   const mouseX = useMotionValue(0);
   const mouseY = useMotionValue(0);
@@ -40,12 +48,24 @@ const Hero = () => {
 
   return (
     <section ref={containerRef} className="min-h-screen flex flex-col justify-center relative overflow-hidden pt-20 sm:pt-0">
-      {/* Ambient background */}
+      {/* Parallax background elements */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <div className="absolute top-1/4 -left-48 w-[600px] h-[600px] bg-forest-sage/12 rounded-full blur-[100px] animate-breathe" />
-        <div className="absolute bottom-1/3 -right-32 w-[500px] h-[500px] bg-forest-dark/10 rounded-full blur-[80px] animate-breathe delay-200" />
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[700px] bg-forest-sage/6 rounded-full blur-[120px]" />
-        <div className="absolute bottom-1/4 left-1/4 w-[300px] h-[300px] bg-orange-gold/8 rounded-full blur-[80px] animate-breathe delay-300" />
+        <motion.div 
+          style={{ y: bg1Y, scale: bg1Scale }}
+          className="absolute top-1/4 -left-48 w-[600px] h-[600px] bg-forest-sage/12 rounded-full blur-[100px]" 
+        />
+        <motion.div 
+          style={{ y: bg2Y, scale: bg2Scale }}
+          className="absolute bottom-1/3 -right-32 w-[500px] h-[500px] bg-forest-dark/10 rounded-full blur-[80px]" 
+        />
+        <motion.div 
+          style={{ y: bg3Y }}
+          className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[700px] bg-forest-sage/6 rounded-full blur-[120px]" 
+        />
+        <motion.div 
+          style={{ y: bg4Y }}
+          className="absolute bottom-1/4 left-1/4 w-[300px] h-[300px] bg-orange-gold/8 rounded-full blur-[80px]" 
+        />
       </div>
 
       <motion.div

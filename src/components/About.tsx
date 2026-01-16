@@ -1,4 +1,4 @@
-import { motion, useInView } from "framer-motion";
+import { motion, useInView, useScroll, useTransform } from "framer-motion";
 import { useRef } from "react";
 import { Linkedin, Award, GraduationCap, Medal } from "lucide-react";
 import AnimatedCounter from "./AnimatedCounter";
@@ -20,14 +20,35 @@ const achievements = [
 const About = () => {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-100px" });
+  
+  const { scrollYProgress } = useScroll({
+    target: ref,
+    offset: ["start end", "end start"],
+  });
+
+  // Parallax transforms for background elements
+  const bg1Y = useTransform(scrollYProgress, [0, 1], [-100, 150]);
+  const bg2Y = useTransform(scrollYProgress, [0, 1], [50, -120]);
+  const bg3Y = useTransform(scrollYProgress, [0, 1], [-50, 100]);
+  const bg1Scale = useTransform(scrollYProgress, [0, 0.5, 1], [0.9, 1.1, 1]);
+  const bg2Rotate = useTransform(scrollYProgress, [0, 1], [0, 15]);
 
   return (
     <section id="about" className="py-28 sm:py-36 lg:py-44 relative overflow-hidden section-dark" ref={ref}>
-      {/* Background accents */}
+      {/* Parallax background accents */}
       <div className="absolute top-0 left-0 w-full h-full overflow-hidden">
-        <div className="absolute top-1/4 -left-48 w-[600px] h-[600px] bg-forest-sage/20 rounded-full blur-[120px]" />
-        <div className="absolute bottom-1/3 -right-32 w-[500px] h-[500px] bg-orange-gold/15 rounded-full blur-[100px]" />
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-forest-sage/10 rounded-full blur-[150px]" />
+        <motion.div 
+          style={{ y: bg1Y, scale: bg1Scale }}
+          className="absolute top-1/4 -left-48 w-[600px] h-[600px] bg-forest-sage/20 rounded-full blur-[120px]" 
+        />
+        <motion.div 
+          style={{ y: bg2Y, rotate: bg2Rotate }}
+          className="absolute bottom-1/3 -right-32 w-[500px] h-[500px] bg-orange-gold/15 rounded-full blur-[100px]" 
+        />
+        <motion.div 
+          style={{ y: bg3Y }}
+          className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-forest-sage/10 rounded-full blur-[150px]" 
+        />
       </div>
       
       <SectionTransition>
