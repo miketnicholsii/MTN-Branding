@@ -1,54 +1,123 @@
 import { motion, useInView, useScroll, useTransform } from "framer-motion";
 import { useRef } from "react";
-import { Target, Users, Brain, Palette, Rocket, Zap } from "lucide-react";
+import { 
+  Rocket, 
+  Palette, 
+  BarChart3, 
+  MessageSquare,
+  Kanban,
+  FileCode,
+  Figma,
+  PenTool,
+  Globe,
+  TableProperties,
+  FileSpreadsheet,
+  Workflow,
+  FileText,
+  Users,
+  Sparkles
+} from "lucide-react";
 import { StaggerContainer, StaggerItem } from "./StaggerReveal";
 import SectionTransition from "./SectionTransition";
 
-const capabilities = [
+const toolCategories = [
   {
-    icon: Target,
-    title: "Business Development",
-    description: "Strategic partnerships and revenue growth through innovative solutions.",
-  },
-  {
-    icon: Users,
-    title: "Agile Leadership",
-    description: "Program & project management with Scrum, Kanban, and hybrid methodologies.",
-  },
-  {
-    icon: Brain,
-    title: "Data Analysis & Insights",
-    description: "Turning complex data into actionable business intelligence.",
-  },
-  {
-    icon: Palette,
-    title: "UX Collaboration",
-    description: "User-centered design backed by research and prototyping.",
-  },
-  {
+    title: "Product & Delivery",
     icon: Rocket,
-    title: "Go-to-Market Execution",
-    description: "Orchestrating teams from beta to successful market launch.",
+    tools: [
+      { name: "Agile & Scrum", icon: Kanban },
+      { name: "Kanban", icon: Workflow },
+      { name: "JIRA", icon: FileCode },
+      { name: "Confluence", icon: FileText },
+    ]
   },
   {
-    icon: Zap,
-    title: "Process Optimization",
-    description: "Platform testing, automation, and scalable solutions.",
+    title: "Design & Web",
+    icon: Palette,
+    tools: [
+      { name: "UX Design Collaboration", icon: Figma },
+      { name: "Prototyping & Wireframing", icon: PenTool },
+      { name: "Website Design", icon: Globe },
+      { name: "HTML/CSS Fundamentals", icon: FileCode },
+    ]
+  },
+  {
+    title: "Data & Automation",
+    icon: BarChart3,
+    tools: [
+      { name: "Excel & Office Suite", icon: TableProperties },
+      { name: "VBA & Reporting Tools", icon: FileSpreadsheet },
+      { name: "Data-Driven Decisions", icon: BarChart3 },
+      { name: "Squarespace", icon: Globe },
+    ]
+  },
+  {
+    title: "Communication",
+    icon: MessageSquare,
+    tools: [
+      { name: "Technical Documentation", icon: FileText },
+      { name: "Executive Communication", icon: Users },
+      { name: "Cross-Functional Facilitation", icon: Sparkles },
+      { name: "Strategic Storytelling", icon: MessageSquare },
+    ]
   },
 ];
 
-const tools = [
-  "Agile & Scrum",
-  "JIRA & Confluence",
-  "UX Prototyping",
-  "Technical Docs",
-  "Website Design",
-  "Office Automation",
-];
+const ToolCategory = ({ category, delay }: { 
+  category: typeof toolCategories[0]; 
+  delay: number;
+}) => {
+  const ref = useRef(null);
+  const isInView = useInView(ref, { once: true, margin: "-50px" });
+
+  return (
+    <motion.div
+      ref={ref}
+      initial={{ opacity: 0, y: 30 }}
+      animate={isInView ? { opacity: 1, y: 0 } : {}}
+      transition={{ duration: 0.6, delay: delay * 0.15, ease: "easeOut" }}
+    >
+      <motion.div
+        whileHover={{ y: -8 }}
+        transition={{ duration: 0.4, ease: "easeOut" }}
+        className="glass-card-dark rounded-3xl p-6 lg:p-8 h-full hover:bg-forest-sage/20 transition-all duration-500"
+      >
+        {/* Category header */}
+        <div className="flex items-center gap-4 mb-6">
+          <div className="w-12 h-12 rounded-2xl bg-orange-gold/20 border border-orange-gold/30 flex items-center justify-center">
+            <category.icon size={22} className="text-orange-gold" />
+          </div>
+          <h3 className="text-lg font-bold text-white">{category.title}</h3>
+        </div>
+
+        {/* Tools list */}
+        <div className="space-y-3">
+          {category.tools.map((tool, index) => (
+            <motion.div
+              key={tool.name}
+              className="flex items-center gap-3 group/tool cursor-default"
+              initial={{ opacity: 0, x: -10 }}
+              animate={isInView ? { opacity: 1, x: 0 } : {}}
+              transition={{ delay: delay * 0.15 + index * 0.08, duration: 0.4 }}
+              whileHover={{ x: 4 }}
+            >
+              <tool.icon 
+                size={16} 
+                className="text-white/50 group-hover/tool:text-orange-gold transition-colors duration-200" 
+              />
+              <span className="text-sm font-medium text-white/80 group-hover/tool:text-white transition-colors duration-200">
+                {tool.name}
+              </span>
+            </motion.div>
+          ))}
+        </div>
+      </motion.div>
+    </motion.div>
+  );
+};
 
 const Capabilities = () => {
   const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, margin: "-100px" });
 
   const { scrollYProgress } = useScroll({
     target: ref,
@@ -86,7 +155,7 @@ const Capabilities = () => {
             {/* Section label */}
             <StaggerItem>
               <div className="text-center mb-6">
-                <span className="text-orange-gold text-sm font-bold tracking-[0.2em] uppercase">Capabilities</span>
+                <span className="text-orange-gold text-sm font-bold tracking-[0.2em] uppercase">Tools & Frameworks</span>
               </div>
             </StaggerItem>
 
@@ -94,53 +163,41 @@ const Capabilities = () => {
             <StaggerItem>
               <div className="text-center mb-6">
                 <h2 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-white">
-                  Everything you need.
+                  Capability-Driven Toolkit
                 </h2>
               </div>
             </StaggerItem>
 
             <StaggerItem>
-              <p className="text-white/80 text-lg text-center max-w-2xl mx-auto mb-20 font-medium">
-                From strategy to execution, I provide the tools and guidance for every stage.
+              <p className="text-white/80 text-lg text-center max-w-2xl mx-auto mb-16 font-medium">
+                From strategy to execution, I leverage the right tools for every stage of product development.
               </p>
             </StaggerItem>
 
-            {/* Capabilities grid */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 mb-20 max-w-5xl mx-auto">
-              {capabilities.map((cap, index) => (
-                <StaggerItem key={index}>
-                  <motion.div
-                    whileHover={{ y: -8 }}
-                    transition={{ duration: 0.4, ease: "easeOut" }}
-                    className="group glass-card-dark rounded-3xl p-8 cursor-default h-full hover:bg-forest-sage/20 transition-all duration-500"
-                  >
-                    <div className="w-14 h-14 rounded-2xl bg-orange-gold/20 border border-orange-gold/30 flex items-center justify-center mb-6 group-hover:bg-orange-gold/30 transition-colors duration-300">
-                      <cap.icon size={26} className="text-orange-gold" />
-                    </div>
-                    <h3 className="text-lg font-bold text-white mb-3">{cap.title}</h3>
-                    <p className="text-white/70 text-sm leading-relaxed font-medium">{cap.description}</p>
-                  </motion.div>
-                </StaggerItem>
+            {/* Tools grid - 2x2 */}
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-4xl mx-auto">
+              {toolCategories.map((category, index) => (
+                <ToolCategory
+                  key={category.title}
+                  category={category}
+                  delay={index}
+                />
               ))}
             </div>
 
-            {/* Tools section */}
+            {/* Bottom callout */}
             <StaggerItem>
-              <div className="text-center">
-                <h3 className="text-lg font-bold text-white mb-10">Tools & Frameworks</h3>
-                <div className="flex flex-wrap justify-center gap-3">
-                  {tools.map((tool) => (
-                    <motion.span
-                      key={tool}
-                      className="px-6 py-3 glass-card-dark rounded-full text-sm font-semibold text-white/90 hover:text-white hover:bg-forest-sage/20 transition-all duration-300"
-                      whileHover={{ y: -4 }}
-                      transition={{ duration: 0.3 }}
-                    >
-                      {tool}
-                    </motion.span>
-                  ))}
-                </div>
-              </div>
+              <motion.div
+                className="mt-16 text-center"
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.6, duration: 0.5 }}
+                viewport={{ once: true }}
+              >
+                <p className="text-white/60 text-sm font-medium">
+                  And many more tools tailored to each project's unique needs
+                </p>
+              </motion.div>
             </StaggerItem>
           </StaggerContainer>
         </div>

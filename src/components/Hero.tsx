@@ -90,22 +90,39 @@ const Hero = () => {
             {/* Main headline */}
             <StaggerItem>
               <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-[3.5rem] xl:text-7xl font-bold leading-[1.08] mb-3 text-forest-deep">
-                Hi, I'm Mike T. Nichols{" "}
-                <span className="text-forest-sage" style={{ fontFamily: 'Georgia, serif' }}>II</span>
+                Hi, I'm{" "}
+                <motion.span 
+                  className="relative inline-block"
+                  whileHover={{ scale: 1.02 }}
+                >
+                  <span className="text-gradient-brand">Mike</span>
+                  <span className="ml-2">👋🏾</span>
+                </motion.span>
               </h1>
             </StaggerItem>
             
             <StaggerItem>
-              <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-[3.5rem] xl:text-7xl font-bold leading-[1.08] text-gradient-brand mb-10">
-                Agile PM & Business Analyst
-              </h1>
+              <p className="text-xl sm:text-2xl md:text-3xl font-semibold text-forest-sage mb-8 max-w-2xl mx-auto lg:mx-0">
+                I solve complex problems with{" "}
+                <span className="text-gradient-brand">clarity</span>,{" "}
+                <span className="text-gradient-brand">creativity</span>, and—when appropriate—a{" "}
+                <motion.span 
+                  className="inline-block text-orange-gold"
+                  whileHover={{ rotate: [0, -5, 5, 0] }}
+                  transition={{ duration: 0.5 }}
+                >
+                  dad joke
+                </motion.span>{" "}
+                or two.
+              </p>
             </StaggerItem>
 
             {/* Subheadline */}
             <StaggerItem>
               <p className="text-body text-lg md:text-xl leading-relaxed max-w-xl mx-auto lg:mx-0 mb-12 font-medium">
-                I solve problems with a smile and a dad joke or two. Building high-performance platforms 
-                and innovative solutions that drive growth — with clarity, empathy, and purpose.
+                I'm an <span className="text-forest-deep font-semibold">Agile Product Manager</span> and{" "}
+                <span className="text-forest-deep font-semibold">Digital Strategist</span> who builds high-performance 
+                platforms and scalable solutions that drive growth, align teams, and deliver real results.
               </p>
             </StaggerItem>
 
