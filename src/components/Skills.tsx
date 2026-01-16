@@ -42,7 +42,7 @@ const skillMatrix = [
     skills: [
       { name: "UX Collaboration & Design Strategy", tier: "Advanced" },
       { name: "User-Centered Design Principles", tier: "Advanced" },
-      { name: "Website & Digital Experience Design", tier: "Proficient" },
+      { name: "Website & Digital Experience Design", tier: "Expert" },
       { name: "Prototyping & Feedback Loops", tier: "Advanced" },
     ]
   },
@@ -114,27 +114,27 @@ const SkillCard = ({ category, icon: Icon, skills, delay }: {
       initial={{ opacity: 0, y: 30 }}
       animate={isInView ? { opacity: 1, y: 0 } : {}}
       transition={{ duration: 0.6, delay: delay * 0.12, ease: "easeOut" }}
-      className="group"
+      className="group h-full"
     >
       <motion.div
         whileHover={{ y: -8 }}
         transition={{ duration: 0.4, ease: "easeOut" }}
-        className="glass-card rounded-3xl p-6 lg:p-8 h-full hover:shadow-xl hover:shadow-forest-deep/10 transition-all duration-500"
+        className="glass-card rounded-3xl p-6 lg:p-8 h-full flex flex-col hover:shadow-xl hover:shadow-forest-deep/10 transition-all duration-500"
       >
         {/* Category header */}
         <div className="flex items-center gap-4 mb-6">
-          <div className="w-12 h-12 rounded-2xl bg-forest-deep/5 border border-forest-sage/20 flex items-center justify-center group-hover:bg-orange-gold/10 group-hover:border-orange-gold/30 transition-all duration-300">
+          <div className="w-12 h-12 rounded-2xl bg-forest-deep/5 border border-forest-sage/20 flex items-center justify-center shrink-0 group-hover:bg-orange-gold/10 group-hover:border-orange-gold/30 transition-all duration-300">
             <Icon size={22} className="text-forest-sage group-hover:text-orange-gold transition-colors duration-300" />
           </div>
-          <h3 className="text-lg font-bold text-forest-deep">{category}</h3>
+          <h3 className="text-lg font-bold text-forest-deep leading-tight">{category}</h3>
         </div>
 
         {/* Skills list */}
-        <div className="space-y-3">
+        <div className="space-y-2 flex-1">
           {skills.map((skill, index) => (
             <motion.div
               key={skill.name}
-              className="relative pl-4 py-2 rounded-lg cursor-default"
+              className="relative py-2.5 px-3 rounded-lg cursor-default"
               onHoverStart={() => setHoveredSkill(index)}
               onHoverEnd={() => setHoveredSkill(null)}
               animate={{
@@ -142,17 +142,19 @@ const SkillCard = ({ category, icon: Icon, skills, delay }: {
               }}
               transition={{ duration: 0.2 }}
             >
-              <div className="flex items-center justify-between">
-                <div className="flex items-center gap-2">
+              <div className="flex items-center justify-between gap-3">
+                <div className="flex items-center gap-2 min-w-0 flex-1">
                   <ChevronRight 
                     size={14} 
-                    className={`transition-colors duration-200 ${hoveredSkill === index ? "text-orange-gold" : "text-forest-sage/50"}`} 
+                    className={`shrink-0 transition-colors duration-200 ${hoveredSkill === index ? "text-orange-gold" : "text-forest-sage/50"}`} 
                   />
-                  <span className="text-sm font-medium text-forest-deep/80 group-hover:text-forest-deep transition-colors duration-200">
+                  <span className="text-sm font-medium text-forest-deep/80 group-hover:text-forest-deep transition-colors duration-200 leading-tight">
                     {skill.name}
                   </span>
                 </div>
-                <TierIndicator tier={skill.tier as "Expert" | "Advanced" | "Proficient"} />
+                <div className="shrink-0">
+                  <TierIndicator tier={skill.tier as "Expert" | "Advanced" | "Proficient"} />
+                </div>
               </div>
             </motion.div>
           ))}
@@ -235,8 +237,8 @@ const Skills = () => {
               </div>
             </StaggerItem>
 
-            {/* Skills Grid - 5 cards */}
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
+            {/* Skills Grid - 5 cards with proper alignment */}
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto auto-rows-fr">
               {skillMatrix.slice(0, 3).map((category, index) => (
                 <SkillCard
                   key={category.category}
@@ -248,8 +250,8 @@ const Skills = () => {
               ))}
             </div>
             
-            {/* Bottom row - 2 cards centered */}
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-4xl mx-auto mt-6">
+            {/* Bottom row - 2 cards centered with matching height */}
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-4xl mx-auto mt-6 auto-rows-fr">
               {skillMatrix.slice(3).map((category, index) => (
                 <SkillCard
                   key={category.category}
