@@ -12,16 +12,15 @@ const Hero = () => {
     offset: ["start start", "end start"],
   });
 
-  const y = useTransform(scrollYProgress, [0, 1], [0, 150]);
-  const opacity = useTransform(scrollYProgress, [0, 0.4], [1, 0]);
-  const imageY = useTransform(scrollYProgress, [0, 1], [0, 80]);
-  const imageScale = useTransform(scrollYProgress, [0, 0.5], [1, 0.9]);
-  const imageRotate = useTransform(scrollYProgress, [0, 1], [0, 5]);
+  const y = useTransform(scrollYProgress, [0, 1], [0, 100]);
+  const opacity = useTransform(scrollYProgress, [0, 0.5], [1, 0]);
+  const imageY = useTransform(scrollYProgress, [0, 1], [0, 60]);
+  const imageScale = useTransform(scrollYProgress, [0, 0.5], [1, 0.95]);
 
-  // Mouse parallax for image
+  // Subtle mouse parallax
   const mouseX = useMotionValue(0);
   const mouseY = useMotionValue(0);
-  const springConfig = { damping: 25, stiffness: 150 };
+  const springConfig = { damping: 30, stiffness: 100 };
   const imageXSpring = useSpring(mouseX, springConfig);
   const imageYSpring = useSpring(mouseY, springConfig);
 
@@ -29,8 +28,8 @@ const Hero = () => {
     const handleMouseMove = (e: MouseEvent) => {
       const { clientX, clientY } = e;
       const { innerWidth, innerHeight } = window;
-      const x = (clientX - innerWidth / 2) / 50;
-      const y = (clientY - innerHeight / 2) / 50;
+      const x = (clientX - innerWidth / 2) / 80;
+      const y = (clientY - innerHeight / 2) / 80;
       mouseX.set(x);
       mouseY.set(y);
     };
@@ -41,66 +40,53 @@ const Hero = () => {
 
   return (
     <section ref={containerRef} className="min-h-screen flex flex-col justify-center relative overflow-hidden pt-20 sm:pt-0">
+      {/* Ambient background elements */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+        <div className="absolute top-1/4 -left-32 w-96 h-96 bg-forest-light/5 rounded-full blur-3xl animate-breathe" />
+        <div className="absolute bottom-1/4 -right-32 w-80 h-80 bg-orange-gold/8 rounded-full blur-3xl animate-breathe delay-200" />
+      </div>
+
       <motion.div
         style={{ y, opacity }}
         className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10"
       >
-        <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center max-w-6xl mx-auto">
+        <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center max-w-6xl mx-auto">
           {/* Text Content */}
           <StaggerContainer className="text-center lg:text-left order-2 lg:order-1">
             {/* Eyebrow badge */}
             <StaggerItem>
               <motion.div 
-                className="inline-flex items-center gap-1.5 sm:gap-2 px-3 sm:px-5 py-2 sm:py-2.5 glass-pill rounded-full mb-6 sm:mb-8 hover:shadow-md transition-all duration-300"
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.98 }}
+                className="inline-flex items-center gap-2 px-4 py-2 glass-pill rounded-full mb-8"
+                whileHover={{ scale: 1.02 }}
+                transition={{ duration: 0.3 }}
               >
-                <Sparkles size={14} className="text-primary sm:w-4 sm:h-4" />
-                <span className="text-body text-xs sm:text-sm font-medium">Product Leader · Strategist · Builder</span>
+                <span className="w-2 h-2 bg-orange-gold rounded-full animate-pulse-subtle" />
+                <span className="text-body text-sm font-medium">Product Leader · Strategist · Builder</span>
               </motion.div>
             </StaggerItem>
 
             {/* Main headline */}
             <StaggerItem>
-              <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-5xl xl:text-6xl font-bold leading-tight mb-1 sm:mb-2 text-headline px-1 lg:px-0">
+              <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-6xl font-bold leading-[1.1] mb-2 text-headline">
                 Hi, I'm Mike T. Nichols{" "}
-                <motion.span 
-                  className="text-primary inline-block" 
-                  style={{ fontFamily: 'Georgia, "Times New Roman", serif' }}
-                  animate={{ 
-                    rotate: [0, 5, -5, 0],
-                  }}
-                  transition={{ 
-                    duration: 4,
-                    repeat: Infinity,
-                    repeatType: "reverse",
-                    ease: "easeInOut"
-                  }}
+                <span 
+                  className="text-forest-light" 
+                  style={{ fontFamily: 'Georgia, serif' }}
                 >
                   II
-                </motion.span>
+                </span>
               </h1>
             </StaggerItem>
             
             <StaggerItem>
-              <motion.h1 
-                className="text-3xl sm:text-4xl md:text-5xl lg:text-5xl xl:text-6xl font-bold leading-tight text-gradient-brand mb-5 sm:mb-8 px-1 lg:px-0"
-                animate={{
-                  backgroundPosition: ["0% 50%", "100% 50%", "0% 50%"],
-                }}
-                transition={{
-                  duration: 5,
-                  repeat: Infinity,
-                  ease: "linear"
-                }}
-              >
+              <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-6xl font-bold leading-[1.1] text-gradient-brand mb-8">
                 I build products that matter.
-              </motion.h1>
+              </h1>
             </StaggerItem>
 
             {/* Subheadline */}
             <StaggerItem>
-              <p className="text-body text-base sm:text-lg md:text-xl leading-relaxed max-w-2xl mx-auto lg:mx-0 mb-8 sm:mb-10 px-2 lg:px-0">
+              <p className="text-body text-lg md:text-xl leading-relaxed max-w-xl mx-auto lg:mx-0 mb-10">
                 High-performance platforms, cross-functional teams, and business solutions — 
                 with clarity, empathy, and a bias toward action.
               </p>
@@ -108,23 +94,17 @@ const Hero = () => {
 
             {/* CTAs */}
             <StaggerItem>
-              <div className="flex flex-col sm:flex-row flex-wrap justify-center lg:justify-start gap-3 sm:gap-4 mb-8 sm:mb-10 px-4 lg:px-0">
+              <div className="flex flex-col sm:flex-row flex-wrap justify-center lg:justify-start gap-4 mb-12">
                 <MagneticButton
                   href="#contact"
-                  className="group inline-flex items-center justify-center gap-2 px-6 sm:px-8 py-3.5 sm:py-4 bg-primary text-primary-foreground font-semibold rounded-full transition-all duration-300 hover:shadow-lg hover:shadow-primary/30 text-sm sm:text-base"
+                  className="group inline-flex items-center justify-center gap-2 px-8 py-4 bg-forest-deep text-white font-semibold rounded-full transition-all duration-500 hover:bg-forest-mid hover:shadow-lg hover:shadow-forest-deep/20"
                 >
                   Get in Touch
-                  <motion.span 
-                    className="inline-block"
-                    animate={{ x: [0, 4, 0] }}
-                    transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
-                  >
-                    →
-                  </motion.span>
+                  <span className="inline-block transition-transform duration-300 group-hover:translate-x-1">→</span>
                 </MagneticButton>
                 <MagneticButton
                   href="#experience"
-                  className="inline-flex items-center justify-center gap-2 px-6 sm:px-8 py-3.5 sm:py-4 glass-pill text-foreground font-semibold rounded-full hover:shadow-md transition-all duration-300 text-sm sm:text-base"
+                  className="inline-flex items-center justify-center gap-2 px-8 py-4 glass-card text-foreground font-semibold rounded-full hover:shadow-md transition-all duration-500"
                 >
                   View Experience
                 </MagneticButton>
@@ -133,7 +113,7 @@ const Hero = () => {
 
             {/* Feature pills */}
             <StaggerItem>
-              <div className="flex flex-wrap justify-center lg:justify-start gap-4 sm:gap-6 px-2 lg:px-0">
+              <div className="flex flex-wrap justify-center lg:justify-start gap-6">
                 {[
                   { icon: Target, text: "Strategic Vision" },
                   { icon: TrendingUp, text: "Proven Results" },
@@ -141,17 +121,12 @@ const Hero = () => {
                 ].map((item, index) => (
                   <motion.div
                     key={index}
-                    className="flex items-center gap-1.5 sm:gap-2 text-subtle text-xs sm:text-sm cursor-default transition-colors duration-300 hover:text-body"
-                    whileHover={{ scale: 1.1, x: 5 }}
-                    transition={{ type: "spring", stiffness: 400 }}
+                    className="flex items-center gap-2 text-subtle text-sm group cursor-default"
+                    whileHover={{ x: 4 }}
+                    transition={{ duration: 0.3 }}
                   >
-                    <motion.div
-                      animate={{ rotate: [0, 360] }}
-                      transition={{ duration: 8, repeat: Infinity, ease: "linear", delay: index * 0.5 }}
-                    >
-                      <item.icon size={14} className="text-primary sm:w-4 sm:h-4" />
-                    </motion.div>
-                    <span>{item.text}</span>
+                    <item.icon size={16} className="text-orange-gold group-hover:text-orange-bright transition-colors duration-300" />
+                    <span className="group-hover:text-body transition-colors duration-300">{item.text}</span>
                   </motion.div>
                 ))}
               </div>
@@ -163,94 +138,74 @@ const Hero = () => {
             <motion.div
               style={{ 
                 y: imageY, 
-                scale: imageScale, 
-                rotateZ: imageRotate,
+                scale: imageScale,
                 x: imageXSpring,
               }}
               className="relative"
             >
-              {/* Animated rings */}
+              {/* Subtle decorative ring */}
               <motion.div
-                className="absolute -inset-4 sm:-inset-6 rounded-full border-2 border-primary/20"
+                className="absolute -inset-6 rounded-full border border-forest-light/20"
                 animate={{ 
-                  scale: [1, 1.1, 1],
-                  opacity: [0.3, 0.6, 0.3],
+                  scale: [1, 1.02, 1],
                 }}
-                transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
-              />
-              <motion.div
-                className="absolute -inset-8 sm:-inset-12 rounded-full border border-primary/10"
-                animate={{ 
-                  scale: [1.1, 1, 1.1],
-                  rotate: [0, 180, 360],
-                }}
-                transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
+                transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
               />
               
-              {/* Floating accent dots */}
+              {/* Accent dot */}
               <motion.div
-                className="absolute -top-4 -right-4 w-3 h-3 bg-primary rounded-full"
+                className="absolute -top-2 -right-2 w-4 h-4 bg-orange-gold rounded-full shadow-lg"
                 animate={{ 
-                  y: [-10, 10, -10],
-                  x: [-5, 5, -5],
-                  scale: [1, 1.2, 1],
+                  y: [-4, 4, -4],
                 }}
                 transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
               />
-              <motion.div
-                className="absolute -bottom-2 -left-6 w-2 h-2 bg-primary/60 rounded-full"
-                animate={{ 
-                  y: [10, -10, 10],
-                  x: [5, -5, 5],
-                }}
-                transition={{ duration: 3, repeat: Infinity, ease: "easeInOut", delay: 0.5 }}
-              />
               
-              {/* Glow effect */}
-              <div className="absolute inset-0 bg-gradient-to-br from-primary/20 via-transparent to-primary/10 rounded-full blur-2xl scale-110" />
+              {/* Ambient glow */}
+              <div className="absolute inset-0 bg-gradient-to-br from-forest-light/10 via-transparent to-orange-gold/10 rounded-full blur-2xl scale-110" />
               
               {/* Image container */}
               <motion.div
-                className="relative w-56 h-56 sm:w-72 sm:h-72 md:w-80 md:h-80 lg:w-96 lg:h-96 rounded-full overflow-hidden shadow-2xl"
+                className="relative w-64 h-64 sm:w-80 sm:h-80 lg:w-[400px] lg:h-[400px] rounded-full overflow-hidden"
+                style={{
+                  boxShadow: '0 25px 80px -20px rgba(42, 49, 42, 0.25), 0 10px 30px -10px rgba(42, 49, 42, 0.2)'
+                }}
                 whileHover={{ scale: 1.02 }}
-                transition={{ type: "spring", stiffness: 300 }}
+                transition={{ duration: 0.5, ease: "easeOut" }}
               >
-                <motion.img
+                <img
                   src={headshot}
                   alt="Mike T. Nichols II"
                   className="w-full h-full object-cover"
-                  initial={{ scale: 1.1 }}
-                  animate={{ scale: 1 }}
-                  transition={{ duration: 1.2, ease: "easeOut" }}
                 />
-                {/* Overlay gradient */}
-                <div className="absolute inset-0 bg-gradient-to-t from-primary/10 via-transparent to-transparent" />
+                {/* Subtle overlay */}
+                <div className="absolute inset-0 bg-gradient-to-t from-forest-deep/5 via-transparent to-transparent" />
               </motion.div>
             </motion.div>
           </StaggerItem>
         </div>
       </motion.div>
 
-      {/* Scroll indicator - hide on mobile */}
+      {/* Scroll indicator */}
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
-        transition={{ duration: 0.6, delay: 1 }}
-        className="hidden sm:block absolute bottom-8 sm:bottom-12 left-1/2 -translate-x-1/2"
+        transition={{ duration: 0.8, delay: 1.2 }}
+        className="hidden sm:block absolute bottom-12 left-1/2 -translate-x-1/2"
       >
         <a
           href="#about"
-          className="flex flex-col items-center gap-3 text-subtle hover:text-primary transition-colors duration-300"
+          className="flex flex-col items-center gap-3 text-subtle hover:text-forest-mid transition-colors duration-300"
         >
           <motion.div 
-            className="w-5 h-8 rounded-full border border-current flex justify-center pt-1.5"
-            animate={{ y: [0, 5, 0] }}
-            transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+            className="w-5 h-9 rounded-full border border-current flex justify-center pt-2"
+            animate={{ y: [0, 3, 0] }}
+            transition={{ duration: 2.5, repeat: Infinity, ease: "easeInOut" }}
           >
             <motion.div 
-              className="w-1 h-1 bg-current rounded-full"
-              animate={{ y: [0, 8, 0], opacity: [1, 0.5, 1] }}
-              transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
+              className="w-1.5 h-1.5 bg-orange-gold rounded-full"
+              animate={{ y: [0, 10, 0], opacity: [1, 0.3, 1] }}
+              transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
             />
           </motion.div>
         </a>

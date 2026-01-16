@@ -14,8 +14,8 @@ export default {
     },
     extend: {
       fontFamily: {
-        sans: ["Inter", "DM Sans", "system-ui", "sans-serif"],
-        display: ["DM Sans", "Inter", "system-ui", "sans-serif"],
+        sans: ["Inter", "system-ui", "sans-serif"],
+        display: ["Space Grotesk", "Inter", "system-ui", "sans-serif"],
       },
       colors: {
         border: "hsl(var(--border))",
@@ -27,13 +27,16 @@ export default {
         body: "hsl(var(--body))",
         subtle: "hsl(var(--subtle))",
         divider: "hsl(var(--divider))",
-        teal: {
-          DEFAULT: "hsl(195, 65%, 37%)",
-          light: "hsl(173, 79%, 43%)",
+        forest: {
+          deep: "hsl(var(--forest-deep))",
+          mid: "hsl(var(--forest-mid))",
+          light: "hsl(var(--forest-light))",
         },
-        cream: "hsl(43, 82%, 96%)",
-        gold: "hsl(38, 100%, 73%)",
-        coral: "hsl(357, 98%, 71%)",
+        orange: {
+          gold: "hsl(var(--orange-gold))",
+          bright: "hsl(var(--orange-bright))",
+          deep: "hsl(var(--orange-deep))",
+        },
         primary: {
           DEFAULT: "hsl(var(--primary))",
           foreground: "hsl(var(--primary-foreground))",
