@@ -7,6 +7,7 @@ import Experience from "@/components/Experience";
 import Projects from "@/components/Projects";
 import Capabilities from "@/components/Capabilities";
 import Skills from "@/components/Skills";
+import Recommendations from "@/components/Recommendations";
 import Contact from "@/components/Contact";
 import Footer from "@/components/Footer";
 import ScrollProgress from "@/components/ScrollProgress";
@@ -67,6 +68,7 @@ const Index = () => {
               <Projects />
               <Skills />
               <Capabilities />
+              <Recommendations />
               <Contact />
             </motion.main>
             <Footer />
