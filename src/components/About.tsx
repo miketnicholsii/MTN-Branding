@@ -60,12 +60,21 @@ const About = () => {
                   return (
                     <CardWrapper key={index} {...cardProps}>
                       <motion.div
-                        whileHover={{ y: -2 }}
-                        className={`text-center p-4 sm:p-6 glass-card rounded-2xl ${stat.isLinkedIn ? 'cursor-pointer hover:shadow-md transition-shadow' : 'cursor-default'}`}
+                        whileHover={{ y: -8, scale: 1.03 }}
+                        whileTap={{ scale: 0.98 }}
+                        transition={{ type: "spring", stiffness: 400, damping: 17 }}
+                        className={`text-center p-4 sm:p-6 glass-card rounded-2xl ${stat.isLinkedIn ? 'cursor-pointer' : 'cursor-default'} hover:shadow-xl hover:shadow-primary/10 transition-shadow duration-300`}
                       >
                         <div className="text-2xl sm:text-3xl lg:text-4xl font-bold text-primary mb-1 sm:mb-2 flex items-center justify-center gap-2">
                           <AnimatedCounter value={stat.value} suffix={stat.suffix} />
-                          {stat.isLinkedIn && <Linkedin size={20} className="opacity-70 sm:w-6 sm:h-6" />}
+                          {stat.isLinkedIn && (
+                            <motion.div
+                              animate={{ y: [0, -3, 0] }}
+                              transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+                            >
+                              <Linkedin size={20} className="opacity-70 sm:w-6 sm:h-6" />
+                            </motion.div>
+                          )}
                         </div>
                         <div className="text-subtle text-xs sm:text-sm font-medium">{stat.label}</div>
                       </motion.div>
@@ -83,12 +92,15 @@ const About = () => {
                   "Certified Scrum Master",
                   "Vanguard Award Winner",
                 ].map((item, index) => (
-                  <span
+                  <motion.span
                     key={item}
-                    className="px-3 sm:px-5 py-2 sm:py-2.5 glass-pill rounded-full text-body text-xs sm:text-sm font-medium cursor-default hover:bg-muted/50 transition-colors"
+                    className="px-3 sm:px-5 py-2 sm:py-2.5 glass-pill rounded-full text-body text-xs sm:text-sm font-medium cursor-default hover:bg-primary/10 hover:border-primary/30 transition-all duration-300"
+                    whileHover={{ scale: 1.08, y: -2 }}
+                    whileTap={{ scale: 0.95 }}
+                    transition={{ type: "spring", stiffness: 400 }}
                   >
                     {item}
-                  </span>
+                  </motion.span>
                 ))}
               </div>
             </StaggerItem>
