@@ -82,13 +82,18 @@ const Capabilities = () => {
               {capabilities.map((cap, index) => (
                 <StaggerItem key={index}>
                     <motion.div
-                      whileHover={{ y: -4 }}
-                      transition={{ type: "spring", stiffness: 400, damping: 25 }}
-                      className="group glass-card rounded-xl sm:rounded-2xl p-4 sm:p-6 cursor-default h-full"
+                      whileHover={{ y: -8, scale: 1.02 }}
+                      whileTap={{ scale: 0.98 }}
+                      transition={{ type: "spring", stiffness: 400, damping: 17 }}
+                      className="group glass-card rounded-xl sm:rounded-2xl p-4 sm:p-6 cursor-default h-full hover:shadow-xl hover:shadow-primary/10"
                     >
-                      <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-lg sm:rounded-xl bg-primary/20 flex items-center justify-center mb-3 sm:mb-4 group-hover:bg-primary/30 transition-colors duration-200">
+                      <motion.div 
+                        className="w-10 h-10 sm:w-12 sm:h-12 rounded-lg sm:rounded-xl bg-primary/20 flex items-center justify-center mb-3 sm:mb-4 group-hover:bg-primary/30 transition-colors duration-200"
+                        whileHover={{ rotate: 10, scale: 1.1 }}
+                        transition={{ type: "spring", stiffness: 300 }}
+                      >
                         <cap.icon size={20} className="text-primary sm:w-6 sm:h-6" />
-                      </div>
+                      </motion.div>
                     <h3 className="text-base sm:text-lg font-bold text-foreground mb-1.5 sm:mb-2 group-hover:text-primary transition-colors">{cap.title}</h3>
                     <p className="text-body text-xs sm:text-sm leading-relaxed">{cap.description}</p>
                   </motion.div>
@@ -101,13 +106,16 @@ const Capabilities = () => {
               <div className="text-center px-2">
                 <h3 className="text-lg sm:text-xl font-bold text-foreground mb-4 sm:mb-6">Tools & Frameworks</h3>
                 <div className="flex flex-wrap justify-center gap-2 sm:gap-3">
-                  {tools.map((tool) => (
-                    <span
+                  {tools.map((tool, index) => (
+                    <motion.span
                       key={tool}
-                      className="px-3 sm:px-5 py-2 sm:py-2.5 glass-pill rounded-full text-body text-xs sm:text-sm font-medium hover:text-foreground hover:bg-muted/50 transition-colors cursor-default"
+                      className="px-3 sm:px-5 py-2 sm:py-2.5 glass-pill rounded-full text-body text-xs sm:text-sm font-medium hover:text-foreground hover:bg-primary/10 hover:border-primary/30 transition-all cursor-default"
+                      whileHover={{ scale: 1.1, y: -3 }}
+                      whileTap={{ scale: 0.95 }}
+                      transition={{ type: "spring", stiffness: 400 }}
                     >
                       {tool}
-                    </span>
+                    </motion.span>
                   ))}
                 </div>
               </div>
