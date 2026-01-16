@@ -71,14 +71,14 @@ const About = () => {
             <StaggerItem>
               <div className="max-w-2xl mx-auto mb-20">
                 <p className="text-white/80 text-lg leading-relaxed mb-6 font-medium">
-                  I'm a product and strategy leader who thrives on turning ambiguity into action. 
-                  With over a decade of experience across fintech, enterprise software, and consulting, 
-                  I've led cross-functional teams to ship complex platforms and deliver measurable results.
+                  As an Agile Product Manager and Business Analyst, I develop high-performance platforms 
+                  and innovative business solutions that drive revenue growth, unlock new opportunities, 
+                  and propel teams forward — on time and with purpose.
                 </p>
                 <p className="text-white/80 text-lg leading-relaxed font-medium">
-                  My work lives at the intersection of strategy, data, and user-centered design. 
-                  Whether I'm roadmapping a product, coaching a team, or diving into data, I bring the 
-                  same rigor and empathy to the table.
+                  I've led diverse, cross-functional teams across industries, uniting strategy, data, 
+                  and user-centered design to deliver measurable results. My work bridges the gap between 
+                  vision and execution.
                 </p>
               </div>
             </StaggerItem>
