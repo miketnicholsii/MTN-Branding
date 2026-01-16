@@ -5,6 +5,7 @@ import Hero from "@/components/Hero";
 import About from "@/components/About";
 import Experience from "@/components/Experience";
 import Capabilities from "@/components/Capabilities";
+import Skills from "@/components/Skills";
 import Contact from "@/components/Contact";
 import Footer from "@/components/Footer";
 import ScrollProgress from "@/components/ScrollProgress";
@@ -62,6 +63,7 @@ const Index = () => {
               <Hero />
               <About />
               <Experience />
+              <Skills />
               <Capabilities />
               <Contact />
             </motion.main>
