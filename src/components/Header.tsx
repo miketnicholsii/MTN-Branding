@@ -57,7 +57,7 @@ const Header = () => {
   }, []);
 
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 py-3 sm:py-4">
+    <header className="fixed top-0 left-0 right-0 z-50 py-4 sm:py-5">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <nav className="flex items-center justify-between">
           {/* Logo */}
@@ -66,11 +66,11 @@ const Header = () => {
             onClick={(e) => scrollToSection(e, "#")}
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            className="text-lg sm:text-xl font-bold text-foreground flex items-baseline"
+            className="text-lg sm:text-xl font-bold text-forest-deep flex items-baseline tracking-tight"
           >
             <span className="hidden sm:inline">Mike T. Nichols</span>
             <span className="sm:hidden">MTN</span>
-            <span className="text-orange-gold ml-1" style={{ fontFamily: 'Georgia, "Times New Roman", serif' }}>II</span>
+            <span className="text-orange-gold ml-1" style={{ fontFamily: 'Georgia, serif' }}>II</span>
           </motion.a>
 
           {/* Center Navigation - Pill style like NEKO */}
@@ -79,16 +79,16 @@ const Header = () => {
             animate={{ opacity: 1, y: 0 }}
             className="hidden md:block"
           >
-            <ul className="flex items-center gap-1 px-2 py-2 glass-pill rounded-full">
+            <ul className="flex items-center gap-1 px-2 py-2.5 glass-pill rounded-full">
               {navLinks.map((link) => (
                 <li key={link.href}>
                   <a
                     href={link.href}
                     onClick={(e) => scrollToSection(e, link.href)}
-                    className={`px-5 py-2 text-sm font-medium rounded-full transition-all duration-300 ${
+                    className={`px-5 py-2.5 text-sm font-semibold rounded-full transition-all duration-300 ${
                       activeSection === link.href.replace("#", "")
                         ? "bg-forest-deep text-white"
-                        : "text-body hover:text-headline hover:bg-muted"
+                        : "text-forest-sage hover:text-forest-deep hover:bg-forest-sage/10"
                     }`}
                   >
                     {link.label}
@@ -107,10 +107,10 @@ const Header = () => {
             <a
               href="#contact"
               onClick={(e) => scrollToSection(e, "#contact")}
-              className="group inline-flex items-center gap-2 px-6 py-2.5 bg-forest-deep text-white text-sm font-semibold rounded-full hover:bg-forest-mid transition-all duration-300"
+              className="group inline-flex items-center gap-2 px-7 py-3 bg-forest-deep text-white text-sm font-semibold rounded-full hover:bg-forest-dark hover:shadow-lg hover:shadow-forest-deep/20 transition-all duration-300"
             >
               <span>Let's Talk</span>
-              <span className="group-hover:translate-x-0.5 transition-transform">→</span>
+              <span className="text-orange-gold group-hover:translate-x-0.5 transition-transform">→</span>
             </a>
           </motion.div>
 
@@ -140,10 +140,10 @@ const Header = () => {
                     <a
                       href={link.href}
                       onClick={(e) => scrollToSection(e, link.href)}
-                      className={`block px-4 py-3 text-lg font-medium rounded-xl transition-colors duration-300 ${
+                      className={`block px-5 py-3.5 text-lg font-semibold rounded-xl transition-colors duration-300 ${
                         activeSection === link.href.replace("#", "")
                           ? "bg-forest-deep text-white"
-                          : "text-body hover:text-headline hover:bg-muted"
+                          : "text-forest-sage hover:text-forest-deep hover:bg-forest-sage/10"
                       }`}
                     >
                       {link.label}
@@ -154,7 +154,7 @@ const Header = () => {
                   <a
                     href="#contact"
                     onClick={(e) => scrollToSection(e, "#contact")}
-                    className="block text-center text-sm font-semibold px-6 py-3 bg-forest-deep text-white rounded-full"
+                    className="block text-center text-sm font-bold px-6 py-3.5 bg-forest-deep text-white rounded-full hover:bg-forest-dark transition-colors duration-300"
                   >
                     Let's Talk
                   </a>
