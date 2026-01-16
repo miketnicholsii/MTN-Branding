@@ -70,7 +70,7 @@ const Header = () => {
           >
             <span className="hidden sm:inline">Mike T. Nichols</span>
             <span className="sm:hidden">MTN</span>
-            <span className="text-primary ml-1" style={{ fontFamily: 'Georgia, "Times New Roman", serif' }}>II</span>
+            <span className="text-orange-gold ml-1" style={{ fontFamily: 'Georgia, "Times New Roman", serif' }}>II</span>
           </motion.a>
 
           {/* Center Navigation - Pill style like NEKO */}
@@ -85,10 +85,10 @@ const Header = () => {
                   <a
                     href={link.href}
                     onClick={(e) => scrollToSection(e, link.href)}
-                    className={`px-5 py-2 text-sm font-medium rounded-full transition-all ${
+                    className={`px-5 py-2 text-sm font-medium rounded-full transition-all duration-300 ${
                       activeSection === link.href.replace("#", "")
-                        ? "bg-primary text-primary-foreground"
-                        : "text-body hover:text-foreground hover:bg-muted"
+                        ? "bg-forest-deep text-white"
+                        : "text-body hover:text-headline hover:bg-muted"
                     }`}
                   >
                     {link.label}
@@ -107,7 +107,7 @@ const Header = () => {
             <a
               href="#contact"
               onClick={(e) => scrollToSection(e, "#contact")}
-              className="group inline-flex items-center gap-2 px-6 py-2.5 bg-primary text-primary-foreground text-sm font-semibold rounded-full hover:bg-primary/90 transition-all"
+              className="group inline-flex items-center gap-2 px-6 py-2.5 bg-forest-deep text-white text-sm font-semibold rounded-full hover:bg-forest-mid transition-all duration-300"
             >
               <span>Let's Talk</span>
               <span className="group-hover:translate-x-0.5 transition-transform">→</span>
@@ -140,10 +140,10 @@ const Header = () => {
                     <a
                       href={link.href}
                       onClick={(e) => scrollToSection(e, link.href)}
-                      className={`block px-4 py-3 text-lg font-medium rounded-xl transition-colors ${
+                      className={`block px-4 py-3 text-lg font-medium rounded-xl transition-colors duration-300 ${
                         activeSection === link.href.replace("#", "")
-                          ? "bg-primary text-primary-foreground"
-                          : "text-body hover:text-foreground hover:bg-muted"
+                          ? "bg-forest-deep text-white"
+                          : "text-body hover:text-headline hover:bg-muted"
                       }`}
                     >
                       {link.label}
@@ -154,7 +154,7 @@ const Header = () => {
                   <a
                     href="#contact"
                     onClick={(e) => scrollToSection(e, "#contact")}
-                    className="block text-center text-sm font-semibold px-6 py-3 bg-primary text-primary-foreground rounded-full"
+                    className="block text-center text-sm font-semibold px-6 py-3 bg-forest-deep text-white rounded-full"
                   >
                     Let's Talk
                   </a>

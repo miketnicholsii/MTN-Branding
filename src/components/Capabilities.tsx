@@ -51,51 +51,49 @@ const Capabilities = () => {
   const isInView = useInView(ref, { once: true, margin: "-100px" });
 
   return (
-    <section id="capabilities" className="py-20 sm:py-32 lg:py-40 relative overflow-hidden" ref={ref}>
+    <section id="capabilities" className="py-24 sm:py-32 lg:py-40 relative overflow-hidden" ref={ref}>
+      {/* Background */}
+      <div className="absolute bottom-0 right-1/4 w-[500px] h-[500px] bg-forest-light/3 rounded-full blur-3xl" />
+      
       <SectionTransition>
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative">
           <StaggerContainer>
             {/* Section label */}
             <StaggerItem>
-              <div className="text-center mb-4 sm:mb-6">
-                <span className="text-primary text-xs sm:text-sm font-medium tracking-wider uppercase">Capabilities</span>
+              <div className="text-center mb-6">
+                <span className="text-orange-gold text-sm font-semibold tracking-widest uppercase">Capabilities</span>
               </div>
             </StaggerItem>
 
             {/* Main headline */}
             <StaggerItem>
-              <div className="text-center mb-4 sm:mb-6 px-2">
-                <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-foreground">
+              <div className="text-center mb-6">
+                <h2 className="text-4xl sm:text-5xl md:text-6xl font-bold text-headline">
                   Everything you need.
                 </h2>
               </div>
             </StaggerItem>
 
             <StaggerItem>
-              <p className="text-body text-base sm:text-lg text-center max-w-2xl mx-auto mb-10 sm:mb-16 px-4">
+              <p className="text-body text-lg text-center max-w-2xl mx-auto mb-16">
                 From strategy to execution, I provide the tools and guidance for every stage.
               </p>
             </StaggerItem>
 
             {/* Capabilities grid */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4 mb-10 sm:mb-16">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mb-16 max-w-5xl mx-auto">
               {capabilities.map((cap, index) => (
                 <StaggerItem key={index}>
-                    <motion.div
-                      whileHover={{ y: -8, scale: 1.02 }}
-                      whileTap={{ scale: 0.98 }}
-                      transition={{ type: "spring", stiffness: 400, damping: 17 }}
-                      className="group glass-card rounded-xl sm:rounded-2xl p-4 sm:p-6 cursor-default h-full hover:shadow-xl hover:shadow-primary/10"
-                    >
-                      <motion.div 
-                        className="w-10 h-10 sm:w-12 sm:h-12 rounded-lg sm:rounded-xl bg-primary/20 flex items-center justify-center mb-3 sm:mb-4 group-hover:bg-primary/30 transition-colors duration-200"
-                        whileHover={{ rotate: 10, scale: 1.1 }}
-                        transition={{ type: "spring", stiffness: 300 }}
-                      >
-                        <cap.icon size={20} className="text-primary sm:w-6 sm:h-6" />
-                      </motion.div>
-                    <h3 className="text-base sm:text-lg font-bold text-foreground mb-1.5 sm:mb-2 group-hover:text-primary transition-colors">{cap.title}</h3>
-                    <p className="text-body text-xs sm:text-sm leading-relaxed">{cap.description}</p>
+                  <motion.div
+                    whileHover={{ y: -6 }}
+                    transition={{ duration: 0.4, ease: "easeOut" }}
+                    className="group glass-card rounded-2xl p-6 cursor-default h-full hover:shadow-lg transition-shadow duration-500"
+                  >
+                    <div className="w-12 h-12 rounded-xl bg-forest-deep/10 flex items-center justify-center mb-5 group-hover:bg-forest-deep/15 transition-colors duration-300">
+                      <cap.icon size={24} className="text-forest-deep group-hover:text-forest-light transition-colors duration-300" />
+                    </div>
+                    <h3 className="text-lg font-bold text-headline mb-2 group-hover:text-forest-light transition-colors duration-300">{cap.title}</h3>
+                    <p className="text-body text-sm leading-relaxed">{cap.description}</p>
                   </motion.div>
                 </StaggerItem>
               ))}
@@ -103,16 +101,15 @@ const Capabilities = () => {
 
             {/* Tools section */}
             <StaggerItem>
-              <div className="text-center px-2">
-                <h3 className="text-lg sm:text-xl font-bold text-foreground mb-4 sm:mb-6">Tools & Frameworks</h3>
-                <div className="flex flex-wrap justify-center gap-2 sm:gap-3">
-                  {tools.map((tool, index) => (
+              <div className="text-center">
+                <h3 className="text-lg font-bold text-headline mb-8">Tools & Frameworks</h3>
+                <div className="flex flex-wrap justify-center gap-3">
+                  {tools.map((tool) => (
                     <motion.span
                       key={tool}
-                      className="px-3 sm:px-5 py-2 sm:py-2.5 glass-pill rounded-full text-body text-xs sm:text-sm font-medium hover:text-foreground hover:bg-primary/10 hover:border-primary/30 transition-all cursor-default"
-                      whileHover={{ scale: 1.1, y: -3 }}
-                      whileTap={{ scale: 0.95 }}
-                      transition={{ type: "spring", stiffness: 400 }}
+                      className="px-5 py-2.5 glass-card rounded-full text-sm font-medium text-headline hover:text-forest-light transition-colors duration-300"
+                      whileHover={{ y: -3 }}
+                      transition={{ duration: 0.3 }}
                     >
                       {tool}
                     </motion.span>
