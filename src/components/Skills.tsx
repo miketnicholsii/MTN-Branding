@@ -69,8 +69,10 @@ const Skills = () => {
 
   return (
     <section id="skills" className="py-28 sm:py-36 lg:py-44 relative overflow-hidden" ref={ref}>
-      {/* Background */}
-      <div className="absolute top-1/2 left-0 w-[500px] h-[500px] bg-orange-gold/4 rounded-full blur-[120px] -translate-y-1/2" />
+      {/* Background with more green */}
+      <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-forest-sage/8 rounded-full blur-[120px]" />
+      <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-forest-dark/6 rounded-full blur-[100px]" />
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[400px] h-[400px] bg-orange-gold/5 rounded-full blur-[80px]" />
       
       <SectionTransition>
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative">
