@@ -52,24 +52,109 @@ const Hero = () => {
 
   return (
     <section ref={containerRef} className="min-h-screen flex flex-col justify-center relative overflow-hidden pt-20 sm:pt-0">
-      {/* Parallax background elements */}
+      {/* Enhanced parallax background elements */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
+        {/* Primary glow - forest green */}
         <motion.div 
           style={{ y: bg1Y, scale: bg1Scale }}
-          className="absolute top-1/4 -left-48 w-[600px] h-[600px] bg-forest-sage/12 rounded-full blur-[100px]" 
-        />
+          className="absolute top-[10%] -left-32 w-[700px] h-[700px] rounded-full blur-[120px]"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 1.5 }}
+        >
+          <div className="w-full h-full bg-gradient-radial from-forest-sage/20 via-forest-sage/8 to-transparent rounded-full" />
+        </motion.div>
+        
+        {/* Secondary glow - accent orange */}
         <motion.div 
           style={{ y: bg2Y, scale: bg2Scale }}
-          className="absolute bottom-1/3 -right-32 w-[500px] h-[500px] bg-forest-dark/10 rounded-full blur-[80px]" 
-        />
+          className="absolute top-[5%] right-[-10%] w-[600px] h-[600px] rounded-full blur-[100px]"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 1.5, delay: 0.2 }}
+        >
+          <div className="w-full h-full bg-gradient-radial from-orange-gold/15 via-orange-gold/5 to-transparent rounded-full" />
+        </motion.div>
+        
+        {/* Center ambient glow */}
         <motion.div 
           style={{ y: bg3Y }}
-          className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[700px] bg-forest-sage/6 rounded-full blur-[120px]" 
-        />
+          className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[900px] h-[900px] rounded-full blur-[150px]"
+          initial={{ opacity: 0, scale: 0.8 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 2, delay: 0.4 }}
+        >
+          <div className="w-full h-full bg-gradient-radial from-forest-deep/8 via-forest-sage/4 to-transparent rounded-full" />
+        </motion.div>
+        
+        {/* Bottom left accent */}
         <motion.div 
           style={{ y: bg4Y }}
-          className="absolute bottom-1/4 left-1/4 w-[300px] h-[300px] bg-orange-gold/8 rounded-full blur-[80px]" 
+          className="absolute bottom-[15%] left-[10%] w-[400px] h-[400px] rounded-full blur-[90px]"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 1.5, delay: 0.6 }}
+        >
+          <div className="w-full h-full bg-gradient-radial from-orange-gold/12 via-orange-bright/4 to-transparent rounded-full" />
+        </motion.div>
+
+        {/* Floating particles/orbs */}
+        <motion.div
+          className="absolute top-[20%] left-[15%] w-3 h-3 bg-orange-gold/40 rounded-full blur-[2px]"
+          animate={{ 
+            y: [-20, 20, -20], 
+            x: [-10, 10, -10],
+            opacity: [0.4, 0.7, 0.4] 
+          }}
+          transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
         />
+        <motion.div
+          className="absolute top-[40%] right-[20%] w-2 h-2 bg-forest-sage/50 rounded-full blur-[1px]"
+          animate={{ 
+            y: [15, -15, 15], 
+            opacity: [0.3, 0.6, 0.3] 
+          }}
+          transition={{ duration: 5, repeat: Infinity, ease: "easeInOut", delay: 1 }}
+        />
+        <motion.div
+          className="absolute bottom-[30%] left-[25%] w-2.5 h-2.5 bg-orange-gold/30 rounded-full blur-[2px]"
+          animate={{ 
+            y: [-15, 20, -15], 
+            x: [5, -5, 5],
+            opacity: [0.2, 0.5, 0.2] 
+          }}
+          transition={{ duration: 7, repeat: Infinity, ease: "easeInOut", delay: 2 }}
+        />
+        <motion.div
+          className="absolute top-[60%] right-[35%] w-1.5 h-1.5 bg-forest-deep/40 rounded-full blur-[1px]"
+          animate={{ 
+            y: [10, -20, 10], 
+            opacity: [0.3, 0.5, 0.3] 
+          }}
+          transition={{ duration: 4, repeat: Infinity, ease: "easeInOut", delay: 0.5 }}
+        />
+        
+        {/* Subtle connecting lines - desktop only */}
+        <svg className="absolute inset-0 w-full h-full opacity-[0.03] hidden lg:block" aria-hidden="true">
+          <motion.path
+            d="M 0 400 Q 300 350 600 450 T 1200 400"
+            stroke="hsl(120 15% 30%)"
+            strokeWidth="1"
+            fill="none"
+            initial={{ pathLength: 0 }}
+            animate={{ pathLength: 1 }}
+            transition={{ duration: 3, delay: 1 }}
+          />
+          <motion.path
+            d="M 0 500 Q 400 550 800 480 T 1600 520"
+            stroke="hsl(34 93% 51%)"
+            strokeWidth="0.5"
+            fill="none"
+            initial={{ pathLength: 0 }}
+            animate={{ pathLength: 1 }}
+            transition={{ duration: 3, delay: 1.5 }}
+          />
+        </svg>
       </div>
 
       <motion.div
