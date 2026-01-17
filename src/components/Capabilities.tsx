@@ -79,14 +79,27 @@ const ToolCategory = ({ category, delay }: {
       <motion.div
         whileHover={{ y: -4 }}
         transition={{ duration: 0.3 }}
-        className="glass-card-dark rounded-xl p-5 h-full"
+        className="rounded-xl p-5 h-full"
+        style={{
+          background: 'hsl(var(--forest-950))',
+          border: '1px solid hsla(var(--offwhite) / 0.10)',
+          boxShadow: 'var(--shadow-1), var(--bevel-highlight)',
+        }}
       >
         {/* Category header */}
         <div className="flex items-center gap-3 mb-4">
-          <div className="w-9 h-9 rounded-lg bg-orange-gold/20 flex items-center justify-center">
-            <category.icon size={16} className="text-orange-gold" />
+          <div 
+            className="w-9 h-9 rounded-lg flex items-center justify-center"
+            style={{ background: 'hsla(var(--orange-500) / 0.2)' }}
+          >
+            <category.icon size={16} style={{ color: 'hsl(var(--orange-500))' }} />
           </div>
-          <h3 className="text-sm font-bold text-white">{category.title}</h3>
+          <h3 
+            className="text-sm font-bold"
+            style={{ color: 'hsl(var(--offwhite))' }}
+          >
+            {category.title}
+          </h3>
         </div>
 
         {/* Tools list */}
@@ -99,8 +112,15 @@ const ToolCategory = ({ category, delay }: {
               animate={isInView ? { opacity: 1, x: 0 } : {}}
               transition={{ delay: delay * 0.1 + index * 0.05 }}
             >
-              <tool.icon size={12} className="text-white/40 group-hover/tool:text-orange-gold transition-colors" />
-              <span className="text-xs text-white/70 group-hover/tool:text-white transition-colors">
+              <tool.icon 
+                size={12} 
+                className="transition-colors"
+                style={{ color: 'hsl(var(--softwhite))' }}
+              />
+              <span 
+                className="text-xs transition-colors"
+                style={{ color: 'hsl(var(--softwhite))' }}
+              >
                 {tool.name}
               </span>
             </motion.div>
@@ -122,17 +142,26 @@ const Capabilities = () => {
   const bgY = useTransform(scrollYProgress, [0, 1], [-30, 30]);
 
   return (
-    <section id="capabilities" className="py-20 sm:py-24 lg:py-28 relative overflow-hidden section-dark" ref={ref}>
+    <section 
+      id="capabilities" 
+      className="py-20 sm:py-24 lg:py-28 relative overflow-hidden" 
+      ref={ref}
+      style={{ background: 'hsl(var(--forest-900))' }}
+    >
       {/* Background */}
       <div className="absolute inset-0 overflow-hidden">
         <motion.div 
           style={{ y: bgY }}
-          className="absolute top-1/4 right-0 w-[400px] h-[400px] bg-forest-sage/15 rounded-full blur-[100px]" 
-        />
+          className="absolute top-1/4 right-0 w-[400px] h-[400px] rounded-full blur-[100px]"
+        >
+          <div className="w-full h-full rounded-full" style={{ background: 'hsla(var(--forest-700) / 0.3)' }} />
+        </motion.div>
         <motion.div 
           style={{ y: bgY }}
-          className="absolute bottom-0 left-1/4 w-[350px] h-[350px] bg-orange-gold/8 rounded-full blur-[80px]" 
-        />
+          className="absolute bottom-0 left-1/4 w-[350px] h-[350px] rounded-full blur-[80px]"
+        >
+          <div className="w-full h-full rounded-full" style={{ background: 'hsla(var(--orange-500) / 0.12)' }} />
+        </motion.div>
       </div>
       
       <div className="container mx-auto px-6 lg:px-8 relative">
@@ -140,20 +169,31 @@ const Capabilities = () => {
           {/* Section header */}
           <StaggerItem>
             <div className="text-center mb-4">
-              <span className="text-orange-gold text-xs font-bold tracking-[0.2em] uppercase">Tools & Frameworks</span>
+              <span 
+                className="text-xs font-bold tracking-[0.2em] uppercase"
+                style={{ color: 'hsl(var(--orange-500))' }}
+              >
+                Tools & Frameworks
+              </span>
             </div>
           </StaggerItem>
 
           <StaggerItem>
             <div className="text-center mb-3">
-              <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-white">
+              <h2 
+                className="text-3xl sm:text-4xl md:text-5xl font-bold"
+                style={{ color: 'hsl(var(--offwhite))' }}
+              >
                 Capability-Driven Toolkit
               </h2>
             </div>
           </StaggerItem>
 
           <StaggerItem>
-            <p className="text-white/70 text-base text-center max-w-lg mx-auto mb-10">
+            <p 
+              className="text-base text-center max-w-lg mx-auto mb-10"
+              style={{ color: 'hsl(var(--softwhite))' }}
+            >
               From strategy to execution, the right tools for every stage.
             </p>
           </StaggerItem>
@@ -171,7 +211,10 @@ const Capabilities = () => {
 
           {/* Bottom callout */}
           <StaggerItem>
-            <p className="text-white/40 text-xs text-center mt-8">
+            <p 
+              className="text-xs text-center mt-8"
+              style={{ color: 'hsla(var(--softwhite) / 0.5)' }}
+            >
               And many more tools tailored to each project
             </p>
           </StaggerItem>
