@@ -1,4 +1,5 @@
 import { motion } from "framer-motion";
+import { useState } from "react";
 import { StaggerContainer, StaggerItem } from "./StaggerReveal";
 
 const clients = [
@@ -41,6 +42,7 @@ const LogoItem = ({ name, industry }: { name: string; industry: string }) => (
 );
 
 const ClientLogos = () => {
+  const [isPaused, setIsPaused] = useState(false);
   // Double the clients for seamless loop
   const duplicatedClients = [...clients, ...clients];
 
@@ -87,10 +89,14 @@ const ClientLogos = () => {
         />
 
         {/* Scrolling track */}
-        <div className="flex overflow-hidden">
+        <div 
+          className="flex overflow-hidden cursor-pointer"
+          onMouseEnter={() => setIsPaused(true)}
+          onMouseLeave={() => setIsPaused(false)}
+        >
           <motion.div
             className="flex"
-            animate={{ x: ["0%", "-50%"] }}
+            animate={isPaused ? {} : { x: ["0%", "-50%"] }}
             transition={{
               x: {
                 duration: 30,
@@ -106,10 +112,14 @@ const ClientLogos = () => {
         </div>
 
         {/* Second row - reverse direction */}
-        <div className="flex overflow-hidden mt-4">
+        <div 
+          className="flex overflow-hidden mt-4 cursor-pointer"
+          onMouseEnter={() => setIsPaused(true)}
+          onMouseLeave={() => setIsPaused(false)}
+        >
           <motion.div
             className="flex"
-            animate={{ x: ["-50%", "0%"] }}
+            animate={isPaused ? {} : { x: ["-50%", "0%"] }}
             transition={{
               x: {
                 duration: 35,
