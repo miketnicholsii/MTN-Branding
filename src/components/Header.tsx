@@ -68,11 +68,10 @@ const Header = () => {
             onClick={(e) => scrollToSection(e, "#")}
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            className="text-lg sm:text-xl font-bold text-foreground flex items-baseline tracking-tight"
+            className="text-lg sm:text-xl font-bold flex items-baseline tracking-tight"
           >
-            <span className="hidden sm:inline">Mike T. Nichols</span>
-            <span className="sm:hidden">MTN</span>
-            <span className="text-orange-gold ml-1" style={{ fontFamily: 'Georgia, serif' }}>II</span>
+            <span className="text-forest-deep dark:text-white">Mike T. Nichols</span>
+            <span className="text-orange-gold ml-1 text-xl sm:text-2xl" style={{ fontFamily: 'Georgia, serif' }}>II</span>
           </motion.a>
 
           {/* Center Navigation - Pill style like NEKO */}
