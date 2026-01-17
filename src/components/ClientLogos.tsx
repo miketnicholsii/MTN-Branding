@@ -1,5 +1,6 @@
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import { useState } from "react";
+import { ChevronDown, ChevronUp } from "lucide-react";
 import { StaggerContainer, StaggerItem } from "./StaggerReveal";
 
 const clients = [
@@ -60,8 +61,43 @@ const LogoItem = ({ name, industry, initials, gradient }: ClientType) => (
   </div>
 );
 
+const GridLogoItem = ({ name, industry, initials, gradient }: ClientType) => (
+  <motion.div 
+    initial={{ opacity: 0, y: 20 }}
+    animate={{ opacity: 1, y: 0 }}
+    exit={{ opacity: 0, y: -10 }}
+    className="flex flex-col items-center gap-3 p-4 sm:p-6 rounded-2xl transition-all duration-300 hover:bg-forest-900/50 group"
+  >
+    {/* Stylized Logo Icon */}
+    <div 
+      className={`w-14 h-14 sm:w-16 sm:h-16 rounded-2xl bg-gradient-to-br ${gradient} flex items-center justify-center shadow-xl group-hover:scale-110 transition-transform duration-300`}
+    >
+      <span className="text-white font-bold text-sm sm:text-base tracking-tight">
+        {initials}
+      </span>
+    </div>
+    
+    {/* Company Info */}
+    <div className="flex flex-col items-center gap-1 text-center">
+      <span 
+        className="text-sm sm:text-base font-semibold tracking-tight"
+        style={{ color: 'hsl(var(--offwhite))' }}
+      >
+        {name}
+      </span>
+      <span 
+        className="text-[8px] sm:text-[9px] uppercase tracking-widest max-w-[140px]"
+        style={{ color: 'hsl(var(--softwhite) / 0.6)' }}
+      >
+        {industry}
+      </span>
+    </div>
+  </motion.div>
+);
+
 const ClientLogos = () => {
   const [isPaused, setIsPaused] = useState(false);
+  const [showGrid, setShowGrid] = useState(false);
   // Double the clients for seamless loop
   const duplicatedClients = [...clients, ...clients];
 
@@ -91,66 +127,132 @@ const ClientLogos = () => {
         </StaggerContainer>
       </div>
 
-      {/* Marquee container */}
-      <div className="relative">
-        {/* Gradient fade edges */}
-        <div 
-          className="absolute left-0 top-0 bottom-0 w-24 sm:w-32 z-10 pointer-events-none"
-          style={{ 
-            background: 'linear-gradient(to right, hsl(var(--forest-950)), transparent)' 
-          }}
-        />
-        <div 
-          className="absolute right-0 top-0 bottom-0 w-24 sm:w-32 z-10 pointer-events-none"
-          style={{ 
-            background: 'linear-gradient(to left, hsl(var(--forest-950)), transparent)' 
-          }}
-        />
-
-        {/* Scrolling track */}
-        <div 
-          className="flex overflow-hidden cursor-pointer"
-          onMouseEnter={() => setIsPaused(true)}
-          onMouseLeave={() => setIsPaused(false)}
-        >
+      <AnimatePresence mode="wait">
+        {!showGrid ? (
           <motion.div
-            className="flex"
-            animate={isPaused ? {} : { x: ["0%", "-50%"] }}
-            transition={{
-              x: {
-                duration: 30,
-                repeat: Infinity,
-                ease: "linear",
-              },
-            }}
+            key="marquee"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.3 }}
           >
-            {duplicatedClients.map((client, idx) => (
-              <LogoItem key={`${client.name}-${idx}`} {...client} />
-            ))}
-          </motion.div>
-        </div>
+            {/* Marquee container */}
+            <div className="relative">
+              {/* Gradient fade edges */}
+              <div 
+                className="absolute left-0 top-0 bottom-0 w-24 sm:w-32 z-10 pointer-events-none"
+                style={{ 
+                  background: 'linear-gradient(to right, hsl(var(--forest-950)), transparent)' 
+                }}
+              />
+              <div 
+                className="absolute right-0 top-0 bottom-0 w-24 sm:w-32 z-10 pointer-events-none"
+                style={{ 
+                  background: 'linear-gradient(to left, hsl(var(--forest-950)), transparent)' 
+                }}
+              />
 
-        {/* Second row - reverse direction */}
-        <div 
-          className="flex overflow-hidden mt-4 cursor-pointer"
-          onMouseEnter={() => setIsPaused(true)}
-          onMouseLeave={() => setIsPaused(false)}
-        >
-          <motion.div
-            className="flex"
-            animate={isPaused ? {} : { x: ["-50%", "0%"] }}
-            transition={{
-              x: {
-                duration: 35,
-                repeat: Infinity,
-                ease: "linear",
-              },
-            }}
-          >
-            {duplicatedClients.map((client, idx) => (
-              <LogoItem key={`${client.name}-reverse-${idx}`} {...client} />
-            ))}
+              {/* Scrolling track */}
+              <div 
+                className="flex overflow-hidden cursor-pointer"
+                onMouseEnter={() => setIsPaused(true)}
+                onMouseLeave={() => setIsPaused(false)}
+              >
+                <motion.div
+                  className="flex"
+                  animate={isPaused ? {} : { x: ["0%", "-50%"] }}
+                  transition={{
+                    x: {
+                      duration: 30,
+                      repeat: Infinity,
+                      ease: "linear",
+                    },
+                  }}
+                >
+                  {duplicatedClients.map((client, idx) => (
+                    <LogoItem key={`${client.name}-${idx}`} {...client} />
+                  ))}
+                </motion.div>
+              </div>
+
+              {/* Second row - reverse direction */}
+              <div 
+                className="flex overflow-hidden mt-4 cursor-pointer"
+                onMouseEnter={() => setIsPaused(true)}
+                onMouseLeave={() => setIsPaused(false)}
+              >
+                <motion.div
+                  className="flex"
+                  animate={isPaused ? {} : { x: ["-50%", "0%"] }}
+                  transition={{
+                    x: {
+                      duration: 35,
+                      repeat: Infinity,
+                      ease: "linear",
+                    },
+                  }}
+                >
+                  {duplicatedClients.map((client, idx) => (
+                    <LogoItem key={`${client.name}-reverse-${idx}`} {...client} />
+                  ))}
+                </motion.div>
+              </div>
+            </div>
           </motion.div>
+        ) : (
+          <motion.div
+            key="grid"
+            initial={{ opacity: 0, height: 0 }}
+            animate={{ opacity: 1, height: "auto" }}
+            exit={{ opacity: 0, height: 0 }}
+            transition={{ duration: 0.4, ease: "easeInOut" }}
+            className="container mx-auto px-6 lg:px-8"
+          >
+            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-2 sm:gap-4">
+              {clients.map((client, idx) => (
+                <motion.div
+                  key={client.name}
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: idx * 0.05 }}
+                >
+                  <GridLogoItem {...client} />
+                </motion.div>
+              ))}
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
+      {/* View All Partners Button */}
+      <div className="container mx-auto px-6 lg:px-8 mt-8">
+        <div className="flex justify-center">
+          <motion.button
+            onClick={() => setShowGrid(!showGrid)}
+            className="inline-flex items-center gap-2 px-6 py-3 rounded-full font-medium text-sm transition-all duration-300 border"
+            style={{ 
+              color: 'hsl(var(--offwhite))',
+              borderColor: 'hsl(var(--offwhite) / 0.2)',
+              background: 'hsl(var(--forest-900) / 0.5)'
+            }}
+            whileHover={{ 
+              scale: 1.02,
+              borderColor: 'hsl(var(--orange-500) / 0.5)'
+            }}
+            whileTap={{ scale: 0.98 }}
+          >
+            {showGrid ? (
+              <>
+                <ChevronUp size={18} style={{ color: 'hsl(var(--orange-500))' }} />
+                <span>Hide Partners</span>
+              </>
+            ) : (
+              <>
+                <ChevronDown size={18} style={{ color: 'hsl(var(--orange-500))' }} />
+                <span>View All {clients.length} Partners</span>
+              </>
+            )}
+          </motion.button>
         </div>
       </div>
 
