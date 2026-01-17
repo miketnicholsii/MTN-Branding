@@ -103,7 +103,7 @@ const Recommendations = () => {
   const bg2Y = useTransform(scrollYProgress, [0, 1], [60, -100]);
 
   return (
-    <section id="recommendations" className="py-28 sm:py-36 lg:py-44 relative overflow-hidden" ref={ref}>
+    <section id="recommendations" className="py-24 sm:py-28 lg:py-32 relative overflow-hidden" ref={ref}>
       {/* Parallax background */}
       <motion.div 
         style={{ y: bg1Y }}

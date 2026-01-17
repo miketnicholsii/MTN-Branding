@@ -57,7 +57,7 @@ const Experience = () => {
   const isInView = useInView(ref, { once: true, margin: "-100px" });
 
   return (
-    <section id="experience" className="py-20 sm:py-32 lg:py-40 relative overflow-hidden" ref={ref}>
+    <section id="experience" className="py-24 sm:py-28 lg:py-32 relative overflow-hidden" ref={ref}>
       <SectionTransition>
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative">
           <StaggerContainer>

@@ -179,7 +179,7 @@ const Skills = () => {
   const bg1Scale = useTransform(scrollYProgress, [0, 0.5, 1], [0.95, 1.05, 1]);
 
   return (
-    <section id="skills" className="py-28 sm:py-36 lg:py-44 relative overflow-hidden" ref={ref}>
+    <section id="skills" className="py-24 sm:py-28 lg:py-32 relative overflow-hidden" ref={ref}>
       {/* Parallax background with more green */}
       <motion.div 
         style={{ y: bg1Y, scale: bg1Scale }}

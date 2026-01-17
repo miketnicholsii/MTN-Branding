@@ -21,7 +21,7 @@ const Contact = () => {
   const bg1Scale = useTransform(scrollYProgress, [0, 0.5, 1], [0.9, 1.08, 1]);
 
   return (
-    <section id="contact" className="py-28 sm:py-36 lg:py-44 relative overflow-hidden" ref={ref}>
+    <section id="contact" className="py-24 sm:py-28 lg:py-32 relative overflow-hidden" ref={ref}>
       {/* Parallax ambient background with more green */}
       <motion.div 
         style={{ y: bg1Y, scale: bg1Scale }}

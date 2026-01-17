@@ -4,7 +4,7 @@ const footerLinks = ["About", "Experience", "Capabilities", "Contact"];
 
 const Footer = () => {
   return (
-    <footer className="py-12 sm:py-16 relative section-dark overflow-hidden">
+    <footer className="py-10 sm:py-12 relative section-dark overflow-hidden">
       {/* Subtle green glow */}
       <motion.div 
         className="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-[200px] bg-forest-sage/10 rounded-full blur-[80px]"

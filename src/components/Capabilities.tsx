@@ -132,7 +132,7 @@ const Capabilities = () => {
   const bg2Rotate = useTransform(scrollYProgress, [0, 1], [-10, 20]);
 
   return (
-    <section id="capabilities" className="py-28 sm:py-36 lg:py-44 relative overflow-hidden section-dark" ref={ref}>
+    <section id="capabilities" className="py-24 sm:py-28 lg:py-32 relative overflow-hidden section-dark" ref={ref}>
       {/* Parallax background with green tones */}
       <div className="absolute top-0 left-0 w-full h-full overflow-hidden">
         <motion.div 

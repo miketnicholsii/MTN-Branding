@@ -86,7 +86,7 @@ const Hero = () => {
   }, [mouseX, mouseY, shouldReduceMotion]);
 
   return (
-    <section ref={containerRef} className="min-h-screen flex flex-col justify-center relative overflow-hidden pt-32 sm:pt-24 lg:pt-20">
+    <section ref={containerRef} className="min-h-screen flex flex-col justify-center relative overflow-hidden pt-28 pb-16 sm:pt-32 sm:pb-20 lg:pt-24 lg:pb-16">
       {/* Multi-layer parallax background */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         {/* Layer 1: Deepest - slow moving, large, faded */}
@@ -245,7 +245,7 @@ const Hero = () => {
         style={{ y: contentY, opacity: contentOpacity }}
         className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10"
       >
-        <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center max-w-7xl mx-auto">
+        <div className="grid lg:grid-cols-2 gap-10 lg:gap-16 items-center max-w-7xl mx-auto">
           {/* Text Content */}
           <StaggerContainer className="text-center lg:text-left order-2 lg:order-1">
             {/* Eyebrow badge */}
@@ -378,7 +378,7 @@ const Hero = () => {
           </StaggerContainer>
 
           {/* Headshot Image */}
-          <StaggerItem className="order-1 lg:order-2 flex justify-center lg:justify-end">
+          <StaggerItem className="order-1 lg:order-2 flex justify-center lg:justify-end mt-8 lg:mt-0">
             <motion.div
               style={{ 
                 y: imageY, 
@@ -389,32 +389,32 @@ const Hero = () => {
             >
               {/* Decorative ring */}
               <motion.div
-                className="absolute -inset-5 rounded-full border-2 border-forest-sage/20"
+                className="absolute -inset-4 rounded-full border-2 border-forest-sage/20"
                 animate={{ scale: [1, 1.02, 1] }}
                 transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
               />
               
               {/* Pulsing ring */}
-              <div className="absolute -inset-5 rounded-full border border-orange-gold/30 animate-pulse-ring" />
+              <div className="absolute -inset-4 rounded-full border border-orange-gold/30 animate-pulse-ring" />
               
               {/* Accent dots */}
               <motion.div
-                className="absolute -top-3 -right-3 w-5 h-5 bg-orange-gold rounded-full shadow-lg shadow-orange-gold/40"
+                className="absolute -top-2 -right-2 w-4 h-4 bg-orange-gold rounded-full shadow-lg shadow-orange-gold/40"
                 animate={{ y: [-5, 5, -5] }}
                 transition={{ duration: 3.5, repeat: Infinity, ease: "easeInOut" }}
               />
               <motion.div
-                className="absolute -bottom-2 -left-4 w-3 h-3 bg-forest-sage rounded-full"
+                className="absolute -bottom-1 -left-3 w-2.5 h-2.5 bg-forest-sage rounded-full"
                 animate={{ y: [4, -4, 4] }}
                 transition={{ duration: 4, repeat: Infinity, ease: "easeInOut", delay: 0.5 }}
               />
               
               {/* Ambient glow */}
-              <div className="absolute inset-0 bg-gradient-to-br from-forest-sage/15 via-transparent to-orange-gold/15 rounded-full blur-3xl scale-125" />
+              <div className="absolute inset-0 bg-gradient-to-br from-forest-sage/15 via-transparent to-orange-gold/15 rounded-full blur-3xl scale-110" />
               
-              {/* Image container */}
+              {/* Image container - smaller on mobile/tablet, reasonable on desktop */}
               <motion.div
-                className="relative w-72 h-72 sm:w-[340px] sm:h-[340px] lg:w-[420px] lg:h-[420px] rounded-full overflow-hidden"
+                className="relative w-56 h-56 sm:w-64 sm:h-64 md:w-72 md:h-72 lg:w-80 lg:h-80 xl:w-96 xl:h-96 rounded-full overflow-hidden"
                 style={{
                   boxShadow: '0 30px 100px -25px rgba(42, 49, 42, 0.35), 0 15px 40px -15px rgba(42, 49, 42, 0.25), inset 0 0 0 1px rgba(69, 91, 70, 0.1)'
                 }}

@@ -34,7 +34,7 @@ const About = () => {
   const bg2Rotate = useTransform(scrollYProgress, [0, 1], [0, 15]);
 
   return (
-    <section id="about" className="py-28 sm:py-36 lg:py-44 relative overflow-hidden section-dark" ref={ref}>
+    <section id="about" className="py-24 sm:py-28 lg:py-32 relative overflow-hidden section-dark" ref={ref}>
       {/* Parallax background accents */}
       <div className="absolute top-0 left-0 w-full h-full overflow-hidden">
         <motion.div 
