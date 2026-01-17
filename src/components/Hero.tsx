@@ -63,8 +63,8 @@ const Hero = () => {
       ref={containerRef} 
       className="min-h-screen flex flex-col justify-center relative overflow-hidden"
       style={{ 
-        paddingTop: "calc(72px + 3rem)", 
-        paddingBottom: "3rem",
+        paddingTop: "calc(72px + 5rem)", 
+        paddingBottom: "4rem",
         background: 'hsl(var(--forest-700))'
       }}
     >

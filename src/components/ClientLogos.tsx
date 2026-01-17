@@ -10,6 +10,13 @@ const clients = [
   { name: "Echoform", industry: "Human-Centered Product Design" },
   { name: "Brightline Works", industry: "Design + Engineering Hybrid" },
   { name: "Folded Space", industry: "Minimalist Branding & Web Design" },
+  { name: "Aureon Group", industry: "Global Brand & Experience Consultancy" },
+  { name: "Vertex Design Systems", industry: "Enterprise UX & Platform Design" },
+  { name: "Helios Creative", industry: "End-to-End Brand Transformation" },
+  { name: "Monument Design Co.", industry: "Large-Scale Corporate Identity" },
+  { name: "Atlas & Co.", industry: "Strategy, Design & Innovation" },
+  { name: "NovaWorks Global", industry: "Digital Experience at Scale" },
+  { name: "Crestline Industries", industry: "Design, Technology & Research" },
 ];
 
 const LogoItem = ({ name, industry }: { name: string; industry: string }) => (
