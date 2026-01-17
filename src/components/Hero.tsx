@@ -199,8 +199,8 @@ const Hero = () => {
                   ["Data Analysis", "SQL", "Tableau"],
                   ["Leadership", "Stakeholders", "Teams"],
                 ]}
-                className="justify-center lg:justify-start mb-6"
-                tagClassName="text-xs"
+                className="justify-center lg:justify-start mb-8"
+                tagClassName="text-xs sm:text-sm"
                 interval={2800}
               />
             </StaggerItem>

@@ -17,9 +17,9 @@ const Contact = () => {
   return (
     <section 
       id="contact" 
-      className="py-20 sm:py-24 lg:py-28 relative overflow-hidden" 
+      className="py-24 sm:py-32 lg:py-40 relative overflow-hidden" 
       ref={ref}
-      style={{ background: 'hsl(var(--forest-700))' }}
+      style={{ background: 'hsl(var(--forest-900))' }}
     >
       {/* Background */}
       <motion.div 
