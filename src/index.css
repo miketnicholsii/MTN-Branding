@@ -68,6 +68,62 @@
     --card-dark: 120 8% 18%;
     --card-dark-foreground: 0 0% 100%;
   }
+
+  .dark {
+    /* Dark mode palette - inverted with same brand colors */
+    --forest-deep: 130 8% 95%;
+    --forest-dark: 130 6% 90%;
+    --forest-sage: 130 10% 70%;
+    --orange-gold: 35 93% 55%;
+    --orange-bright: 18 93% 58%;
+    --orange-deep: 20 96% 52%;
+
+    --background: 120 10% 8%;
+    --foreground: 130 8% 95%;
+
+    --card: 120 8% 11%;
+    --card-foreground: 130 8% 95%;
+
+    --popover: 120 8% 11%;
+    --popover-foreground: 130 8% 95%;
+
+    --primary: 130 8% 95%;
+    --primary-foreground: 120 10% 8%;
+
+    --accent: 35 93% 55%;
+    --accent-foreground: 120 10% 8%;
+
+    --secondary: 120 8% 14%;
+    --secondary-foreground: 130 8% 90%;
+
+    --muted: 120 8% 16%;
+    --muted-foreground: 130 8% 60%;
+
+    --destructive: 20 96% 52%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 120 8% 18%;
+    --input: 120 8% 18%;
+    --ring: 35 93% 55%;
+
+    /* Dark semantic tokens */
+    --headline: 130 8% 95%;
+    --body: 130 8% 70%;
+    --subtle: 130 8% 55%;
+    --divider: 120 8% 18%;
+
+    --sidebar-background: 120 8% 11%;
+    --sidebar-foreground: 130 8% 95%;
+    --sidebar-primary: 130 8% 95%;
+    --sidebar-primary-foreground: 120 10% 8%;
+    --sidebar-accent: 35 93% 55%;
+    --sidebar-accent-foreground: 120 10% 8%;
+    --sidebar-border: 120 8% 18%;
+    --sidebar-ring: 35 93% 55%;
+
+    --card-dark: 120 8% 14%;
+    --card-dark-foreground: 130 8% 95%;
+  }
 }
 
 @layer base {
@@ -85,12 +141,24 @@
   body {
     @apply text-foreground font-sans antialiased;
     font-feature-settings: "cv02", "cv03", "cv04", "cv11";
-    background: linear-gradient(180deg, hsl(130, 8%, 97%) 0%, hsl(130, 6%, 95%) 100%);
+    background: hsl(var(--background));
     letter-spacing: -0.01em;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     overflow-x: hidden;
     overscroll-behavior-y: none;
+    transition: background-color 0.5s ease, color 0.5s ease;
+  }
+
+  /* Smooth theme transition for all elements */
+  *, *::before, *::after {
+    transition: background-color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+  }
+
+  /* Exclude transforms from transition to preserve animations */
+  .no-theme-transition,
+  .no-theme-transition * {
+    transition: none !important;
   }
 
   h1, h2, h3, h4, h5, h6 {
@@ -142,42 +210,70 @@
   }
 
   .glass-card {
-    background: hsla(130, 8%, 99%, 0.92);
+    background: hsla(var(--card), 0.92);
     -webkit-backdrop-filter: blur(16px);
     backdrop-filter: blur(16px);
-    border: 1px solid hsl(130 12% 88%);
+    border: 1px solid hsl(var(--border));
     box-shadow: 
-      0 4px 32px hsl(var(--forest-deep) / 0.06),
-      0 1px 3px hsl(var(--forest-deep) / 0.04);
+      0 4px 32px hsl(var(--foreground) / 0.06),
+      0 1px 3px hsl(var(--foreground) / 0.04);
+  }
+
+  .dark .glass-card {
+    background: hsla(var(--card), 0.8);
+    border: 1px solid hsl(var(--border) / 0.5);
+    box-shadow: 
+      0 4px 32px hsl(0 0% 0% / 0.3),
+      0 1px 3px hsl(0 0% 0% / 0.2);
   }
 
   .glass-pill {
-    background: hsla(130, 8%, 99%, 0.96);
+    background: hsla(var(--card), 0.96);
     -webkit-backdrop-filter: blur(12px);
     backdrop-filter: blur(12px);
-    border: 1px solid hsl(130 12% 88%);
-    box-shadow: 0 2px 12px hsl(var(--forest-deep) / 0.05);
+    border: 1px solid hsl(var(--border));
+    box-shadow: 0 2px 12px hsl(var(--foreground) / 0.05);
+  }
+
+  .dark .glass-pill {
+    background: hsla(var(--card), 0.85);
+    border: 1px solid hsl(var(--border) / 0.5);
+    box-shadow: 0 2px 12px hsl(0 0% 0% / 0.2);
   }
 
   .section-dark {
-    background: linear-gradient(145deg, #2A312A 0%, #28382B 100%);
-    color: white;
+    background: linear-gradient(145deg, hsl(120 10% 10%) 0%, hsl(120 8% 12%) 100%);
+    color: hsl(var(--foreground));
+  }
+
+  .dark .section-dark {
+    background: linear-gradient(145deg, hsl(120 8% 6%) 0%, hsl(120 10% 8%) 100%);
   }
 
   .glass-card-dark {
-    background: hsla(130, 12%, 22%, 0.6);
+    background: hsla(120, 8%, 18%, 0.6);
     -webkit-backdrop-filter: blur(16px);
     backdrop-filter: blur(16px);
-    border: 1px solid hsl(130 14% 28% / 0.5);
-    box-shadow: 0 4px 32px hsl(var(--forest-deep) / 0.3);
+    border: 1px solid hsl(120 10% 25% / 0.5);
+    box-shadow: 0 4px 32px hsl(0 0% 0% / 0.3);
+  }
+
+  .dark .glass-card-dark {
+    background: hsla(120, 8%, 14%, 0.7);
+    border: 1px solid hsl(120 8% 20% / 0.4);
   }
 
   .card-featured {
-    background: linear-gradient(145deg, #2A312A 0%, #28382B 100%);
-    border: 1px solid rgba(69, 91, 70, 0.3);
+    background: linear-gradient(145deg, hsl(120 8% 18%) 0%, hsl(132 16% 19%) 100%);
+    border: 1px solid hsl(123 14% 31% / 0.3);
     box-shadow: 
-      0 12px 48px rgba(42, 49, 42, 0.35),
-      inset 0 1px 0 rgba(69, 91, 70, 0.15);
+      0 12px 48px hsl(120 8% 10% / 0.35),
+      inset 0 1px 0 hsl(123 14% 31% / 0.15);
+  }
+
+  .dark .card-featured {
+    background: linear-gradient(145deg, hsl(120 8% 12%) 0%, hsl(120 10% 14%) 100%);
+    border: 1px solid hsl(123 10% 20% / 0.3);
   }
 
   .card-accent {
