@@ -86,7 +86,7 @@ const Hero = () => {
   }, [mouseX, mouseY, shouldReduceMotion]);
 
   return (
-    <section ref={containerRef} className="min-h-screen flex flex-col justify-center relative overflow-hidden pt-20 sm:pt-0">
+    <section ref={containerRef} className="min-h-screen flex flex-col justify-center relative overflow-hidden pt-32 sm:pt-24 lg:pt-20">
       {/* Multi-layer parallax background */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         {/* Layer 1: Deepest - slow moving, large, faded */}
