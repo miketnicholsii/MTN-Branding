@@ -142,6 +142,71 @@ const Neko = () => {
           />
         </motion.div>
 
+        {/* Floating particles */}
+        <div className="absolute inset-0 overflow-hidden pointer-events-none">
+          {[...Array(12)].map((_, i) => (
+            <motion.div
+              key={i}
+              className="absolute rounded-full"
+              style={{
+                width: `${4 + (i % 3) * 3}px`,
+                height: `${4 + (i % 3) * 3}px`,
+                left: `${8 + (i * 7.5)}%`,
+                top: `${15 + (i % 4) * 20}%`,
+                background: i % 2 === 0 
+                  ? 'hsla(var(--orange-500) / 0.4)' 
+                  : 'hsla(var(--offwhite) / 0.2)',
+                boxShadow: i % 2 === 0 
+                  ? '0 0 12px hsla(var(--orange-500) / 0.3)' 
+                  : '0 0 8px hsla(var(--offwhite) / 0.1)',
+              }}
+              animate={{
+                y: [0, -30 - (i % 3) * 15, 0],
+                x: [0, (i % 2 === 0 ? 15 : -15), 0],
+                opacity: [0.3, 0.7, 0.3],
+                scale: [1, 1.2, 1],
+              }}
+              transition={{
+                duration: 4 + (i % 3) * 2,
+                repeat: Infinity,
+                ease: "easeInOut",
+                delay: i * 0.3,
+              }}
+            />
+          ))}
+          
+          {/* Larger floating shapes */}
+          {[...Array(5)].map((_, i) => (
+            <motion.div
+              key={`shape-${i}`}
+              className="absolute"
+              style={{
+                width: `${20 + i * 8}px`,
+                height: `${20 + i * 8}px`,
+                left: `${10 + i * 18}%`,
+                top: `${25 + (i % 3) * 25}%`,
+                border: '1px solid',
+                borderColor: i % 2 === 0 
+                  ? 'hsla(var(--orange-500) / 0.2)' 
+                  : 'hsla(var(--offwhite) / 0.1)',
+                borderRadius: i % 2 === 0 ? '30%' : '50%',
+                transform: `rotate(${i * 15}deg)`,
+              }}
+              animate={{
+                y: [0, -20 - i * 5, 0],
+                rotate: [i * 15, i * 15 + 180, i * 15 + 360],
+                opacity: [0.15, 0.3, 0.15],
+              }}
+              transition={{
+                duration: 8 + i * 2,
+                repeat: Infinity,
+                ease: "linear",
+                delay: i * 0.5,
+              }}
+            />
+          ))}
+        </div>
+
         {/* Grid pattern overlay */}
         <div className="absolute inset-0 opacity-10">
           <div className="absolute inset-0" style={{
