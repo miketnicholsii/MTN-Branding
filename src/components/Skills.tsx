@@ -1,7 +1,6 @@
 import { motion, useInView, useScroll, useTransform } from "framer-motion";
 import { useRef, useState } from "react";
 import { StaggerContainer, StaggerItem } from "./StaggerReveal";
-import SectionTransition from "./SectionTransition";
 import { 
   Target, 
   Rocket, 
@@ -11,56 +10,50 @@ import {
   ChevronRight 
 } from "lucide-react";
 
-// Strategic Capability Matrix - 5 categories with specific skills
 const skillMatrix = [
   {
     icon: Target,
     category: "Strategy & Business",
-    color: "orange-gold",
     skills: [
       { name: "Product Strategy & Roadmapping", tier: "Expert" },
-      { name: "Business Development & Partnerships", tier: "Expert" },
+      { name: "Business Development", tier: "Expert" },
       { name: "Go-to-Market Planning", tier: "Advanced" },
-      { name: "Opportunity & Market Analysis", tier: "Advanced" },
+      { name: "Market Analysis", tier: "Advanced" },
     ]
   },
   {
     icon: Rocket,
     category: "Product & Delivery",
-    color: "forest-sage",
     skills: [
       { name: "Agile Program Management", tier: "Expert" },
-      { name: "Scrum & Kanban Execution", tier: "Expert" },
+      { name: "Scrum & Kanban", tier: "Expert" },
       { name: "Backlog Prioritization", tier: "Expert" },
-      { name: "Cross-Functional Team Leadership", tier: "Expert" },
+      { name: "Cross-Functional Leadership", tier: "Expert" },
     ]
   },
   {
     icon: Palette,
-    category: "Design & User Experience",
-    color: "orange-bright",
+    category: "Design & UX",
     skills: [
-      { name: "UX Collaboration & Design Strategy", tier: "Advanced" },
-      { name: "User-Centered Design Principles", tier: "Advanced" },
-      { name: "Website & Digital Experience Design", tier: "Expert" },
-      { name: "Prototyping & Feedback Loops", tier: "Advanced" },
+      { name: "UX Collaboration", tier: "Advanced" },
+      { name: "User-Centered Design", tier: "Advanced" },
+      { name: "Website Design", tier: "Expert" },
+      { name: "Prototyping", tier: "Advanced" },
     ]
   },
   {
     icon: BarChart3,
-    category: "Data, Tools & Automation",
-    color: "forest-deep",
+    category: "Data & Automation",
     skills: [
-      { name: "Data Analysis & Insight Generation", tier: "Expert" },
-      { name: "Platform Testing & Optimization", tier: "Expert" },
-      { name: "Office Suite Automation (Excel, VBA)", tier: "Expert" },
-      { name: "No-Code / Low-Code Workflows", tier: "Advanced" },
+      { name: "Data Analysis", tier: "Expert" },
+      { name: "Platform Testing", tier: "Expert" },
+      { name: "Excel & VBA", tier: "Expert" },
+      { name: "Low-Code Workflows", tier: "Advanced" },
     ]
   },
   {
     icon: MessageSquare,
-    category: "Communication & Execution",
-    color: "orange-deep",
+    category: "Communication",
     skills: [
       { name: "Stakeholder Alignment", tier: "Expert" },
       { name: "Technical Documentation", tier: "Expert" },
@@ -73,25 +66,22 @@ const skillMatrix = [
 const tierConfig = {
   Expert: { dots: 4, color: "bg-orange-gold" },
   Advanced: { dots: 3, color: "bg-forest-sage" },
-  Proficient: { dots: 2, color: "bg-forest-dark" },
+  Proficient: { dots: 2, color: "bg-muted-foreground" },
 };
 
 const TierIndicator = ({ tier }: { tier: "Expert" | "Advanced" | "Proficient" }) => {
   const config = tierConfig[tier];
   return (
-    <div className="flex items-center gap-2">
-      <div className="flex gap-1">
+    <div className="flex items-center gap-1.5">
+      <div className="flex gap-0.5">
         {[...Array(4)].map((_, i) => (
-          <motion.div
+          <div
             key={i}
-            className={`w-2 h-2 rounded-full ${i < config.dots ? config.color : "bg-forest-sage/20"}`}
-            initial={{ scale: 0 }}
-            animate={{ scale: 1 }}
-            transition={{ delay: i * 0.1, duration: 0.3 }}
+            className={`w-1.5 h-1.5 rounded-full ${i < config.dots ? config.color : "bg-border"}`}
           />
         ))}
       </div>
-      <span className={`text-xs font-semibold ${tier === "Expert" ? "text-orange-gold" : "text-forest-sage"}`}>
+      <span className={`text-[10px] font-medium ${tier === "Expert" ? "text-orange-gold" : "text-muted-foreground"}`}>
         {tier}
       </span>
     </div>
@@ -106,57 +96,43 @@ const SkillCard = ({ category, icon: Icon, skills, delay }: {
 }) => {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-50px" });
-  const [hoveredSkill, setHoveredSkill] = useState<number | null>(null);
 
   return (
     <motion.div
       ref={ref}
-      initial={{ opacity: 0, y: 30 }}
+      initial={{ opacity: 0, y: 20 }}
       animate={isInView ? { opacity: 1, y: 0 } : {}}
-      transition={{ duration: 0.6, delay: delay * 0.12, ease: "easeOut" }}
+      transition={{ duration: 0.5, delay: delay * 0.1 }}
       className="group h-full"
     >
       <motion.div
-        whileHover={{ y: -8 }}
-        transition={{ duration: 0.4, ease: "easeOut" }}
-        className="glass-card rounded-3xl p-6 lg:p-8 h-full flex flex-col hover:shadow-xl hover:shadow-forest-deep/10 transition-all duration-500"
+        whileHover={{ y: -4 }}
+        transition={{ duration: 0.3 }}
+        className="glass-card rounded-xl p-5 h-full flex flex-col"
       >
         {/* Category header */}
-        <div className="flex items-center gap-4 mb-6">
-          <div className="w-12 h-12 rounded-2xl bg-forest-deep/5 border border-forest-sage/20 flex items-center justify-center shrink-0 group-hover:bg-orange-gold/10 group-hover:border-orange-gold/30 transition-all duration-300">
-            <Icon size={22} className="text-forest-sage group-hover:text-orange-gold transition-colors duration-300" />
+        <div className="flex items-center gap-3 mb-4">
+          <div className="w-9 h-9 rounded-lg bg-muted flex items-center justify-center group-hover:bg-orange-gold/10 transition-colors">
+            <Icon size={16} className="text-muted-foreground group-hover:text-orange-gold transition-colors" />
           </div>
-          <h3 className="text-lg font-bold text-forest-deep leading-tight">{category}</h3>
+          <h3 className="text-sm font-bold text-foreground">{category}</h3>
         </div>
 
         {/* Skills list */}
-        <div className="space-y-2 flex-1">
-          {skills.map((skill, index) => (
-            <motion.div
+        <div className="space-y-1.5 flex-1">
+          {skills.map((skill) => (
+            <div
               key={skill.name}
-              className="relative py-2.5 px-3 rounded-lg cursor-default"
-              onHoverStart={() => setHoveredSkill(index)}
-              onHoverEnd={() => setHoveredSkill(null)}
-              animate={{
-                backgroundColor: hoveredSkill === index ? "hsl(130 8% 97%)" : "transparent",
-              }}
-              transition={{ duration: 0.2 }}
+              className="flex items-center justify-between gap-2 py-1.5 px-2 rounded-md hover:bg-muted/50 transition-colors"
             >
-              <div className="flex items-center justify-between gap-3">
-                <div className="flex items-center gap-2 min-w-0 flex-1">
-                  <ChevronRight 
-                    size={14} 
-                    className={`shrink-0 transition-colors duration-200 ${hoveredSkill === index ? "text-orange-gold" : "text-forest-sage/50"}`} 
-                  />
-                  <span className="text-sm font-medium text-forest-deep/80 group-hover:text-forest-deep transition-colors duration-200 leading-tight">
-                    {skill.name}
-                  </span>
-                </div>
-                <div className="shrink-0">
-                  <TierIndicator tier={skill.tier as "Expert" | "Advanced" | "Proficient"} />
-                </div>
+              <div className="flex items-center gap-1.5 min-w-0 flex-1">
+                <ChevronRight size={10} className="text-muted-foreground shrink-0" />
+                <span className="text-xs text-muted-foreground truncate">
+                  {skill.name}
+                </span>
               </div>
-            </motion.div>
+              <TierIndicator tier={skill.tier as "Expert" | "Advanced" | "Proficient"} />
+            </div>
           ))}
         </div>
       </motion.div>
@@ -172,99 +148,85 @@ const Skills = () => {
     offset: ["start end", "end start"],
   });
 
-  // Parallax transforms
-  const bg1Y = useTransform(scrollYProgress, [0, 1], [-80, 120]);
-  const bg2Y = useTransform(scrollYProgress, [0, 1], [60, -100]);
-  const bg3Y = useTransform(scrollYProgress, [0, 1], [-40, 80]);
-  const bg1Scale = useTransform(scrollYProgress, [0, 0.5, 1], [0.95, 1.05, 1]);
+  const bgY = useTransform(scrollYProgress, [0, 1], [-30, 30]);
 
   return (
-    <section id="skills" className="py-24 sm:py-28 lg:py-32 relative overflow-hidden" ref={ref}>
-      {/* Parallax background with more green */}
+    <section id="skills" className="py-20 sm:py-24 lg:py-28 relative overflow-hidden" ref={ref}>
+      {/* Background */}
       <motion.div 
-        style={{ y: bg1Y, scale: bg1Scale }}
-        className="absolute top-0 right-0 w-[600px] h-[600px] bg-forest-sage/8 rounded-full blur-[120px]" 
-      />
-      <motion.div 
-        style={{ y: bg2Y }}
-        className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-forest-dark/6 rounded-full blur-[100px]" 
-      />
-      <motion.div 
-        style={{ y: bg3Y }}
-        className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[400px] h-[400px] bg-orange-gold/5 rounded-full blur-[80px]" 
+        style={{ y: bgY }}
+        className="absolute top-0 right-0 w-[400px] h-[400px] bg-forest-sage/6 rounded-full blur-[100px]" 
       />
       
-      <SectionTransition>
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative">
-          <StaggerContainer>
-            {/* Section header */}
-            <StaggerItem>
-              <div className="text-center mb-6">
-                <span className="text-orange-gold text-sm font-bold tracking-[0.2em] uppercase">Expertise</span>
-              </div>
-            </StaggerItem>
+      <div className="container mx-auto px-6 lg:px-8 relative">
+        <StaggerContainer>
+          {/* Section header */}
+          <StaggerItem>
+            <div className="text-center mb-4">
+              <span className="text-orange-gold text-xs font-bold tracking-[0.2em] uppercase">Expertise</span>
+            </div>
+          </StaggerItem>
 
-            <StaggerItem>
-              <div className="text-center mb-6">
-                <h2 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-forest-deep">
-                  Strategic Capability Matrix
-                </h2>
-              </div>
-            </StaggerItem>
+          <StaggerItem>
+            <div className="text-center mb-3">
+              <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-foreground">
+                Strategic Capability Matrix
+              </h2>
+            </div>
+          </StaggerItem>
 
-            <StaggerItem>
-              <p className="text-body text-lg text-center max-w-2xl mx-auto mb-16 font-medium">
-                A decade of experience translated into measurable expertise across product, strategy, and leadership.
-              </p>
-            </StaggerItem>
+          <StaggerItem>
+            <p className="text-muted-foreground text-base text-center max-w-lg mx-auto mb-8">
+              A decade of experience across product, strategy, and leadership.
+            </p>
+          </StaggerItem>
 
-            {/* Tier Legend */}
-            <StaggerItem>
-              <div className="flex flex-wrap justify-center gap-6 mb-12">
-                {Object.entries(tierConfig).map(([tier, config]) => (
-                  <div key={tier} className="flex items-center gap-2">
-                    <div className="flex gap-0.5">
-                      {[...Array(4)].map((_, i) => (
-                        <div
-                          key={i}
-                          className={`w-1.5 h-1.5 rounded-full ${i < config.dots ? config.color : "bg-forest-sage/20"}`}
-                        />
-                      ))}
-                    </div>
-                    <span className="text-xs font-medium text-forest-sage">{tier}</span>
+          {/* Tier Legend */}
+          <StaggerItem>
+            <div className="flex flex-wrap justify-center gap-4 mb-10">
+              {Object.entries(tierConfig).map(([tier, config]) => (
+                <div key={tier} className="flex items-center gap-1.5">
+                  <div className="flex gap-0.5">
+                    {[...Array(4)].map((_, i) => (
+                      <div
+                        key={i}
+                        className={`w-1 h-1 rounded-full ${i < config.dots ? config.color : "bg-border"}`}
+                      />
+                    ))}
                   </div>
-                ))}
-              </div>
-            </StaggerItem>
+                  <span className="text-[10px] text-muted-foreground">{tier}</span>
+                </div>
+              ))}
+            </div>
+          </StaggerItem>
 
-            {/* Skills Grid - 5 cards with proper alignment */}
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto auto-rows-fr">
-              {skillMatrix.slice(0, 3).map((category, index) => (
-                <SkillCard
-                  key={category.category}
-                  category={category.category}
-                  icon={category.icon}
-                  skills={category.skills as { name: string; tier: "Expert" | "Advanced" | "Proficient" }[]}
-                  delay={index}
-                />
-              ))}
-            </div>
-            
-            {/* Bottom row - 2 cards centered with matching height */}
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-4xl mx-auto mt-6 auto-rows-fr">
-              {skillMatrix.slice(3).map((category, index) => (
-                <SkillCard
-                  key={category.category}
-                  category={category.category}
-                  icon={category.icon}
-                  skills={category.skills as { name: string; tier: "Expert" | "Advanced" | "Proficient" }[]}
-                  delay={index + 3}
-                />
-              ))}
-            </div>
-          </StaggerContainer>
-        </div>
-      </SectionTransition>
+          {/* Skills Grid - 3 top, 2 bottom centered */}
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 max-w-5xl mx-auto">
+            {skillMatrix.slice(0, 3).map((category, index) => (
+              <SkillCard
+                key={category.category}
+                category={category.category}
+                icon={category.icon}
+                skills={category.skills as { name: string; tier: "Expert" | "Advanced" | "Proficient" }[]}
+                delay={index}
+              />
+            ))}
+          </div>
+          
+          {/* Bottom row - 2 cards centered */}
+          <div className="grid sm:grid-cols-2 gap-4 max-w-3xl mx-auto mt-4">
+            {skillMatrix.slice(3).map((category, index) => (
+              <SkillCard
+                key={category.category}
+                category={category.category}
+                icon={category.icon}
+                skills={category.skills as { name: string; tier: "Expert" | "Advanced" | "Proficient" }[]}
+                delay={index + 3}
+              />
+            ))}
+          </div>
+        </StaggerContainer>
+      </div>
     </section>
   );
 };
