@@ -567,4 +567,18 @@
   .bg-offwhite {
     background-color: hsl(var(--offwhite));
   }
+
+  /* Shimmer animation for NÈKO title */
+  @keyframes shimmer {
+    0%, 100% {
+      background-position: 200% center;
+    }
+    50% {
+      background-position: 0% center;
+    }
+  }
+
+  .neko-shimmer {
+    animation: shimmer 3s ease-in-out infinite;
+  }
 }
