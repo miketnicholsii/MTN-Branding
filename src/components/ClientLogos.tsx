@@ -2,14 +2,14 @@ import { motion } from "framer-motion";
 import { StaggerContainer, StaggerItem } from "./StaggerReveal";
 
 const clients = [
-  { name: "Salesforce", industry: "CRM" },
-  { name: "JPMorgan", industry: "Finance" },
-  { name: "Deloitte", industry: "Consulting" },
-  { name: "Microsoft", industry: "Tech" },
-  { name: "Accenture", industry: "Consulting" },
-  { name: "Oracle", industry: "Enterprise" },
-  { name: "IBM", industry: "Tech" },
-  { name: "Cisco", industry: "Networking" },
+  { name: "Luminary Studio", industry: "Digital Product & Brand Design" },
+  { name: "Offset Labs", industry: "UX, Motion & Experimental Design" },
+  { name: "Pixel & Form", industry: "Visual Identity & Interface Design" },
+  { name: "Northframe", industry: "Brand Systems for Startups" },
+  { name: "Crafted Collective", industry: "Strategy-Led Design Studio" },
+  { name: "Echoform", industry: "Human-Centered Product Design" },
+  { name: "Brightline Works", industry: "Design + Engineering Hybrid" },
+  { name: "Folded Space", industry: "Minimalist Branding & Web Design" },
 ];
 
 const LogoItem = ({ name, industry }: { name: string; industry: string }) => (
