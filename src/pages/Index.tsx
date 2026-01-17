@@ -16,6 +16,7 @@ import AnimatedBackground from "@/components/AnimatedBackground";
 import ParticleField from "@/components/ParticleField";
 import LoadingScreen from "@/components/LoadingScreen";
 import SectionDivider from "@/components/SectionDivider";
+import ClientLogos from "@/components/ClientLogos";
 
 const Index = () => {
   const [isLoaded, setIsLoaded] = useState(false);
@@ -55,9 +56,10 @@ const Index = () => {
                 to="hsl(var(--forest-900))" 
               />
               <About />
+              <ClientLogos />
               <SectionDivider 
                 variant="fade" 
-                from="hsl(var(--forest-900))" 
+                from="hsl(var(--forest-950))" 
                 to="hsl(var(--forest-700))" 
               />
               <Experience />
