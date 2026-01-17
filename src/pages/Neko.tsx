@@ -21,12 +21,13 @@ import {
 import { StaggerContainer, StaggerItem } from "@/components/StaggerReveal";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import AnimatedCounter from "@/components/AnimatedCounter";
 
 const metrics = [
-  { icon: TrendingUp, value: "300%", label: "Faster Insights", description: "Reduced time-to-insight from days to hours" },
-  { icon: Users, value: "10K+", label: "Beta Users", description: "Active users during closed beta phase" },
-  { icon: Zap, value: "$8K", label: "Avg Build", description: "Average project value delivered" },
-  { icon: Target, value: "99.9%", label: "Uptime", description: "Platform reliability and availability" },
+  { icon: TrendingUp, value: 300, suffix: "%", prefix: "", label: "Faster Insights", description: "Reduced time-to-insight from days to hours" },
+  { icon: Users, value: 10, suffix: "K+", prefix: "", label: "Beta Users", description: "Active users during closed beta phase" },
+  { icon: Zap, value: 8, suffix: "K", prefix: "$", label: "Avg Build", description: "Average project value delivered" },
+  { icon: Target, value: 99.9, suffix: "%", prefix: "", label: "Uptime", description: "Platform reliability and availability", decimals: 1 },
 ];
 
 const features = [
@@ -401,7 +402,12 @@ const Neko = () => {
                         viewport={{ once: true }}
                         transition={{ duration: 0.4, delay: idx * 0.1 + 0.3 }}
                       >
-                        {metric.value}
+                        <AnimatedCounter 
+                          value={metric.value} 
+                          prefix={metric.prefix} 
+                          suffix={metric.suffix}
+                          decimals={(metric as any).decimals}
+                        />
                       </motion.div>
                       <motion.div 
                         className="text-sm font-medium"
