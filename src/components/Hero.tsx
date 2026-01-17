@@ -3,6 +3,7 @@ import { TrendingUp, Target, Zap } from "lucide-react";
 import MagneticButton from "./MagneticButton";
 import { StaggerContainer, StaggerItem } from "./StaggerReveal";
 import TypeWriter from "./TypeWriter";
+import { SkillTags } from "./RotatingText";
 import { useRef, useEffect, useState } from "react";
 import headshot from "@/assets/headshot.png";
 
@@ -338,6 +339,22 @@ const Hero = () => {
               </div>
             </StaggerItem>
 
+            {/* Animated Skill Tags */}
+            <StaggerItem>
+              <SkillTags
+                skills={[
+                  ["Product Strategy", "Roadmapping", "Vision Setting"],
+                  ["Agile", "Scrum", "Kanban"],
+                  ["UX Design", "User Research", "Prototyping"],
+                  ["Data Analysis", "SQL", "Tableau"],
+                  ["Team Leadership", "Stakeholder Mgmt", "Communication"],
+                ]}
+                className="justify-center lg:justify-start mb-10"
+                tagClassName="bg-card/80 border-border text-foreground backdrop-blur-sm"
+                interval={2800}
+              />
+            </StaggerItem>
+
             {/* Feature pills */}
             <StaggerItem>
               <div className="flex flex-wrap justify-center lg:justify-start gap-8">
@@ -348,12 +365,12 @@ const Hero = () => {
                 ].map((item, index) => (
                   <motion.div
                     key={index}
-                    className="flex items-center gap-2.5 text-forest-sage text-sm font-medium group cursor-default"
+                    className="flex items-center gap-2.5 text-muted-foreground text-sm font-medium group cursor-default"
                     whileHover={{ x: 3 }}
                     transition={{ duration: 0.25 }}
                   >
                     <item.icon size={18} className="text-orange-gold group-hover:text-orange-bright transition-colors duration-300" />
-                    <span className="group-hover:text-forest-dark transition-colors duration-300">{item.text}</span>
+                    <span className="group-hover:text-foreground transition-colors duration-300">{item.text}</span>
                   </motion.div>
                 ))}
               </div>
