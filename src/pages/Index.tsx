@@ -15,6 +15,7 @@ import ScrollProgress from "@/components/ScrollProgress";
 import AnimatedBackground from "@/components/AnimatedBackground";
 import ParticleField from "@/components/ParticleField";
 import LoadingScreen from "@/components/LoadingScreen";
+import SectionDivider from "@/components/SectionDivider";
 
 const Index = () => {
   const [isLoaded, setIsLoaded] = useState(false);
@@ -48,12 +49,47 @@ const Index = () => {
             <Header />
             <main className="relative z-10">
               <Hero />
+              <SectionDivider 
+                variant="fade" 
+                from="hsl(var(--forest-700))" 
+                to="hsl(var(--forest-900))" 
+              />
               <About />
+              <SectionDivider 
+                variant="fade" 
+                from="hsl(var(--forest-900))" 
+                to="hsl(var(--forest-700))" 
+              />
               <Experience />
+              <SectionDivider 
+                variant="curve" 
+                from="hsl(var(--forest-700))" 
+                to="hsl(var(--forest-900))" 
+              />
               <Projects />
+              <SectionDivider 
+                variant="fade" 
+                from="hsl(var(--forest-900))" 
+                to="hsl(var(--forest-700))" 
+              />
               <Skills />
+              <SectionDivider 
+                variant="angle" 
+                from="hsl(var(--forest-700))" 
+                to="hsl(var(--forest-900))" 
+              />
               <Capabilities />
+              <SectionDivider 
+                variant="fade" 
+                from="hsl(var(--forest-900))" 
+                to="hsl(var(--forest-700))" 
+              />
               <Recommendations />
+              <SectionDivider 
+                variant="curve" 
+                from="hsl(var(--forest-700))" 
+                to="hsl(var(--forest-900))" 
+              />
               <Contact />
             </main>
             <Footer />

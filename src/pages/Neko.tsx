@@ -223,29 +223,39 @@ const Neko = () => {
 
             {/* Metrics */}
             <StaggerItem>
-              <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 max-w-3xl mx-auto">
+              <div className="grid grid-cols-2 sm:grid-cols-4 gap-5 max-w-4xl mx-auto">
                 {metrics.map((metric, idx) => (
                   <motion.div
                     key={idx}
-                    whileHover={{ y: -4, scale: 1.02 }}
-                    className="text-center p-6 backdrop-blur-sm rounded-2xl"
+                    whileHover={{ y: -6, scale: 1.02 }}
+                    className="text-center p-6 sm:p-8 backdrop-blur-md rounded-2xl relative overflow-hidden"
                     style={{
-                      background: 'hsla(var(--offwhite) / 0.05)',
-                      border: '1px solid hsla(var(--offwhite) / 0.10)',
+                      background: 'linear-gradient(135deg, hsla(var(--forest-900) / 0.8), hsla(var(--forest-950) / 0.6))',
+                      border: '1px solid hsla(var(--offwhite) / 0.12)',
+                      boxShadow: 'var(--shadow-1), inset 0 1px 0 hsla(var(--offwhite) / 0.05)',
                     }}
                   >
-                    <metric.icon size={24} className="mx-auto mb-3" style={{ color: 'hsl(var(--orange-500))' }} />
+                    {/* Subtle gradient overlay */}
                     <div 
-                      className="text-3xl sm:text-4xl font-bold mb-1"
-                      style={{ color: 'hsl(var(--offwhite))' }}
-                    >
-                      {metric.value}
-                    </div>
-                    <div 
-                      className="text-sm"
-                      style={{ color: 'hsl(var(--softwhite))' }}
-                    >
-                      {metric.label}
+                      className="absolute inset-0 opacity-30"
+                      style={{ 
+                        background: 'radial-gradient(circle at 50% 0%, hsla(var(--orange-500) / 0.15), transparent 70%)' 
+                      }}
+                    />
+                    <div className="relative z-10">
+                      <metric.icon size={28} className="mx-auto mb-4" style={{ color: 'hsl(var(--orange-500))' }} />
+                      <div 
+                        className="text-3xl sm:text-4xl lg:text-5xl font-bold mb-2 tracking-tight"
+                        style={{ color: 'hsl(var(--offwhite))' }}
+                      >
+                        {metric.value}
+                      </div>
+                      <div 
+                        className="text-sm font-medium"
+                        style={{ color: 'hsl(var(--softwhite))' }}
+                      >
+                        {metric.label}
+                      </div>
                     </div>
                   </motion.div>
                 ))}

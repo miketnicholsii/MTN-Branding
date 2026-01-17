@@ -79,30 +79,34 @@ export const SkillTags = ({
   }, [skills, interval]);
 
   return (
-    <div className={`flex flex-wrap gap-3 ${className}`}>
+    <div className={`flex flex-wrap gap-2.5 ${className}`}>
       {skills.map((skillGroup, groupIndex) => (
         <motion.div
           key={groupIndex}
-          className={`px-4 py-2 rounded-full overflow-hidden ${tagClassName}`}
+          className={`px-4 py-2.5 rounded-full overflow-hidden ${tagClassName}`}
           style={{
-            background: 'hsl(var(--forest-900))',
-            border: '1px solid hsla(var(--offwhite) / 0.15)',
-            color: 'hsl(var(--offwhite))',
+            background: 'linear-gradient(135deg, hsl(var(--forest-900)), hsl(var(--forest-950)))',
+            border: '1px solid hsla(var(--offwhite) / 0.12)',
+            boxShadow: '0 2px 8px hsla(0, 0%, 0%, 0.15), inset 0 1px 0 hsla(var(--offwhite) / 0.06)',
           }}
           initial={{ opacity: 0, scale: 0.9 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ delay: groupIndex * 0.1, duration: 0.4 }}
-          whileHover={{ scale: 1.05, y: -2 }}
+          whileHover={{ 
+            scale: 1.04, 
+            y: -2,
+            boxShadow: '0 4px 12px hsla(0, 0%, 0%, 0.2), inset 0 1px 0 hsla(var(--offwhite) / 0.08)',
+          }}
         >
-          <div className="relative h-5 flex items-center justify-center min-w-[80px]">
+          <div className="relative h-5 flex items-center justify-center min-w-[85px]">
             <AnimatePresence mode="wait">
               <motion.span
                 key={`${groupIndex}-${indices[groupIndex]}`}
-                initial={shouldReduceMotion ? {} : { y: 16, opacity: 0 }}
+                initial={shouldReduceMotion ? {} : { y: 14, opacity: 0 }}
                 animate={{ y: 0, opacity: 1 }}
-                exit={shouldReduceMotion ? {} : { y: -16, opacity: 0 }}
+                exit={shouldReduceMotion ? {} : { y: -14, opacity: 0 }}
                 transition={{
-                  duration: 0.35,
+                  duration: 0.32,
                   ease: [0.22, 1, 0.36, 1],
                 }}
                 className="absolute inset-0 flex items-center justify-center text-sm font-medium whitespace-nowrap"
