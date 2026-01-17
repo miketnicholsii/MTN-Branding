@@ -4,6 +4,19 @@ import { TrendingUp, Users, Clock, Zap, ArrowUpRight, BarChart3, Target } from "
 import { StaggerContainer, StaggerItem } from "./StaggerReveal";
 import SectionTransition from "./SectionTransition";
 
+const nekoProject = {
+  title: "NÈKO",
+  subtitle: "AI-Powered Product Intelligence Platform",
+  description: "A next-generation platform that transforms how product teams make decisions. NÈKO combines real-time analytics, predictive modeling, and collaborative workflows to accelerate product development cycles by 3x.",
+  metrics: [
+    { icon: TrendingUp, value: "300%", label: "Faster Insights" },
+    { icon: Users, value: "10K+", label: "Beta Users" },
+    { icon: Zap, value: "AI", label: "Powered" },
+    { icon: Target, value: "98%", label: "Accuracy" },
+  ],
+  tags: ["AI/ML", "Product Analytics", "Real-time Data", "Collaboration"],
+};
+
 const projects = [
   {
     title: "Enterprise Platform Modernization",
@@ -15,7 +28,6 @@ const projects = [
       { icon: Users, value: "50K+", label: "Active Users" },
     ],
     tags: ["Agile", "Cloud Migration", "UX Design"],
-    featured: true,
   },
   {
     title: "Go-to-Market Strategy & Launch",
@@ -27,7 +39,6 @@ const projects = [
       { icon: Zap, value: "3 mo", label: "Time to Market" },
     ],
     tags: ["Product Strategy", "GTM", "Team Leadership"],
-    featured: false,
   },
   {
     title: "Process Automation Initiative",
@@ -39,7 +50,6 @@ const projects = [
       { icon: Users, value: "200+", label: "Users Impacted" },
     ],
     tags: ["VBA", "Automation", "Process Optimization"],
-    featured: false,
   },
   {
     title: "Data Analytics Dashboard",
@@ -51,7 +61,6 @@ const projects = [
       { icon: Target, value: "30%", label: "Better Decisions" },
     ],
     tags: ["SQL", "Tableau", "Data Analysis"],
-    featured: false,
   },
 ];
 
@@ -110,49 +119,75 @@ const Projects = () => {
               </p>
             </StaggerItem>
 
-            {/* Featured project */}
+            {/* NÈKO Hero Section */}
             <StaggerItem>
               <motion.div
-                whileHover={{ y: -8 }}
-                transition={{ duration: 0.4, ease: "easeOut" }}
-                className="card-featured rounded-3xl p-8 lg:p-12 mb-8 max-w-5xl mx-auto cursor-default"
+                className="relative mb-20 max-w-6xl mx-auto"
+                initial={{ opacity: 0, y: 40 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8, ease: "easeOut" }}
+                viewport={{ once: true }}
               >
-                <div className="flex flex-col lg:flex-row lg:items-start gap-8">
-                  <div className="flex-1">
-                    <div className="flex items-center gap-3 mb-4">
-                      <span className="px-3 py-1 bg-orange-gold/20 text-orange-gold text-xs font-bold rounded-full">
-                        Featured
+                {/* NÈKO Card */}
+                <div className="relative overflow-hidden rounded-[2.5rem] bg-gradient-to-br from-forest-deep via-forest-dark to-forest-deep p-1">
+                  <div className="absolute inset-0 bg-gradient-to-br from-orange-gold/20 via-transparent to-forest-sage/10 opacity-60" />
+                  <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-orange-gold/10 rounded-full blur-[150px] -translate-y-1/2 translate-x-1/4" />
+                  <div className="absolute bottom-0 left-0 w-[400px] h-[400px] bg-forest-sage/15 rounded-full blur-[120px] translate-y-1/2 -translate-x-1/4" />
+                  
+                  <div className="relative rounded-[2.25rem] bg-gradient-to-br from-forest-deep/95 to-forest-dark/98 backdrop-blur-xl p-10 lg:p-16">
+                    {/* Flagship badge */}
+                    <motion.div 
+                      className="inline-flex items-center gap-2 px-4 py-2 bg-orange-gold/20 border border-orange-gold/30 rounded-full mb-8"
+                      animate={{ scale: [1, 1.02, 1] }}
+                      transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
+                    >
+                      <span className="w-2 h-2 bg-orange-gold rounded-full animate-pulse" />
+                      <span className="text-orange-gold text-sm font-bold tracking-wider uppercase">Flagship Project</span>
+                    </motion.div>
+                    
+                    {/* NÈKO Title */}
+                    <motion.h3 
+                      className="text-6xl sm:text-7xl md:text-8xl lg:text-9xl font-black text-white mb-4 tracking-tight"
+                      style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}
+                    >
+                      <span className="bg-gradient-to-r from-white via-white to-orange-gold/80 bg-clip-text text-transparent">
+                        NÈKO
                       </span>
-                      <span className="text-white/60 text-sm font-medium">{projects[0].category}</span>
-                    </div>
-                    <h3 className="text-2xl lg:text-3xl font-bold text-white mb-4">{projects[0].title}</h3>
-                    <p className="text-white/70 text-base leading-relaxed mb-6 font-medium">
-                      {projects[0].description}
+                    </motion.h3>
+                    
+                    <p className="text-xl sm:text-2xl text-white/80 font-medium mb-4 max-w-2xl">
+                      {nekoProject.subtitle}
                     </p>
-                    <div className="flex flex-wrap gap-2">
-                      {projects[0].tags.map((tag) => (
+                    
+                    <p className="text-white/60 text-lg leading-relaxed mb-10 max-w-3xl font-medium">
+                      {nekoProject.description}
+                    </p>
+                    
+                    {/* Metrics row */}
+                    <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-10">
+                      {nekoProject.metrics.map((metric, idx) => (
+                        <motion.div
+                          key={idx}
+                          className="text-center p-6 bg-white/5 border border-white/10 rounded-2xl backdrop-blur-sm"
+                          whileHover={{ scale: 1.03, backgroundColor: "rgba(255,255,255,0.08)" }}
+                          transition={{ duration: 0.3 }}
+                        >
+                          <metric.icon size={24} className="text-orange-gold mx-auto mb-3" />
+                          <div className="text-3xl lg:text-4xl font-bold text-white mb-1">{metric.value}</div>
+                          <div className="text-white/50 text-sm font-medium">{metric.label}</div>
+                        </motion.div>
+                      ))}
+                    </div>
+                    
+                    {/* Tags */}
+                    <div className="flex flex-wrap gap-3">
+                      {nekoProject.tags.map((tag) => (
                         <span 
                           key={tag}
-                          className="px-4 py-2 bg-white/5 border border-white/10 text-white/80 text-sm font-medium rounded-full"
+                          className="px-5 py-2.5 bg-white/5 border border-white/15 text-white/80 text-sm font-semibold rounded-full hover:bg-white/10 transition-colors duration-300"
                         >
                           {tag}
                         </span>
-                      ))}
-                    </div>
-                  </div>
-                  <div className="lg:w-80">
-                    <div className="grid grid-cols-3 lg:grid-cols-1 gap-4">
-                      {projects[0].metrics.map((metric, idx) => (
-                        <motion.div
-                          key={idx}
-                          className="text-center lg:text-left p-4 lg:p-5 bg-white/5 rounded-2xl"
-                          whileHover={{ scale: 1.02 }}
-                          transition={{ duration: 0.3 }}
-                        >
-                          <metric.icon size={20} className="text-orange-gold mx-auto lg:mx-0 mb-2" />
-                          <div className="text-2xl lg:text-3xl font-bold text-white">{metric.value}</div>
-                          <div className="text-white/50 text-xs lg:text-sm font-medium">{metric.label}</div>
-                        </motion.div>
                       ))}
                     </div>
                   </div>
@@ -161,8 +196,8 @@ const Projects = () => {
             </StaggerItem>
 
             {/* Other projects grid */}
-            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-5xl mx-auto">
-              {projects.slice(1).map((project, index) => (
+            <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-6xl mx-auto">
+              {projects.map((project, index) => (
                 <StaggerItem key={index}>
                   <motion.div
                     whileHover={{ y: -8 }}
