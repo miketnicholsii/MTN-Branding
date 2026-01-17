@@ -15,13 +15,18 @@ const Contact = () => {
   const bgY = useTransform(scrollYProgress, [0, 1], [-30, 30]);
 
   return (
-    <section id="contact" className="py-20 sm:py-24 lg:py-28 relative overflow-hidden" ref={ref}>
+    <section 
+      id="contact" 
+      className="py-20 sm:py-24 lg:py-28 relative overflow-hidden" 
+      ref={ref}
+      style={{ background: 'hsl(var(--forest-700))' }}
+    >
       {/* Background */}
       <motion.div 
         style={{ y: bgY }}
         className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] rounded-full blur-[120px]"
       >
-        <div className="w-full h-full rounded-full" style={{ background: 'hsla(var(--forest-900) / 0.3)' }} />
+        <div className="w-full h-full rounded-full" style={{ background: 'hsla(var(--forest-900) / 0.5)' }} />
       </motion.div>
       
       <div className="container mx-auto px-6 lg:px-8 relative">

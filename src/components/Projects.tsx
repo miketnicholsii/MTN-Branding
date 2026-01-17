@@ -6,15 +6,15 @@ import { StaggerContainer, StaggerItem } from "./StaggerReveal";
 
 const nekoProject = {
   title: "NÈKO",
-  subtitle: "AI-Powered Product Intelligence Platform",
+  subtitle: "Digital Strategy & Product Intelligence",
   description: "A next-generation platform transforming how product teams make decisions. NÈKO combines real-time analytics, predictive modeling, and collaborative workflows.",
   metrics: [
     { icon: TrendingUp, value: "300%", label: "Faster Insights" },
     { icon: Users, value: "10K+", label: "Beta Users" },
-    { icon: Zap, value: "AI", label: "Powered" },
-    { icon: Target, value: "98%", label: "Accuracy" },
+    { icon: Zap, value: "$8K", label: "Avg Build" },
+    { icon: Target, value: "99.9%", label: "Uptime" },
   ],
-  tags: ["AI/ML", "Product Analytics", "Real-time Data", "Collaboration"],
+  tags: ["Strategy", "Product Analytics", "Real-time Data", "Collaboration"],
 };
 
 const projects = [
@@ -75,13 +75,18 @@ const Projects = () => {
   const bgY = useTransform(scrollYProgress, [0, 1], [-30, 30]);
 
   return (
-    <section id="projects" className="py-20 sm:py-24 lg:py-28 relative overflow-hidden" ref={ref}>
+    <section 
+      id="projects" 
+      className="py-20 sm:py-24 lg:py-28 relative overflow-hidden" 
+      ref={ref}
+      style={{ background: 'hsl(var(--forest-700))' }}
+    >
       {/* Background */}
       <motion.div 
         style={{ y: bgY }}
         className="absolute top-1/4 -left-20 w-[400px] h-[400px] rounded-full blur-[100px]"
       >
-        <div className="w-full h-full rounded-full" style={{ background: 'hsla(var(--forest-900) / 0.3)' }} />
+        <div className="w-full h-full rounded-full" style={{ background: 'hsla(var(--forest-900) / 0.5)' }} />
       </motion.div>
       
       <div className="container mx-auto px-6 lg:px-8 relative">

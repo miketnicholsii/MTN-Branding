@@ -62,7 +62,11 @@ const Hero = () => {
     <section 
       ref={containerRef} 
       className="min-h-screen flex flex-col justify-center relative overflow-hidden"
-      style={{ paddingTop: "calc(72px + 3rem)", paddingBottom: "3rem" }}
+      style={{ 
+        paddingTop: "calc(72px + 3rem)", 
+        paddingBottom: "3rem",
+        background: 'hsl(var(--forest-700))'
+      }}
     >
       {/* Simplified parallax background */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">

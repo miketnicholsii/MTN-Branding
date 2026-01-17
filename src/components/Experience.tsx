@@ -55,7 +55,12 @@ const Experience = () => {
   const ref = useRef(null);
 
   return (
-    <section id="experience" className="py-20 sm:py-24 lg:py-28 relative overflow-hidden" ref={ref}>
+    <section 
+      id="experience" 
+      className="py-20 sm:py-24 lg:py-28 relative overflow-hidden" 
+      ref={ref}
+      style={{ background: 'hsl(var(--forest-700))' }}
+    >
       <div className="container mx-auto px-6 lg:px-8 relative">
         <StaggerContainer>
           {/* Section header */}
