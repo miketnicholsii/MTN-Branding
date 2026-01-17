@@ -79,28 +79,41 @@ const Projects = () => {
       {/* Background */}
       <motion.div 
         style={{ y: bgY }}
-        className="absolute top-1/4 -left-20 w-[400px] h-[400px] bg-forest-sage/8 rounded-full blur-[100px]" 
-      />
+        className="absolute top-1/4 -left-20 w-[400px] h-[400px] rounded-full blur-[100px]"
+      >
+        <div className="w-full h-full rounded-full" style={{ background: 'hsla(var(--forest-900) / 0.3)' }} />
+      </motion.div>
       
       <div className="container mx-auto px-6 lg:px-8 relative">
         <StaggerContainer>
           {/* Section header */}
           <StaggerItem>
             <div className="text-center mb-4">
-              <span className="text-orange-gold text-xs font-bold tracking-[0.2em] uppercase">Portfolio</span>
+              <span 
+                className="text-xs font-bold tracking-[0.2em] uppercase"
+                style={{ color: 'hsl(var(--orange-500))' }}
+              >
+                Portfolio
+              </span>
             </div>
           </StaggerItem>
 
           <StaggerItem>
             <div className="text-center mb-3">
-              <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-foreground">
+              <h2 
+                className="text-3xl sm:text-4xl md:text-5xl font-bold"
+                style={{ color: 'hsl(var(--offwhite))' }}
+              >
                 Case Studies
               </h2>
             </div>
           </StaggerItem>
 
           <StaggerItem>
-            <p className="text-muted-foreground text-base text-center max-w-lg mx-auto mb-12">
+            <p 
+              className="text-base text-center max-w-lg mx-auto mb-12"
+              style={{ color: 'hsl(var(--softwhite))' }}
+            >
               Real-world projects where strategy met execution to deliver measurable impact.
             </p>
           </StaggerItem>
@@ -112,28 +125,65 @@ const Projects = () => {
               whileHover={{ y: -4 }}
               transition={{ duration: 0.3 }}
             >
-              <div className="relative overflow-hidden rounded-2xl bg-gradient-to-br from-forest-deep via-forest-dark to-forest-deep p-[1px]">
-                <div className="absolute inset-0 bg-gradient-to-br from-orange-gold/15 via-transparent to-forest-sage/10" />
+              <div 
+                className="relative overflow-hidden rounded-2xl p-[1px]"
+                style={{
+                  background: 'linear-gradient(135deg, hsl(var(--forest-950)), hsl(var(--forest-900)))',
+                }}
+              >
+                <div 
+                  className="absolute inset-0"
+                  style={{ background: 'linear-gradient(135deg, hsla(var(--orange-500) / 0.15), transparent, hsla(var(--forest-700) / 0.1))' }}
+                />
                 
-                <div className="relative rounded-2xl bg-gradient-to-br from-forest-deep/98 to-forest-dark/98 p-6 sm:p-8 lg:p-10">
+                <div 
+                  className="relative rounded-2xl p-6 sm:p-8 lg:p-10"
+                  style={{ background: 'linear-gradient(135deg, hsl(var(--forest-950) / 0.98), hsl(var(--forest-900) / 0.98))' }}
+                >
                   {/* Flagship badge */}
-                  <div className="inline-flex items-center gap-1.5 px-3 py-1 bg-orange-gold/20 border border-orange-gold/30 rounded-full mb-6">
-                    <span className="w-1.5 h-1.5 bg-orange-gold rounded-full animate-pulse" />
-                    <span className="text-orange-gold text-xs font-bold tracking-wider uppercase">Flagship Project</span>
+                  <div 
+                    className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full mb-6"
+                    style={{
+                      background: 'hsla(var(--orange-500) / 0.2)',
+                      border: '1px solid hsla(var(--orange-500) / 0.3)',
+                    }}
+                  >
+                    <span 
+                      className="w-1.5 h-1.5 rounded-full animate-pulse"
+                      style={{ background: 'hsl(var(--orange-500))' }}
+                    />
+                    <span 
+                      className="text-xs font-bold tracking-wider uppercase"
+                      style={{ color: 'hsl(var(--orange-500))' }}
+                    >
+                      Flagship Project
+                    </span>
                   </div>
                   
                   {/* NÈKO Title */}
-                  <h3 className="text-4xl sm:text-5xl md:text-6xl font-black text-white mb-3 tracking-tight">
-                    <span className="bg-gradient-to-r from-white to-orange-gold/80 bg-clip-text text-transparent">
-                      NÈKO
-                    </span>
+                  <h3 
+                    className="text-4xl sm:text-5xl md:text-6xl font-black mb-3 tracking-tight"
+                    style={{ 
+                      background: 'linear-gradient(90deg, hsl(var(--offwhite)), hsl(var(--orange-500) / 0.8))',
+                      WebkitBackgroundClip: 'text',
+                      WebkitTextFillColor: 'transparent',
+                      backgroundClip: 'text',
+                    }}
+                  >
+                    NÈKO
                   </h3>
                   
-                  <p className="text-lg sm:text-xl text-white/80 font-medium mb-3 max-w-xl">
+                  <p 
+                    className="text-lg sm:text-xl font-medium mb-3 max-w-xl"
+                    style={{ color: 'hsla(var(--offwhite) / 0.8)' }}
+                  >
                     {nekoProject.subtitle}
                   </p>
                   
-                  <p className="text-white/60 text-sm sm:text-base leading-relaxed mb-8 max-w-2xl">
+                  <p 
+                    className="text-sm sm:text-base leading-relaxed mb-8 max-w-2xl"
+                    style={{ color: 'hsl(var(--softwhite))' }}
+                  >
                     {nekoProject.description}
                   </p>
                   
@@ -142,11 +192,25 @@ const Projects = () => {
                     {nekoProject.metrics.map((metric, idx) => (
                       <div
                         key={idx}
-                        className="text-center p-4 bg-white/5 border border-white/10 rounded-xl"
+                        className="text-center p-4 rounded-xl"
+                        style={{
+                          background: 'hsla(var(--offwhite) / 0.05)',
+                          border: '1px solid hsla(var(--offwhite) / 0.10)',
+                        }}
                       >
-                        <metric.icon size={18} className="text-orange-gold mx-auto mb-2" />
-                        <div className="text-xl sm:text-2xl font-bold text-white">{metric.value}</div>
-                        <div className="text-white/50 text-xs">{metric.label}</div>
+                        <metric.icon size={18} className="mx-auto mb-2" style={{ color: 'hsl(var(--orange-500))' }} />
+                        <div 
+                          className="text-xl sm:text-2xl font-bold"
+                          style={{ color: 'hsl(var(--offwhite))' }}
+                        >
+                          {metric.value}
+                        </div>
+                        <div 
+                          className="text-xs"
+                          style={{ color: 'hsl(var(--softwhite))' }}
+                        >
+                          {metric.label}
+                        </div>
                       </div>
                     ))}
                   </div>
@@ -156,7 +220,12 @@ const Projects = () => {
                     {nekoProject.tags.map((tag) => (
                       <span 
                         key={tag}
-                        className="px-3 py-1.5 bg-white/5 border border-white/10 text-white/70 text-xs font-medium rounded-full"
+                        className="px-3 py-1.5 text-xs font-medium rounded-full"
+                        style={{
+                          background: 'hsla(var(--offwhite) / 0.05)',
+                          border: '1px solid hsla(var(--offwhite) / 0.10)',
+                          color: 'hsl(var(--softwhite))',
+                        }}
                       >
                         {tag}
                       </span>
@@ -166,7 +235,7 @@ const Projects = () => {
                   {/* View Case Study Link */}
                   <Link 
                     to="/neko"
-                    className="inline-flex items-center gap-2 px-6 py-3 bg-orange-gold text-forest-deep font-bold rounded-full hover:bg-orange-gold/90 transition-colors group"
+                    className="btn-primary inline-flex items-center gap-2 px-6 py-3 font-bold rounded-full group"
                   >
                     <span>View Full Case Study</span>
                     <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform" />
@@ -186,25 +255,48 @@ const Projects = () => {
                   className="glass-card rounded-xl p-4 h-full"
                 >
                   <div className="flex items-center justify-between mb-3">
-                    <span className="text-orange-gold text-[10px] font-bold tracking-wider uppercase">
+                    <span 
+                      className="text-[10px] font-bold tracking-wider uppercase"
+                      style={{ color: 'hsl(var(--orange-500))' }}
+                    >
                       {project.category}
                     </span>
                   </div>
                   
-                  <h3 className="text-sm font-bold text-foreground mb-2 leading-tight">
+                  <h3 
+                    className="text-sm font-bold mb-2 leading-tight"
+                    style={{ color: 'hsl(var(--offwhite))' }}
+                  >
                     {project.title}
                   </h3>
                   
-                  <p className="text-muted-foreground text-xs leading-relaxed mb-4">
+                  <p 
+                    className="text-xs leading-relaxed mb-4"
+                    style={{ color: 'hsl(var(--softwhite))' }}
+                  >
                     {project.description}
                   </p>
 
                   {/* Metrics */}
                   <div className="grid grid-cols-3 gap-1 mb-3">
                     {project.metrics.map((metric, idx) => (
-                      <div key={idx} className="text-center p-2 bg-muted/50 rounded-lg">
-                        <div className="text-xs font-bold text-foreground">{metric.value}</div>
-                        <div className="text-muted-foreground text-[9px]">{metric.label}</div>
+                      <div 
+                        key={idx} 
+                        className="text-center p-2 rounded-lg"
+                        style={{ background: 'hsla(var(--forest-950) / 0.5)' }}
+                      >
+                        <div 
+                          className="text-xs font-bold"
+                          style={{ color: 'hsl(var(--offwhite))' }}
+                        >
+                          {metric.value}
+                        </div>
+                        <div 
+                          className="text-[9px]"
+                          style={{ color: 'hsl(var(--softwhite))' }}
+                        >
+                          {metric.label}
+                        </div>
                       </div>
                     ))}
                   </div>
@@ -214,7 +306,11 @@ const Projects = () => {
                     {project.tags.map((tag) => (
                       <span 
                         key={tag}
-                        className="px-2 py-0.5 bg-muted text-muted-foreground text-[10px] font-medium rounded-full"
+                        className="px-2 py-0.5 text-[10px] font-medium rounded-full"
+                        style={{
+                          background: 'hsl(var(--forest-950))',
+                          color: 'hsl(var(--softwhite))',
+                        }}
                       >
                         {tag}
                       </span>

@@ -7,9 +7,13 @@ export default {
   theme: {
     container: {
       center: true,
-      padding: "2rem",
+      padding: {
+        DEFAULT: "1rem",
+        sm: "1.5rem",
+        lg: "2rem",
+      },
       screens: {
-        "2xl": "1400px",
+        "2xl": "1200px",
       },
     },
     extend: {
@@ -27,16 +31,22 @@ export default {
         body: "hsl(var(--body))",
         subtle: "hsl(var(--subtle))",
         divider: "hsl(var(--divider))",
+        
+        /* LOCKED PALETTE */
         forest: {
-          deep: "#2A312A",
-          dark: "#28382B",
-          sage: "#455B46",
+          950: "hsl(var(--forest-950))",
+          900: "hsl(var(--forest-900))",
+          700: "hsl(var(--forest-700))",
         },
         orange: {
-          gold: "#F4900E",
-          bright: "#F7631C",
-          deep: "#ED5005",
+          500: "hsl(var(--orange-500))",
+          600: "hsl(var(--orange-600))",
+          700: "hsl(var(--orange-700))",
         },
+        offwhite: "hsl(var(--offwhite))",
+        softwhite: "hsl(var(--softwhite))",
+        ink: "hsl(var(--ink))",
+        
         primary: {
           DEFAULT: "hsl(var(--primary))",
           foreground: "hsl(var(--primary-foreground))",
@@ -82,9 +92,16 @@ export default {
       borderRadius: {
         lg: "var(--radius)",
         md: "calc(var(--radius) - 2px)",
-        sm: "calc(var(--radius) - 4px)",
+        sm: "var(--radius-sm)",
+        pill: "var(--radius-pill)",
         "2xl": "1.5rem",
         "3xl": "2rem",
+      },
+      boxShadow: {
+        "elevation-1": "var(--shadow-1)",
+        "elevation-2": "var(--shadow-2)",
+        "bevel": "var(--bevel-highlight)",
+        "nav": "var(--shadow-2), var(--bevel-highlight)",
       },
       keyframes: {
         "accordion-down": {
@@ -132,8 +149,8 @@ export default {
           "50%": { transform: "translateY(-6px)" },
         },
         "glow-pulse": {
-          "0%, 100%": { boxShadow: "0 0 0 0 rgba(244, 144, 14, 0.4)" },
-          "50%": { boxShadow: "0 0 0 8px rgba(244, 144, 14, 0)" },
+          "0%, 100%": { boxShadow: "0 0 0 0 hsla(var(--orange-500) / 0.4)" },
+          "50%": { boxShadow: "0 0 0 8px hsla(var(--orange-500) / 0)" },
         },
       },
       animation: {

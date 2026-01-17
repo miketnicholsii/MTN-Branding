@@ -4,9 +4,15 @@ const footerLinks = ["About", "Experience", "Projects", "Skills", "Contact"];
 
 const Footer = () => {
   return (
-    <footer className="py-8 sm:py-10 relative section-dark overflow-hidden">
+    <footer 
+      className="py-8 sm:py-10 relative overflow-hidden"
+      style={{ background: 'hsl(var(--forest-900))' }}
+    >
       {/* Subtle glow */}
-      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[400px] h-[150px] bg-forest-sage/8 rounded-full blur-[60px]" />
+      <div 
+        className="absolute top-0 left-1/2 -translate-x-1/2 w-[400px] h-[150px] rounded-full blur-[60px]"
+        style={{ background: 'hsla(var(--forest-700) / 0.2)' }}
+      />
       
       <div className="container mx-auto px-6 lg:px-8 relative">
         <div className="flex flex-col items-center gap-4 sm:gap-6">
@@ -15,9 +21,16 @@ const Footer = () => {
             href="#"
             whileHover={{ scale: 1.03 }}
             whileTap={{ scale: 0.98 }}
-            className="text-base sm:text-lg font-bold text-white flex items-baseline"
+            className="text-base sm:text-lg font-bold flex items-baseline"
+            style={{ color: 'hsl(var(--offwhite))' }}
           >
-            Mike T. Nichols<span className="text-orange-gold ml-1" style={{ fontFamily: 'Georgia, serif' }}>II</span>
+            Mike T. Nichols
+            <span 
+              className="ml-1" 
+              style={{ fontFamily: 'Georgia, serif', color: 'hsl(var(--orange-500))' }}
+            >
+              II
+            </span>
           </motion.a>
 
           {/* Navigation */}
@@ -26,8 +39,9 @@ const Footer = () => {
               <motion.a
                 key={item}
                 href={`#${item.toLowerCase()}`}
-                className="text-xs text-white/50 hover:text-orange-gold transition-colors"
-                whileHover={{ y: -1 }}
+                className="text-xs transition-colors duration-200"
+                style={{ color: 'hsl(var(--softwhite))' }}
+                whileHover={{ y: -1, color: 'hsl(var(--orange-500))' }}
               >
                 {item}
               </motion.a>
@@ -35,7 +49,10 @@ const Footer = () => {
           </nav>
 
           {/* Copyright */}
-          <p className="text-white/30 text-xs text-center">
+          <p 
+            className="text-xs text-center"
+            style={{ color: 'hsla(var(--softwhite) / 0.5)' }}
+          >
             © {new Date().getFullYear()} Mike T. Nichols II
           </p>
         </div>
