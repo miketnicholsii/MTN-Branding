@@ -220,6 +220,8 @@ const Hero = () => {
                 <img
                   src={headshot}
                   alt="Mike T. Nichols II"
+                  decoding="async"
+                  fetchPriority="high"
                   className="w-full h-full object-cover"
                 />
                 {/* Gradient overlay */}
