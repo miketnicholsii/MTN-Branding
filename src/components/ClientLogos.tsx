@@ -3,29 +3,34 @@ import { useState } from "react";
 import { ChevronDown, ChevronUp } from "lucide-react";
 import { StaggerContainer, StaggerItem } from "./StaggerReveal";
 
+type Category = "All" | "Brand & Identity" | "Product & UX" | "Strategy & Consulting" | "Technology";
+
 const clients = [
-  { name: "Luminary Studio", industry: "Digital Product & Brand Design", initials: "LS", gradient: "from-amber-400 to-orange-500" },
-  { name: "Offset Labs", industry: "UX, Motion & Experimental Design", initials: "OL", gradient: "from-violet-400 to-purple-600" },
-  { name: "Pixel & Form", industry: "Visual Identity & Interface Design", initials: "P&F", gradient: "from-cyan-400 to-blue-500" },
-  { name: "Northframe", industry: "Brand Systems for Startups", initials: "NF", gradient: "from-emerald-400 to-teal-600" },
-  { name: "Crafted Collective", industry: "Strategy-Led Design Studio", initials: "CC", gradient: "from-rose-400 to-pink-600" },
-  { name: "Echoform", industry: "Human-Centered Product Design", initials: "EF", gradient: "from-sky-400 to-indigo-500" },
-  { name: "Brightline Works", industry: "Design + Engineering Hybrid", initials: "BW", gradient: "from-yellow-400 to-amber-500" },
-  { name: "Folded Space", industry: "Minimalist Branding & Web Design", initials: "FS", gradient: "from-slate-400 to-zinc-600" },
-  { name: "Aureon Group", industry: "Global Brand & Experience Consultancy", initials: "AG", gradient: "from-amber-300 to-yellow-500" },
-  { name: "Vertex Design Systems", industry: "Enterprise UX & Platform Design", initials: "VDS", gradient: "from-blue-400 to-cyan-500" },
-  { name: "Helios Creative", industry: "End-to-End Brand Transformation", initials: "HC", gradient: "from-orange-400 to-red-500" },
-  { name: "Monument Design Co.", industry: "Large-Scale Corporate Identity", initials: "MDC", gradient: "from-stone-400 to-neutral-600" },
-  { name: "Atlas & Co.", industry: "Strategy, Design & Innovation", initials: "A&C", gradient: "from-teal-400 to-emerald-600" },
-  { name: "NovaWorks Global", industry: "Digital Experience at Scale", initials: "NW", gradient: "from-fuchsia-400 to-purple-600" },
-  { name: "Crestline Industries", industry: "Design, Technology & Research", initials: "CI", gradient: "from-lime-400 to-green-600" },
+  { name: "Luminary Studio", industry: "Digital Product & Brand Design", initials: "LS", gradient: "from-amber-400 to-orange-500", category: "Brand & Identity" as Category },
+  { name: "Offset Labs", industry: "UX, Motion & Experimental Design", initials: "OL", gradient: "from-violet-400 to-purple-600", category: "Product & UX" as Category },
+  { name: "Pixel & Form", industry: "Visual Identity & Interface Design", initials: "P&F", gradient: "from-cyan-400 to-blue-500", category: "Brand & Identity" as Category },
+  { name: "Northframe", industry: "Brand Systems for Startups", initials: "NF", gradient: "from-emerald-400 to-teal-600", category: "Brand & Identity" as Category },
+  { name: "Crafted Collective", industry: "Strategy-Led Design Studio", initials: "CC", gradient: "from-rose-400 to-pink-600", category: "Strategy & Consulting" as Category },
+  { name: "Echoform", industry: "Human-Centered Product Design", initials: "EF", gradient: "from-sky-400 to-indigo-500", category: "Product & UX" as Category },
+  { name: "Brightline Works", industry: "Design + Engineering Hybrid", initials: "BW", gradient: "from-yellow-400 to-amber-500", category: "Technology" as Category },
+  { name: "Folded Space", industry: "Minimalist Branding & Web Design", initials: "FS", gradient: "from-slate-400 to-zinc-600", category: "Brand & Identity" as Category },
+  { name: "Aureon Group", industry: "Global Brand & Experience Consultancy", initials: "AG", gradient: "from-amber-300 to-yellow-500", category: "Strategy & Consulting" as Category },
+  { name: "Vertex Design Systems", industry: "Enterprise UX & Platform Design", initials: "VDS", gradient: "from-blue-400 to-cyan-500", category: "Technology" as Category },
+  { name: "Helios Creative", industry: "End-to-End Brand Transformation", initials: "HC", gradient: "from-orange-400 to-red-500", category: "Brand & Identity" as Category },
+  { name: "Monument Design Co.", industry: "Large-Scale Corporate Identity", initials: "MDC", gradient: "from-stone-400 to-neutral-600", category: "Brand & Identity" as Category },
+  { name: "Atlas & Co.", industry: "Strategy, Design & Innovation", initials: "A&C", gradient: "from-teal-400 to-emerald-600", category: "Strategy & Consulting" as Category },
+  { name: "NovaWorks Global", industry: "Digital Experience at Scale", initials: "NW", gradient: "from-fuchsia-400 to-purple-600", category: "Technology" as Category },
+  { name: "Crestline Industries", industry: "Design, Technology & Research", initials: "CI", gradient: "from-lime-400 to-green-600", category: "Technology" as Category },
 ];
+
+const categories: Category[] = ["All", "Brand & Identity", "Product & UX", "Strategy & Consulting", "Technology"];
 
 interface ClientType {
   name: string;
   industry: string;
   initials: string;
   gradient: string;
+  category: Category;
 }
 
 const LogoItem = ({ name, industry, initials, gradient }: ClientType) => (
@@ -98,6 +103,12 @@ const GridLogoItem = ({ name, industry, initials, gradient }: ClientType) => (
 const ClientLogos = () => {
   const [isPaused, setIsPaused] = useState(false);
   const [showGrid, setShowGrid] = useState(false);
+  const [activeCategory, setActiveCategory] = useState<Category>("All");
+  
+  const filteredClients = activeCategory === "All" 
+    ? clients 
+    : clients.filter(client => client.category === activeCategory);
+  
   // Double the clients for seamless loop
   const duplicatedClients = [...clients, ...clients];
 
@@ -208,18 +219,64 @@ const ClientLogos = () => {
             transition={{ duration: 0.4, ease: "easeInOut" }}
             className="container mx-auto px-6 lg:px-8"
           >
-            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-2 sm:gap-4">
-              {clients.map((client, idx) => (
-                <motion.div
-                  key={client.name}
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: idx * 0.05 }}
+            {/* Category Filter Tabs */}
+            <div className="flex flex-wrap justify-center gap-2 sm:gap-3 mb-8">
+              {categories.map((category) => (
+                <motion.button
+                  key={category}
+                  onClick={() => setActiveCategory(category)}
+                  className="px-4 py-2 rounded-full text-xs sm:text-sm font-medium transition-all duration-300 border"
+                  style={{ 
+                    color: activeCategory === category ? 'hsl(var(--forest-950))' : 'hsl(var(--offwhite) / 0.8)',
+                    background: activeCategory === category ? 'hsl(var(--orange-500))' : 'transparent',
+                    borderColor: activeCategory === category ? 'hsl(var(--orange-500))' : 'hsl(var(--offwhite) / 0.2)',
+                  }}
+                  whileHover={{ scale: 1.02 }}
+                  whileTap={{ scale: 0.98 }}
                 >
-                  <GridLogoItem {...client} />
-                </motion.div>
+                  {category}
+                  {category !== "All" && (
+                    <span 
+                      className="ml-1.5 opacity-60"
+                      style={{ fontSize: '0.65rem' }}
+                    >
+                      ({clients.filter(c => c.category === category).length})
+                    </span>
+                  )}
+                </motion.button>
               ))}
             </div>
+
+            <motion.div 
+              layout
+              className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-2 sm:gap-4"
+            >
+              <AnimatePresence mode="popLayout">
+                {filteredClients.map((client, idx) => (
+                  <motion.div
+                    key={client.name}
+                    layout
+                    initial={{ opacity: 0, scale: 0.8 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    exit={{ opacity: 0, scale: 0.8 }}
+                    transition={{ delay: idx * 0.03, duration: 0.3 }}
+                  >
+                    <GridLogoItem {...client} />
+                  </motion.div>
+                ))}
+              </AnimatePresence>
+            </motion.div>
+
+            {filteredClients.length === 0 && (
+              <motion.p
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                className="text-center py-12"
+                style={{ color: 'hsl(var(--softwhite) / 0.6)' }}
+              >
+                No partners in this category.
+              </motion.p>
+            )}
           </motion.div>
         )}
       </AnimatePresence>
