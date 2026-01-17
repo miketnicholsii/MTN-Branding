@@ -62,7 +62,7 @@ const Hero = () => {
     <section 
       ref={containerRef} 
       className="min-h-screen flex flex-col justify-center relative overflow-hidden"
-      style={{ paddingTop: "calc(80px + 2rem)", paddingBottom: "2rem" }}
+      style={{ paddingTop: "calc(72px + 3rem)", paddingBottom: "3rem" }}
     >
       {/* Simplified parallax background */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
@@ -70,24 +70,26 @@ const Hero = () => {
           style={{ y: layer1Y }}
           className="absolute top-[10%] -left-[10%] w-[600px] h-[600px] rounded-full"
         >
-          <div className="w-full h-full bg-gradient-radial from-forest-sage/20 via-forest-sage/5 to-transparent rounded-full blur-[100px]" />
+          <div className="w-full h-full rounded-full blur-[100px]" style={{ background: 'radial-gradient(circle, hsla(var(--forest-900) / 0.4) 0%, transparent 70%)' }} />
         </motion.div>
         
         <motion.div 
           style={{ y: layer2Y }}
           className="absolute top-[5%] right-[-5%] w-[500px] h-[500px] rounded-full"
         >
-          <div className="w-full h-full bg-gradient-radial from-orange-gold/12 via-orange-gold/3 to-transparent rounded-full blur-[80px]" />
+          <div className="w-full h-full rounded-full blur-[80px]" style={{ background: 'radial-gradient(circle, hsla(var(--orange-500) / 0.15) 0%, transparent 70%)' }} />
         </motion.div>
 
         {/* Subtle floating particles */}
         <motion.div
-          className="absolute top-[25%] left-[20%] w-2 h-2 bg-orange-gold/30 rounded-full blur-[1px]"
+          className="absolute top-[25%] left-[20%] w-2 h-2 rounded-full blur-[1px]"
+          style={{ background: 'hsl(var(--orange-500) / 0.3)' }}
           animate={{ y: [-10, 10, -10], opacity: [0.3, 0.5, 0.3] }}
           transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
         />
         <motion.div
-          className="absolute top-[50%] right-[25%] w-1.5 h-1.5 bg-forest-sage/40 rounded-full blur-[1px]"
+          className="absolute top-[50%] right-[25%] w-1.5 h-1.5 rounded-full blur-[1px]"
+          style={{ background: 'hsl(var(--forest-900) / 0.4)' }}
           animate={{ y: [8, -8, 8], opacity: [0.2, 0.4, 0.2] }}
           transition={{ duration: 4, repeat: Infinity, ease: "easeInOut", delay: 1 }}
         />
@@ -107,14 +109,14 @@ const Hero = () => {
                 whileHover={{ scale: 1.02 }}
                 transition={{ duration: 0.3 }}
               >
-                <span className="w-2 h-2 bg-orange-gold rounded-full animate-subtle-glow" />
-                <span className="text-foreground/80 text-xs sm:text-sm font-medium tracking-wide">Product Leader · Strategist · Builder</span>
+                <span className="w-2 h-2 rounded-full animate-subtle-glow" style={{ background: 'hsl(var(--orange-500))' }} />
+                <span className="text-xs sm:text-sm font-medium tracking-wide" style={{ color: 'hsl(var(--softwhite))' }}>Product Leader · Strategist · Builder</span>
               </motion.div>
             </StaggerItem>
 
             {/* Main headline */}
             <StaggerItem>
-              <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold leading-[1.1] mb-4 text-foreground">
+              <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold leading-[1.1] mb-4" style={{ color: 'hsl(var(--offwhite))' }}>
                 <TypeWriter 
                   text="Hi, I'm " 
                   delay={800}
@@ -142,19 +144,19 @@ const Hero = () => {
             </StaggerItem>
             
             <StaggerItem>
-              <p className="text-lg sm:text-xl md:text-2xl font-medium text-muted-foreground mb-6 max-w-lg mx-auto lg:mx-0">
+              <p className="text-lg sm:text-xl md:text-2xl font-medium mb-6 max-w-lg mx-auto lg:mx-0" style={{ color: 'hsl(var(--softwhite))' }}>
                 I solve complex problems with{" "}
                 <span className="text-gradient-brand font-semibold">clarity</span>,{" "}
                 <span className="text-gradient-brand font-semibold">creativity</span>, and a{" "}
-                <span className="text-orange-gold font-semibold">dad joke</span> or two.
+                <span className="font-semibold" style={{ color: 'hsl(var(--orange-500))' }}>dad joke</span> or two.
               </p>
             </StaggerItem>
 
             {/* Subheadline */}
             <StaggerItem>
-              <p className="text-muted-foreground text-base md:text-lg leading-relaxed max-w-md mx-auto lg:mx-0 mb-8">
-                I'm an <span className="text-foreground font-medium">Agile Product Manager</span> and{" "}
-                <span className="text-foreground font-medium">Digital Strategist</span> who builds platforms that drive growth.
+              <p className="text-base md:text-lg leading-relaxed max-w-md mx-auto lg:mx-0 mb-8" style={{ color: 'hsl(var(--softwhite))' }}>
+                I'm an <span className="font-medium" style={{ color: 'hsl(var(--offwhite))' }}>Agile Product Manager</span> and{" "}
+                <span className="font-medium" style={{ color: 'hsl(var(--offwhite))' }}>Digital Strategist</span> who builds platforms that drive growth.
               </p>
             </StaggerItem>
 
@@ -163,11 +165,11 @@ const Hero = () => {
               <div className="flex flex-col sm:flex-row flex-wrap justify-center lg:justify-start gap-3 mb-8">
                 <MagneticButton
                   href="#contact"
-                  className="group inline-flex items-center justify-center gap-2 px-6 py-3 bg-primary text-primary-foreground font-semibold rounded-full transition-all duration-300 hover:shadow-lg hover:shadow-primary/20"
+                  className="btn-primary group inline-flex items-center justify-center gap-2 px-6 py-3 font-semibold rounded-full"
                 >
                   Get in Touch
                   <motion.span 
-                    className="inline-block text-orange-gold"
+                    className="inline-block"
                     animate={{ x: [0, 3, 0] }}
                     transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
                   >
@@ -176,7 +178,7 @@ const Hero = () => {
                 </MagneticButton>
                 <MagneticButton
                   href="#experience"
-                  className="inline-flex items-center justify-center gap-2 px-6 py-3 border border-border text-foreground font-medium rounded-full hover:bg-muted transition-all duration-300"
+                  className="inline-flex items-center justify-center gap-2 px-6 py-3 font-medium rounded-full transition-all duration-200 border border-white/20 text-offwhite hover:bg-forest-900"
                 >
                   View Experience
                 </MagneticButton>
@@ -194,7 +196,7 @@ const Hero = () => {
                   ["Leadership", "Stakeholders", "Teams"],
                 ]}
                 className="justify-center lg:justify-start mb-6"
-                tagClassName="bg-card border-border text-foreground text-xs"
+                tagClassName="text-xs"
                 interval={2800}
               />
             </StaggerItem>
@@ -209,9 +211,10 @@ const Hero = () => {
                 ].map((item, index) => (
                   <div
                     key={index}
-                    className="flex items-center gap-2 text-muted-foreground text-xs font-medium"
+                    className="flex items-center gap-2 text-xs font-medium"
+                    style={{ color: 'hsl(var(--softwhite))' }}
                   >
-                    <item.icon size={14} className="text-orange-gold" />
+                    <item.icon size={14} style={{ color: 'hsl(var(--orange-500))' }} />
                     <span>{item.text}</span>
                   </div>
                 ))}
@@ -231,14 +234,19 @@ const Hero = () => {
             >
               {/* Decorative ring */}
               <motion.div
-                className="absolute -inset-3 rounded-full border border-border/50"
+                className="absolute -inset-3 rounded-full"
+                style={{ border: '1px solid hsla(var(--offwhite) / 0.15)' }}
                 animate={{ scale: [1, 1.01, 1] }}
                 transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
               />
               
               {/* Accent dot */}
               <motion.div
-                className="absolute -top-1 -right-1 w-3 h-3 bg-orange-gold rounded-full shadow-lg shadow-orange-gold/30"
+                className="absolute -top-1 -right-1 w-3 h-3 rounded-full"
+                style={{ 
+                  background: 'hsl(var(--orange-500))',
+                  boxShadow: '0 4px 12px hsla(var(--orange-500) / 0.4)'
+                }}
                 animate={{ y: [-3, 3, -3] }}
                 transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
               />
@@ -247,7 +255,7 @@ const Hero = () => {
               <motion.div
                 className="relative w-48 h-48 sm:w-56 sm:h-56 md:w-64 md:h-64 lg:w-72 lg:h-72 xl:w-80 xl:h-80 rounded-full overflow-hidden"
                 style={{
-                  boxShadow: '0 20px 60px -15px rgba(42, 49, 42, 0.25)'
+                  boxShadow: 'var(--shadow-2)'
                 }}
                 whileHover={{ scale: 1.02 }}
                 transition={{ duration: 0.4, ease: "easeOut" }}
@@ -273,15 +281,18 @@ const Hero = () => {
       >
         <a
           href="#about"
-          className="flex flex-col items-center text-muted-foreground hover:text-foreground transition-colors duration-300"
+          className="flex flex-col items-center transition-colors duration-300"
+          style={{ color: 'hsl(var(--softwhite))' }}
         >
           <motion.div 
-            className="w-5 h-8 rounded-full border border-current flex justify-center pt-1.5"
+            className="w-5 h-8 rounded-full flex justify-center pt-1.5"
+            style={{ border: '1px solid currentColor' }}
             animate={{ y: [0, 3, 0] }}
             transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
           >
             <motion.div 
-              className="w-1 h-1 bg-orange-gold rounded-full"
+              className="w-1 h-1 rounded-full"
+              style={{ background: 'hsl(var(--orange-500))' }}
               animate={{ y: [0, 8, 0], opacity: [1, 0.3, 1] }}
               transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
             />

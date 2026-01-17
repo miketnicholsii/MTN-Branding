@@ -1,5 +1,5 @@
 import { motion, useInView, useScroll, useTransform } from "framer-motion";
-import { useRef, useState } from "react";
+import { useRef } from "react";
 import { StaggerContainer, StaggerItem } from "./StaggerReveal";
 import { 
   Target, 
@@ -64,9 +64,9 @@ const skillMatrix = [
 ];
 
 const tierConfig = {
-  Expert: { dots: 4, color: "bg-orange-gold" },
-  Advanced: { dots: 3, color: "bg-forest-sage" },
-  Proficient: { dots: 2, color: "bg-muted-foreground" },
+  Expert: { dots: 4, color: "hsl(var(--orange-500))" },
+  Advanced: { dots: 3, color: "hsl(var(--forest-700))" },
+  Proficient: { dots: 2, color: "hsl(var(--softwhite))" },
 };
 
 const TierIndicator = ({ tier }: { tier: "Expert" | "Advanced" | "Proficient" }) => {
@@ -77,11 +77,19 @@ const TierIndicator = ({ tier }: { tier: "Expert" | "Advanced" | "Proficient" })
         {[...Array(4)].map((_, i) => (
           <div
             key={i}
-            className={`w-1.5 h-1.5 rounded-full ${i < config.dots ? config.color : "bg-border"}`}
+            className="w-1.5 h-1.5 rounded-full"
+            style={{ 
+              background: i < config.dots 
+                ? config.color 
+                : 'hsla(var(--offwhite) / 0.2)'
+            }}
           />
         ))}
       </div>
-      <span className={`text-[10px] font-medium ${tier === "Expert" ? "text-orange-gold" : "text-muted-foreground"}`}>
+      <span 
+        className="text-[10px] font-medium"
+        style={{ color: tier === "Expert" ? 'hsl(var(--orange-500))' : 'hsl(var(--softwhite))' }}
+      >
         {tier}
       </span>
     </div>
@@ -112,10 +120,18 @@ const SkillCard = ({ category, icon: Icon, skills, delay }: {
       >
         {/* Category header */}
         <div className="flex items-center gap-3 mb-4">
-          <div className="w-9 h-9 rounded-lg bg-muted flex items-center justify-center group-hover:bg-orange-gold/10 transition-colors">
-            <Icon size={16} className="text-muted-foreground group-hover:text-orange-gold transition-colors" />
+          <div 
+            className="w-9 h-9 rounded-lg flex items-center justify-center transition-colors"
+            style={{ background: 'hsl(var(--forest-950))' }}
+          >
+            <Icon size={16} style={{ color: 'hsl(var(--softwhite))' }} className="group-hover:text-orange-500 transition-colors" />
           </div>
-          <h3 className="text-sm font-bold text-foreground">{category}</h3>
+          <h3 
+            className="text-sm font-bold"
+            style={{ color: 'hsl(var(--offwhite))' }}
+          >
+            {category}
+          </h3>
         </div>
 
         {/* Skills list */}
@@ -123,11 +139,15 @@ const SkillCard = ({ category, icon: Icon, skills, delay }: {
           {skills.map((skill) => (
             <div
               key={skill.name}
-              className="flex items-center justify-between gap-2 py-1.5 px-2 rounded-md hover:bg-muted/50 transition-colors"
+              className="flex items-center justify-between gap-2 py-1.5 px-2 rounded-md transition-colors"
+              style={{ background: 'transparent' }}
             >
               <div className="flex items-center gap-1.5 min-w-0 flex-1">
-                <ChevronRight size={10} className="text-muted-foreground shrink-0" />
-                <span className="text-xs text-muted-foreground truncate">
+                <ChevronRight size={10} style={{ color: 'hsl(var(--softwhite))' }} className="shrink-0" />
+                <span 
+                  className="text-xs truncate"
+                  style={{ color: 'hsl(var(--softwhite))' }}
+                >
                   {skill.name}
                 </span>
               </div>
@@ -155,28 +175,41 @@ const Skills = () => {
       {/* Background */}
       <motion.div 
         style={{ y: bgY }}
-        className="absolute top-0 right-0 w-[400px] h-[400px] bg-forest-sage/6 rounded-full blur-[100px]" 
-      />
+        className="absolute top-0 right-0 w-[400px] h-[400px] rounded-full blur-[100px]"
+      >
+        <div className="w-full h-full rounded-full" style={{ background: 'hsla(var(--forest-900) / 0.3)' }} />
+      </motion.div>
       
       <div className="container mx-auto px-6 lg:px-8 relative">
         <StaggerContainer>
           {/* Section header */}
           <StaggerItem>
             <div className="text-center mb-4">
-              <span className="text-orange-gold text-xs font-bold tracking-[0.2em] uppercase">Expertise</span>
+              <span 
+                className="text-xs font-bold tracking-[0.2em] uppercase"
+                style={{ color: 'hsl(var(--orange-500))' }}
+              >
+                Expertise
+              </span>
             </div>
           </StaggerItem>
 
           <StaggerItem>
             <div className="text-center mb-3">
-              <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-foreground">
+              <h2 
+                className="text-3xl sm:text-4xl md:text-5xl font-bold"
+                style={{ color: 'hsl(var(--offwhite))' }}
+              >
                 Strategic Capability Matrix
               </h2>
             </div>
           </StaggerItem>
 
           <StaggerItem>
-            <p className="text-muted-foreground text-base text-center max-w-lg mx-auto mb-8">
+            <p 
+              className="text-base text-center max-w-lg mx-auto mb-8"
+              style={{ color: 'hsl(var(--softwhite))' }}
+            >
               A decade of experience across product, strategy, and leadership.
             </p>
           </StaggerItem>
@@ -190,11 +223,21 @@ const Skills = () => {
                     {[...Array(4)].map((_, i) => (
                       <div
                         key={i}
-                        className={`w-1 h-1 rounded-full ${i < config.dots ? config.color : "bg-border"}`}
+                        className="w-1 h-1 rounded-full"
+                        style={{ 
+                          background: i < config.dots 
+                            ? config.color 
+                            : 'hsla(var(--offwhite) / 0.2)'
+                        }}
                       />
                     ))}
                   </div>
-                  <span className="text-[10px] text-muted-foreground">{tier}</span>
+                  <span 
+                    className="text-[10px]"
+                    style={{ color: 'hsl(var(--softwhite))' }}
+                  >
+                    {tier}
+                  </span>
                 </div>
               ))}
             </div>

@@ -61,13 +61,21 @@ const Experience = () => {
           {/* Section header */}
           <StaggerItem>
             <div className="text-center mb-4">
-              <span className="text-orange-gold text-xs font-bold tracking-[0.2em] uppercase">Where I've Been</span>
+              <span 
+                className="text-xs font-bold tracking-[0.2em] uppercase"
+                style={{ color: 'hsl(var(--orange-500))' }}
+              >
+                Where I've Been
+              </span>
             </div>
           </StaggerItem>
 
           <StaggerItem>
             <div className="text-center mb-3">
-              <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-foreground">
+              <h2 
+                className="text-3xl sm:text-4xl md:text-5xl font-bold"
+                style={{ color: 'hsl(var(--offwhite))' }}
+              >
                 A Few Stops Along the Way
               </h2>
             </div>
@@ -75,13 +83,14 @@ const Experience = () => {
           
           <StaggerItem>
             <div className="text-center mb-4">
-              <p className="text-muted-foreground text-base">
+              <p style={{ color: 'hsl(var(--softwhite))' }} className="text-base">
                 Currently crafting strategy at{" "}
                 <a 
                   href="https://helloneko.co" 
                   target="_blank" 
                   rel="noopener noreferrer"
-                  className="text-orange-gold font-semibold hover:underline"
+                  className="font-semibold hover:underline"
+                  style={{ color: 'hsl(var(--orange-500))' }}
                 >
                   NÈKO
                 </a>
@@ -93,9 +102,10 @@ const Experience = () => {
             <div className="text-center mb-10">
               <Link
                 to="/resume"
-                className="inline-flex items-center gap-2 px-4 py-2 glass-pill rounded-full text-muted-foreground text-xs font-medium hover:text-foreground transition-colors"
+                className="inline-flex items-center gap-2 px-4 py-2 glass-pill rounded-full text-xs font-medium transition-colors"
+                style={{ color: 'hsl(var(--softwhite))' }}
               >
-                <Download size={12} className="text-orange-gold" />
+                <Download size={12} style={{ color: 'hsl(var(--orange-500))' }} />
                 View & Download Resume
               </Link>
             </div>
@@ -112,38 +122,70 @@ const Experience = () => {
                   <CardWrapper
                     {...cardProps}
                     className={`group block rounded-xl p-4 sm:p-5 transition-all duration-300 hover:translate-x-1 ${
-                      exp.featured 
-                        ? 'relative overflow-hidden card-featured text-white cursor-pointer' 
-                        : 'glass-card'
+                      exp.featured ? 'relative overflow-hidden cursor-pointer' : 'glass-card'
                     }`}
+                    style={exp.featured ? {
+                      background: 'linear-gradient(145deg, hsl(var(--forest-950)), hsl(var(--forest-900)))',
+                      border: '1px solid hsla(var(--offwhite) / 0.15)',
+                      boxShadow: 'var(--shadow-2), var(--bevel-highlight)',
+                    } : undefined}
                   >
                     {exp.featured && (
-                      <div className="absolute top-3 right-3 px-2 py-0.5 bg-white/20 text-white text-[10px] font-semibold rounded-full">
+                      <div 
+                        className="absolute top-3 right-3 px-2 py-0.5 text-[10px] font-semibold rounded-full"
+                        style={{ 
+                          background: 'hsla(var(--offwhite) / 0.2)',
+                          color: 'hsl(var(--offwhite))',
+                        }}
+                      >
                         Current
                       </div>
                     )}
                     <div className={`flex items-start gap-4 ${exp.featured ? 'pt-2' : ''}`}>
-                      <div className={`text-xl sm:text-2xl font-bold ${
-                        exp.featured ? 'text-white/50' : 'text-orange-gold/40 group-hover:text-orange-gold'
-                      } transition-colors`}>
+                      <div 
+                        className="text-xl sm:text-2xl font-bold transition-colors"
+                        style={{ 
+                          color: exp.featured 
+                            ? 'hsla(var(--offwhite) / 0.5)' 
+                            : 'hsla(var(--orange-500) / 0.4)'
+                        }}
+                      >
                         {exp.number}
                       </div>
                       
                       <div className="flex-1 min-w-0">
                         <div className="flex items-start justify-between gap-2 mb-1">
                           <div>
-                            <h3 className={`text-sm sm:text-base font-bold ${
-                              exp.featured ? 'text-white' : 'text-foreground group-hover:text-orange-gold'
-                            } transition-colors`}>{exp.company}</h3>
-                            <p className={`text-xs font-medium ${exp.featured ? 'text-white/70' : 'text-orange-gold'}`}>{exp.role}</p>
+                            <h3 
+                              className="text-sm sm:text-base font-bold transition-colors"
+                              style={{ color: 'hsl(var(--offwhite))' }}
+                            >
+                              {exp.company}
+                            </h3>
+                            <p 
+                              className="text-xs font-medium"
+                              style={{ color: exp.featured ? 'hsla(var(--offwhite) / 0.7)' : 'hsl(var(--orange-500))' }}
+                            >
+                              {exp.role}
+                            </p>
                           </div>
-                          <span className={`text-[10px] sm:text-xs shrink-0 ${exp.featured ? 'text-white/50' : 'text-muted-foreground'}`}>{exp.period}</span>
+                          <span 
+                            className="text-[10px] sm:text-xs shrink-0"
+                            style={{ color: exp.featured ? 'hsla(var(--offwhite) / 0.5)' : 'hsl(var(--softwhite))' }}
+                          >
+                            {exp.period}
+                          </span>
                         </div>
-                        <p className={`text-xs sm:text-sm leading-relaxed ${exp.featured ? 'text-white/70' : 'text-muted-foreground'}`}>{exp.description}</p>
+                        <p 
+                          className="text-xs sm:text-sm leading-relaxed"
+                          style={{ color: exp.featured ? 'hsla(var(--offwhite) / 0.7)' : 'hsl(var(--softwhite))' }}
+                        >
+                          {exp.description}
+                        </p>
                       </div>
 
                       {exp.featured && (
-                        <ExternalLink size={14} className="text-white/50 shrink-0 mt-1" />
+                        <ExternalLink size={14} className="shrink-0 mt-1" style={{ color: 'hsla(var(--offwhite) / 0.5)' }} />
                       )}
                     </div>
                   </CardWrapper>

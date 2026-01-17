@@ -1,7 +1,6 @@
 import { useState, useEffect, useCallback } from "react";
 import { Menu, X } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
-import ThemeToggle from "./ThemeToggle";
 
 const Header = () => {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -36,7 +35,7 @@ const Header = () => {
     };
 
     window.addEventListener("scroll", handleScroll);
-    handleScroll(); // Check initial position
+    handleScroll();
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
@@ -59,129 +58,196 @@ const Header = () => {
   }, []);
 
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 py-4 sm:py-5 bg-white/70 dark:bg-background/70 backdrop-blur-xl border-b border-border/50">
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-        <nav className="flex items-center justify-between">
-          {/* Logo */}
-          <motion.a
-            href="#"
-            onClick={(e) => scrollToSection(e, "#")}
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            className="text-lg sm:text-xl font-bold flex items-baseline tracking-tight"
+    <header 
+      className="fixed top-0 left-0 right-0 z-50"
+      style={{
+        height: '72px',
+        background: 'hsl(var(--forest-900))',
+        borderBottom: '1px solid hsla(var(--offwhite) / 0.10)',
+        boxShadow: 'var(--shadow-2), var(--bevel-highlight)',
+      }}
+    >
+      <div 
+        className="h-full mx-auto flex items-center justify-between"
+        style={{
+          maxWidth: '1200px',
+          paddingLeft: '24px',
+          paddingRight: '24px',
+        }}
+      >
+        {/* Brand / Owner Name - NEVER CROPS */}
+        <motion.a
+          href="#"
+          onClick={(e) => scrollToSection(e, "#")}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          className="flex items-center focus-ring"
+          style={{
+            minHeight: '72px',
+            maxWidth: '220px',
+            textWrap: 'balance',
+          }}
+          whileHover={{ opacity: 0.92 }}
+        >
+          <span 
+            className="font-bold leading-snug"
+            style={{
+              fontSize: '18px',
+              letterSpacing: '-0.2px',
+              color: 'hsl(var(--offwhite))',
+              lineHeight: '22px',
+            }}
           >
-            <span className="text-forest-deep">Mike T. Nichols</span>
-            <span className="text-orange-gold ml-1 text-xl sm:text-2xl" style={{ fontFamily: 'Georgia, serif' }}>II</span>
-          </motion.a>
+            Mike T. Nichols II
+          </span>
+        </motion.a>
 
-          {/* Center Navigation - Pill style like NEKO */}
-          <motion.div
-            initial={{ opacity: 0, y: -20 }}
-            animate={{ opacity: 1, y: 0 }}
-            className="hidden md:block"
+        {/* Center Navigation - Pill style */}
+        <motion.nav
+          initial={{ opacity: 0, y: -20 }}
+          animate={{ opacity: 1, y: 0 }}
+          className="hidden lg:block"
+        >
+          <ul 
+            className="flex items-center"
+            style={{ gap: '20px' }}
           >
-            <ul className="flex items-center gap-1 px-2 py-2.5 glass-pill rounded-full">
-              {navLinks.map((link, index) => (
+            {navLinks.map((link, index) => {
+              const isActive = activeSection === link.href.replace("#", "");
+              return (
                 <li key={link.href}>
                   <motion.a
                     href={link.href}
                     onClick={(e) => scrollToSection(e, link.href)}
-                    className={`px-5 py-2.5 text-sm font-semibold rounded-full transition-all duration-300 inline-block ${
-                      activeSection === link.href.replace("#", "")
-                        ? "bg-primary text-primary-foreground"
-                        : "text-muted-foreground hover:text-foreground hover:bg-muted"
-                    }`}
+                    className="relative inline-block font-semibold text-sm transition-colors duration-200 focus-ring"
+                    style={{
+                      color: isActive ? 'hsl(var(--offwhite))' : 'hsl(var(--softwhite))',
+                      paddingBottom: '4px',
+                    }}
                     initial={{ opacity: 0, y: -10 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ delay: index * 0.05, duration: 0.3 }}
-                    whileHover={{ scale: 1.03 }}
-                    whileTap={{ scale: 0.98 }}
+                    whileHover={{ color: 'hsl(var(--offwhite))' }}
                   >
                     {link.label}
+                    {/* Active indicator */}
+                    {isActive && (
+                      <motion.span
+                        layoutId="nav-indicator"
+                        className="absolute left-0 right-0 bottom-0"
+                        style={{
+                          height: '2px',
+                          background: 'hsl(var(--orange-500))',
+                          borderRadius: '1px',
+                        }}
+                        transition={{ type: "spring", stiffness: 500, damping: 30 }}
+                      />
+                    )}
                   </motion.a>
                 </li>
-              ))}
-            </ul>
-          </motion.div>
+              );
+            })}
+          </ul>
+        </motion.nav>
 
-          {/* Right side CTA + Theme Toggle */}
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            className="hidden md:flex items-center gap-3"
+        {/* Right side CTA */}
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          className="hidden lg:flex items-center gap-3"
+        >
+          <motion.a
+            href="#contact"
+            onClick={(e) => scrollToSection(e, "#contact")}
+            className="btn-primary inline-flex items-center gap-2 text-sm font-semibold focus-ring"
+            style={{
+              padding: '10px 14px',
+            }}
+            whileHover={{ scale: 1.02 }}
+            whileTap={{ scale: 0.98 }}
           >
-            <ThemeToggle />
-            <motion.a
-              href="#contact"
-              onClick={(e) => scrollToSection(e, "#contact")}
-              className="group inline-flex items-center gap-2 px-7 py-3 bg-primary text-primary-foreground text-sm font-semibold rounded-full hover:opacity-90 hover:shadow-lg hover:shadow-primary/20 transition-all duration-300"
-              whileHover={{ scale: 1.03, y: -2 }}
-              whileTap={{ scale: 0.98 }}
+            <span>Let's Talk</span>
+            <motion.span 
+              animate={{ x: [0, 3, 0] }}
+              transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
             >
-              <span>Let's Talk</span>
-              <motion.span 
-                className="text-orange-gold"
-                animate={{ x: [0, 3, 0] }}
-                transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
-              >
-                →
-              </motion.span>
-            </motion.a>
-          </motion.div>
+              →
+            </motion.span>
+          </motion.a>
+        </motion.div>
 
-          {/* Mobile Menu Button + Theme Toggle */}
-          <div className="flex items-center gap-2 md:hidden">
-            <ThemeToggle />
-            <button
-              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-              className="p-2 text-foreground"
-              aria-label="Toggle menu"
-            >
-              {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
-            </button>
-          </div>
-        </nav>
+        {/* Mobile Menu Button */}
+        <button
+          onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+          className="lg:hidden p-2 focus-ring"
+          style={{
+            width: '40px',
+            height: '40px',
+            borderRadius: '10px',
+            color: 'hsl(var(--offwhite))',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+          }}
+          aria-label="Toggle menu"
+        >
+          {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
+        </button>
+      </div>
 
-        {/* Mobile Navigation */}
-        <AnimatePresence>
-          {isMobileMenuOpen && (
-            <motion.div
-              initial={{ opacity: 0, y: -10 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -10 }}
-              transition={{ duration: 0.2 }}
-              className="md:hidden mt-4 glass-card rounded-2xl overflow-hidden"
-            >
-              <ul className="flex flex-col py-4 px-4 gap-1">
-                {navLinks.map((link) => (
+      {/* Mobile Navigation */}
+      <AnimatePresence>
+        {isMobileMenuOpen && (
+          <motion.div
+            initial={{ opacity: 0, y: -10 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -10 }}
+            transition={{ duration: 0.2, ease: [0.2, 0.8, 0.2, 1] }}
+            className="lg:hidden absolute left-4 right-4 top-full mt-2"
+            style={{
+              background: 'hsl(var(--forest-900))',
+              borderRadius: '14px',
+              boxShadow: 'var(--shadow-2)',
+              overflow: 'hidden',
+            }}
+          >
+            <ul className="flex flex-col py-2">
+              {navLinks.map((link) => {
+                const isActive = activeSection === link.href.replace("#", "");
+                return (
                   <li key={link.href}>
                     <a
                       href={link.href}
                       onClick={(e) => scrollToSection(e, link.href)}
-                      className={`block px-5 py-3.5 text-lg font-semibold rounded-xl transition-colors duration-300 ${
-                        activeSection === link.href.replace("#", "")
-                          ? "bg-primary text-primary-foreground"
-                          : "text-muted-foreground hover:text-foreground hover:bg-muted"
-                      }`}
+                      className="block px-5 font-semibold text-lg transition-colors duration-200"
+                      style={{
+                        height: '44px',
+                        lineHeight: '44px',
+                        color: isActive ? 'hsl(var(--offwhite))' : 'hsl(var(--softwhite))',
+                        borderBottom: '1px solid hsla(var(--offwhite) / 0.10)',
+                      }}
                     >
                       {link.label}
                     </a>
                   </li>
-                ))}
-                <li className="pt-2 px-4">
-                  <a
-                    href="#contact"
-                    onClick={(e) => scrollToSection(e, "#contact")}
-                    className="block text-center text-sm font-bold px-6 py-3.5 bg-primary text-primary-foreground rounded-full hover:opacity-90 transition-all duration-300"
-                  >
-                    Let's Talk
-                  </a>
-                </li>
-              </ul>
-            </motion.div>
-          )}
-        </AnimatePresence>
-      </div>
+                );
+              })}
+              <li className="p-4">
+                <a
+                  href="#contact"
+                  onClick={(e) => scrollToSection(e, "#contact")}
+                  className="btn-primary block text-center text-sm font-bold"
+                  style={{
+                    padding: '12px 16px',
+                  }}
+                >
+                  Let's Talk
+                </a>
+              </li>
+            </ul>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </header>
   );
 };
