@@ -78,6 +78,8 @@
   html {
     scroll-behavior: smooth;
     -webkit-text-size-adjust: 100%;
+    -webkit-tap-highlight-color: transparent;
+    text-rendering: optimizeLegibility;
   }
 
   body {
@@ -85,6 +87,10 @@
     font-feature-settings: "cv02", "cv03", "cv04", "cv11";
     background: linear-gradient(180deg, hsl(130, 8%, 97%) 0%, hsl(130, 6%, 95%) 100%);
     letter-spacing: -0.01em;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    overflow-x: hidden;
+    overscroll-behavior-y: none;
   }
 
   h1, h2, h3, h4, h5, h6 {
@@ -95,6 +101,26 @@
   
   .text-headline {
     color: hsl(var(--headline));
+  }
+
+  /* Improve touch targets on mobile */
+  button, a, [role="button"] {
+    touch-action: manipulation;
+  }
+
+  /* Prevent layout shift from scrollbar */
+  html {
+    scrollbar-gutter: stable;
+  }
+
+  /* Reduce motion for users who prefer it */
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
   }
 }
 

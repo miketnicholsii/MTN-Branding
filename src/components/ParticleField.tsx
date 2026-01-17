@@ -1,4 +1,5 @@
-import { useMemo } from "react";
+import { useMemo, memo } from "react";
+import { useReducedMotion } from "@/hooks/useReducedMotion";
 
 interface Particle {
   id: number;
@@ -9,11 +10,17 @@ interface Particle {
   delay: number;
 }
 
-const ParticleField = () => {
-  // Reduced particle count and use CSS animations instead of framer-motion
+const ParticleField = memo(() => {
+  const prefersReducedMotion = useReducedMotion();
+
+  // Reduced particle count for better performance
   const particles = useMemo(() => {
+    // Skip particles entirely if user prefers reduced motion
+    if (prefersReducedMotion) return [];
+    
+    const count = window.innerWidth < 768 ? 5 : 10; // Fewer particles on mobile
     const newParticles: Particle[] = [];
-    for (let i = 0; i < 10; i++) {
+    for (let i = 0; i < count; i++) {
       newParticles.push({
         id: i,
         x: Math.random() * 100,
@@ -24,10 +31,12 @@ const ParticleField = () => {
       });
     }
     return newParticles;
-  }, []);
+  }, [prefersReducedMotion]);
+
+  if (particles.length === 0) return null;
 
   return (
-    <div className="fixed inset-0 pointer-events-none overflow-hidden z-0">
+    <div className="fixed inset-0 pointer-events-none overflow-hidden z-0" aria-hidden="true">
       {particles.map((particle) => (
         <div
           key={particle.id}
@@ -39,11 +48,15 @@ const ParticleField = () => {
             height: particle.size,
             animationDuration: `${particle.duration}s`,
             animationDelay: `${particle.delay}s`,
+            willChange: "transform",
+            transform: "translateZ(0)",
           }}
         />
       ))}
     </div>
   );
-};
+});
+
+ParticleField.displayName = "ParticleField";
 
 export default ParticleField;
