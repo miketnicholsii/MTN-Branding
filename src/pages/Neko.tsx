@@ -213,7 +213,7 @@ const Neko = () => {
             
             <StaggerItem>
               <p 
-                className="text-base sm:text-lg leading-relaxed max-w-2xl mx-auto mb-12"
+                className="text-base sm:text-lg leading-relaxed max-w-2xl mx-auto mb-16 sm:mb-20"
                 style={{ color: 'hsl(var(--softwhite))' }}
               >
                 A next-generation platform transforming how product teams make decisions through 
@@ -223,7 +223,7 @@ const Neko = () => {
 
             {/* Metrics */}
             <StaggerItem>
-              <div className="grid grid-cols-2 sm:grid-cols-4 gap-5 max-w-4xl mx-auto">
+              <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 sm:gap-6 max-w-4xl mx-auto">
                 {metrics.map((metric, idx) => (
                   <motion.div
                     key={idx}
