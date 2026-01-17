@@ -5,9 +5,10 @@ import AnimatedCounter from "./AnimatedCounter";
 import { StaggerContainer, StaggerItem } from "./StaggerReveal";
 
 const stats = [
+  { value: 2, suffix: "M+", label: "Revenue Generated", prefix: "$" },
   { value: 10, suffix: "+", label: "Years Experience" },
-  { value: 18, suffix: "K+", label: "LinkedIn Connections", isLinkedIn: true },
-  { value: 6, suffix: "", label: "Industries" },
+  { value: 50, suffix: "+", label: "Projects Delivered" },
+  { value: 18, suffix: "K+", label: "LinkedIn Network", isLinkedIn: true },
 ];
 
 const achievements = [
@@ -94,7 +95,7 @@ const About = () => {
 
           {/* Stats grid */}
           <StaggerItem>
-            <div className="grid grid-cols-3 gap-4 max-w-lg mx-auto mb-10">
+            <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 max-w-2xl mx-auto mb-10">
               {stats.map((stat, index) => {
                 const CardWrapper = stat.isLinkedIn ? 'a' : 'div';
                 const cardProps = stat.isLinkedIn 
@@ -106,19 +107,20 @@ const About = () => {
                     <motion.div
                       whileHover={{ y: -4 }}
                       transition={{ duration: 0.3 }}
-                      className={`text-center p-4 rounded-xl ${stat.isLinkedIn ? 'cursor-pointer' : ''}`}
+                      className={`text-center p-5 rounded-xl ${stat.isLinkedIn ? 'cursor-pointer' : ''}`}
                       style={{
-                        background: 'hsl(var(--forest-950))',
+                        background: 'linear-gradient(135deg, hsl(var(--forest-950)), hsla(var(--forest-900) / 0.8))',
                         border: '1px solid hsla(var(--offwhite) / 0.10)',
-                        boxShadow: 'var(--shadow-1), var(--bevel-highlight)',
+                        boxShadow: 'var(--shadow-1), inset 0 1px 0 hsla(var(--offwhite) / 0.05)',
                       }}
                     >
                       <div 
-                        className="text-2xl sm:text-3xl font-bold mb-1 flex items-center justify-center gap-2"
+                        className="text-2xl sm:text-3xl font-bold mb-1 flex items-center justify-center gap-1"
                         style={{ color: 'hsl(var(--offwhite))' }}
                       >
+                        {stat.prefix && <span>{stat.prefix}</span>}
                         <AnimatedCounter value={stat.value} suffix={stat.suffix} />
-                        {stat.isLinkedIn && <Linkedin size={18} style={{ color: 'hsl(var(--orange-500))' }} />}
+                        {stat.isLinkedIn && <Linkedin size={16} style={{ color: 'hsl(var(--orange-500))' }} />}
                       </div>
                       <div 
                         className="text-xs font-medium"
