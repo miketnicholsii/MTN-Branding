@@ -81,19 +81,24 @@ const Header = () => {
             className="hidden md:block"
           >
             <ul className="flex items-center gap-1 px-2 py-2.5 glass-pill rounded-full">
-              {navLinks.map((link) => (
+              {navLinks.map((link, index) => (
                 <li key={link.href}>
-                  <a
+                  <motion.a
                     href={link.href}
                     onClick={(e) => scrollToSection(e, link.href)}
-                    className={`px-5 py-2.5 text-sm font-semibold rounded-full transition-all duration-300 ${
+                    className={`px-5 py-2.5 text-sm font-semibold rounded-full transition-all duration-300 inline-block ${
                       activeSection === link.href.replace("#", "")
                         ? "bg-forest-deep text-white"
                         : "text-forest-sage hover:text-forest-deep hover:bg-forest-sage/10"
                     }`}
+                    initial={{ opacity: 0, y: -10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: index * 0.05, duration: 0.3 }}
+                    whileHover={{ scale: 1.03 }}
+                    whileTap={{ scale: 0.98 }}
                   >
                     {link.label}
-                  </a>
+                  </motion.a>
                 </li>
               ))}
             </ul>
@@ -105,14 +110,22 @@ const Header = () => {
             animate={{ opacity: 1 }}
             className="hidden md:flex items-center gap-4"
           >
-            <a
+            <motion.a
               href="#contact"
               onClick={(e) => scrollToSection(e, "#contact")}
               className="group inline-flex items-center gap-2 px-7 py-3 bg-forest-deep text-white text-sm font-semibold rounded-full hover:bg-forest-dark hover:shadow-lg hover:shadow-forest-deep/20 transition-all duration-300"
+              whileHover={{ scale: 1.03, y: -2 }}
+              whileTap={{ scale: 0.98 }}
             >
               <span>Let's Talk</span>
-              <span className="text-orange-gold group-hover:translate-x-0.5 transition-transform">→</span>
-            </a>
+              <motion.span 
+                className="text-orange-gold"
+                animate={{ x: [0, 3, 0] }}
+                transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
+              >
+                →
+              </motion.span>
+            </motion.a>
           </motion.div>
 
           {/* Mobile Menu Button */}
