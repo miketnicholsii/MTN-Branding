@@ -2,11 +2,15 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
     
-    <!-- Preconnect for performance -->
+    <!-- Performance: DNS prefetch and preconnect -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="dns-prefetch" href="https://fonts.googleapis.com" />
+    
+    <!-- Preload critical font -->
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Outfit:wght@400;500;600;700&display=swap" as="style" />
     
     <!-- Primary Meta Tags -->
     <title>Mike T. Nichols II — Product Leader & Strategist</title>
@@ -14,6 +18,12 @@
     <meta name="description" content="Senior product and strategy leader building high-performance platforms, cross-functional teams, and business solutions with clarity, empathy, and a bias toward action." />
     <meta name="author" content="Mike T. Nichols II" />
     <meta name="robots" content="index, follow" />
+    
+    <!-- Mobile optimization -->
+    <meta name="format-detection" content="telephone=no" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+    <meta name="mobile-web-app-capable" content="yes" />
     
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website" />
@@ -31,14 +41,15 @@
     <meta property="twitter:image" content="/og-image.png" />
     
     <!-- Theme -->
-    <meta name="theme-color" content="#1a9a8a" />
+    <meta name="theme-color" content="#1a9a8a" media="(prefers-color-scheme: light)" />
+    <meta name="theme-color" content="#2A312A" media="(prefers-color-scheme: dark)" />
     
     <link rel="icon" type="image/png" href="/favicon.png" />
+    <link rel="apple-touch-icon" href="/favicon.png" />
     <link rel="canonical" href="https://miketnicholsii.com/" />
   </head>
   <body>
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
   </body>
-</html>
 </html>

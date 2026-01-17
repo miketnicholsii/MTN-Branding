@@ -1,5 +1,5 @@
 import { motion, useInView, useScroll, useTransform } from "framer-motion";
-import { useRef } from "react";
+import { useRef, memo } from "react";
 import { Quote } from "lucide-react";
 import { StaggerContainer, StaggerItem } from "./StaggerReveal";
 import SectionTransition from "./SectionTransition";
@@ -43,7 +43,7 @@ const recommendations = [
   },
 ];
 
-const RecommendationCard = ({ recommendation, index }: { 
+const RecommendationCard = memo(({ recommendation, index }: { 
   recommendation: typeof recommendations[0]; 
   index: number;
 }) => {
@@ -51,21 +51,17 @@ const RecommendationCard = ({ recommendation, index }: {
   const isInView = useInView(ref, { once: true, margin: "-50px" });
 
   return (
-    <motion.div
+    <motion.article
       ref={ref}
       initial={{ opacity: 0, y: 30 }}
       animate={isInView ? { opacity: 1, y: 0 } : {}}
       transition={{ duration: 0.6, delay: index * 0.1, ease: "easeOut" }}
       className="group h-full"
     >
-      <motion.div
-        whileHover={{ y: -6 }}
-        transition={{ duration: 0.4, ease: "easeOut" }}
-        className="glass-card rounded-3xl p-6 lg:p-8 h-full flex flex-col hover:shadow-xl hover:shadow-forest-deep/10 transition-all duration-500"
-      >
+      <div className="glass-card rounded-3xl p-6 lg:p-8 h-full flex flex-col hover:shadow-xl hover:shadow-forest-deep/10 transition-all duration-500 hover:-translate-y-1.5">
         {/* Quote icon */}
         <div className="w-10 h-10 rounded-xl bg-orange-gold/10 border border-orange-gold/20 flex items-center justify-center mb-5">
-          <Quote size={18} className="text-orange-gold" />
+          <Quote size={18} className="text-orange-gold" aria-hidden="true" />
         </div>
 
         {/* Quote text */}
@@ -74,21 +70,25 @@ const RecommendationCard = ({ recommendation, index }: {
         </blockquote>
 
         {/* Attribution */}
-        <div className="border-t border-forest-sage/10 pt-5">
-          <div className="font-bold text-forest-deep text-base">
-            {recommendation.name}
-          </div>
-          <div className="text-forest-sage text-sm font-medium mt-0.5">
-            {recommendation.title}
-          </div>
-          <div className="text-orange-gold/80 text-xs font-semibold mt-1.5 uppercase tracking-wider">
-            {recommendation.relationship}
-          </div>
-        </div>
-      </motion.div>
-    </motion.div>
+        <footer className="border-t border-forest-sage/10 pt-5">
+          <cite className="not-italic">
+            <div className="font-bold text-forest-deep text-base">
+              {recommendation.name}
+            </div>
+            <div className="text-forest-sage text-sm font-medium mt-0.5">
+              {recommendation.title}
+            </div>
+            <div className="text-orange-gold/80 text-xs font-semibold mt-1.5 uppercase tracking-wider">
+              {recommendation.relationship}
+            </div>
+          </cite>
+        </footer>
+      </div>
+    </motion.article>
   );
-};
+});
+
+RecommendationCard.displayName = "RecommendationCard";
 
 const Recommendations = () => {
   const ref = useRef(null);

@@ -16,6 +16,9 @@ export default defineConfig(({ mode }) => ({
     },
   },
   build: {
+    target: "esnext",
+    minify: "esbuild",
+    cssMinify: true,
     rollupOptions: {
       output: {
         manualChunks(id) {
@@ -33,6 +36,9 @@ export default defineConfig(({ mode }) => ({
           }
           if (id.includes("recharts")) {
             return "recharts-vendor";
+          }
+          if (id.includes("lucide-react")) {
+            return "icons-vendor";
           }
         },
       },
