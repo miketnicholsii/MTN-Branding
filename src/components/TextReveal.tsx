@@ -1,26 +1,41 @@
-import { motion, useInView } from "framer-motion";
+import { motion, useInView, useReducedMotion } from "framer-motion";
 import { useRef, ReactNode } from "react";
 
 interface TextRevealProps {
   children: ReactNode;
   className?: string;
   delay?: number;
+  duration?: number;
+  direction?: "up" | "down";
 }
 
-const TextReveal = ({ children, className = "", delay = 0 }: TextRevealProps) => {
+const TextReveal = ({ 
+  children, 
+  className = "", 
+  delay = 0,
+  duration = 0.7,
+  direction = "up"
+}: TextRevealProps) => {
   const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, margin: "-50px" });
+  const shouldReduceMotion = useReducedMotion();
+  const isInView = useInView(ref, { once: true, amount: 0.5 });
+
+  const initialY = direction === "up" ? "100%" : "-100%";
 
   return (
     <div ref={ref} className={`overflow-hidden ${className}`}>
       <motion.div
-        initial={{ y: "100%" }}
-        animate={isInView ? { y: 0 } : {}}
-        transition={{
-          duration: 0.8,
-          delay,
-          ease: [0.16, 1, 0.3, 1],
+        initial={{ 
+          y: shouldReduceMotion ? 0 : initialY,
+          opacity: shouldReduceMotion ? 0 : 1 
         }}
+        animate={isInView ? { y: 0, opacity: 1 } : {}}
+        transition={{
+          duration: shouldReduceMotion ? 0.1 : duration,
+          delay: shouldReduceMotion ? 0 : delay,
+          ease: [0.22, 1, 0.36, 1],
+        }}
+        style={{ willChange: "transform, opacity" }}
       >
         {children}
       </motion.div>
