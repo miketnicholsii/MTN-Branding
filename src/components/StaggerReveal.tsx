@@ -1,49 +1,63 @@
-import { motion, useInView, Variants } from "framer-motion";
+import { motion, useInView, Variants, useReducedMotion } from "framer-motion";
 import { useRef, ReactNode } from "react";
 
 interface StaggerRevealProps {
   children: ReactNode;
   className?: string;
   staggerDelay?: number;
+  delayStart?: number;
 }
 
-const containerVariants: Variants = {
-  hidden: { opacity: 0 },
-  visible: {
-    opacity: 1,
-    transition: {
-      staggerChildren: 0.12,
-      delayChildren: 0.1,
-    },
-  },
+interface StaggerItemProps {
+  children: ReactNode;
+  className?: string;
+  direction?: "up" | "down" | "left" | "right" | "fade" | "scale";
+}
+
+const getItemOffset = (direction: string) => {
+  switch (direction) {
+    case "up": return { y: 24, x: 0, scale: 1 };
+    case "down": return { y: -24, x: 0, scale: 1 };
+    case "left": return { y: 0, x: 24, scale: 1 };
+    case "right": return { y: 0, x: -24, scale: 1 };
+    case "fade": return { y: 0, x: 0, scale: 1 };
+    case "scale": return { y: 0, x: 0, scale: 0.96 };
+    default: return { y: 24, x: 0, scale: 1 };
+  }
 };
 
 const itemVariants: Variants = {
   hidden: { 
     opacity: 0, 
-    y: 20,
+    y: 24,
   },
   visible: { 
     opacity: 1, 
     y: 0,
     transition: {
-      duration: 0.5,
-      ease: [0.25, 0.46, 0.45, 0.94],
+      duration: 0.6,
+      ease: [0.22, 1, 0.36, 1], // Smooth deceleration curve
     },
   },
 };
 
-export const StaggerContainer = ({ children, className = "", staggerDelay = 0.12 }: StaggerRevealProps) => {
+export const StaggerContainer = ({ 
+  children, 
+  className = "", 
+  staggerDelay = 0.1,
+  delayStart = 0.05 
+}: StaggerRevealProps) => {
   const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, margin: "-80px" });
+  const shouldReduceMotion = useReducedMotion();
+  const isInView = useInView(ref, { once: true, amount: 0.15 });
 
   const dynamicContainerVariants: Variants = {
     hidden: { opacity: 0 },
     visible: {
       opacity: 1,
       transition: {
-        staggerChildren: staggerDelay,
-        delayChildren: 0.1,
+        staggerChildren: shouldReduceMotion ? 0 : staggerDelay,
+        delayChildren: shouldReduceMotion ? 0 : delayStart,
       },
     },
   };
@@ -55,15 +69,42 @@ export const StaggerContainer = ({ children, className = "", staggerDelay = 0.12
       initial="hidden"
       animate={isInView ? "visible" : "hidden"}
       className={className}
+      style={{ willChange: "opacity" }}
     >
       {children}
     </motion.div>
   );
 };
 
-export const StaggerItem = ({ children, className = "" }: { children: ReactNode; className?: string }) => {
+export const StaggerItem = ({ children, className = "", direction = "up" }: StaggerItemProps) => {
+  const shouldReduceMotion = useReducedMotion();
+  const offset = getItemOffset(direction);
+  
+  const dynamicItemVariants: Variants = {
+    hidden: { 
+      opacity: 0, 
+      y: shouldReduceMotion ? 0 : offset.y,
+      x: shouldReduceMotion ? 0 : offset.x,
+      scale: shouldReduceMotion ? 1 : offset.scale,
+    },
+    visible: { 
+      opacity: 1, 
+      y: 0,
+      x: 0,
+      scale: 1,
+      transition: {
+        duration: shouldReduceMotion ? 0.1 : 0.6,
+        ease: [0.22, 1, 0.36, 1],
+      },
+    },
+  };
+
   return (
-    <motion.div variants={itemVariants} className={className}>
+    <motion.div 
+      variants={dynamicItemVariants} 
+      className={className}
+      style={{ willChange: "transform, opacity" }}
+    >
       {children}
     </motion.div>
   );
