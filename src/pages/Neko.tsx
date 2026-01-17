@@ -116,6 +116,13 @@ const Neko = () => {
 
   const heroY = useTransform(scrollYProgress, [0, 1], [0, 150]);
   const heroOpacity = useTransform(scrollYProgress, [0, 0.5], [1, 0]);
+  
+  // Parallax transforms for particles at different speeds
+  const particleY1 = useTransform(scrollYProgress, [0, 1], [0, -80]);
+  const particleY2 = useTransform(scrollYProgress, [0, 1], [0, -150]);
+  const particleY3 = useTransform(scrollYProgress, [0, 1], [0, -220]);
+  const shapeY = useTransform(scrollYProgress, [0, 1], [0, -100]);
+  const shapeRotate = useTransform(scrollYProgress, [0, 1], [0, 45]);
 
   return (
     <div className="min-h-screen" style={{ background: 'hsl(var(--forest-700))' }}>
@@ -142,69 +149,126 @@ const Neko = () => {
           />
         </motion.div>
 
-        {/* Floating particles */}
+        {/* Floating particles with parallax */}
         <div className="absolute inset-0 overflow-hidden pointer-events-none">
-          {[...Array(12)].map((_, i) => (
-            <motion.div
-              key={i}
-              className="absolute rounded-full"
-              style={{
-                width: `${4 + (i % 3) * 3}px`,
-                height: `${4 + (i % 3) * 3}px`,
-                left: `${8 + (i * 7.5)}%`,
-                top: `${15 + (i % 4) * 20}%`,
-                background: i % 2 === 0 
-                  ? 'hsla(var(--orange-500) / 0.4)' 
-                  : 'hsla(var(--offwhite) / 0.2)',
-                boxShadow: i % 2 === 0 
-                  ? '0 0 12px hsla(var(--orange-500) / 0.3)' 
-                  : '0 0 8px hsla(var(--offwhite) / 0.1)',
-              }}
-              animate={{
-                y: [0, -30 - (i % 3) * 15, 0],
-                x: [0, (i % 2 === 0 ? 15 : -15), 0],
-                opacity: [0.3, 0.7, 0.3],
-                scale: [1, 1.2, 1],
-              }}
-              transition={{
-                duration: 4 + (i % 3) * 2,
-                repeat: Infinity,
-                ease: "easeInOut",
-                delay: i * 0.3,
-              }}
-            />
-          ))}
+          {/* Layer 1 - Slowest parallax */}
+          <motion.div style={{ y: particleY1 }} className="absolute inset-0">
+            {[...Array(4)].map((_, i) => (
+              <motion.div
+                key={`p1-${i}`}
+                className="absolute rounded-full"
+                style={{
+                  width: `${4 + (i % 2) * 2}px`,
+                  height: `${4 + (i % 2) * 2}px`,
+                  left: `${10 + i * 22}%`,
+                  top: `${20 + (i % 3) * 25}%`,
+                  background: 'hsla(var(--offwhite) / 0.15)',
+                  boxShadow: '0 0 8px hsla(var(--offwhite) / 0.1)',
+                }}
+                animate={{
+                  y: [0, -20, 0],
+                  opacity: [0.2, 0.5, 0.2],
+                }}
+                transition={{
+                  duration: 5 + i,
+                  repeat: Infinity,
+                  ease: "easeInOut",
+                  delay: i * 0.4,
+                }}
+              />
+            ))}
+          </motion.div>
           
-          {/* Larger floating shapes */}
-          {[...Array(5)].map((_, i) => (
-            <motion.div
-              key={`shape-${i}`}
-              className="absolute"
-              style={{
-                width: `${20 + i * 8}px`,
-                height: `${20 + i * 8}px`,
-                left: `${10 + i * 18}%`,
-                top: `${25 + (i % 3) * 25}%`,
-                border: '1px solid',
-                borderColor: i % 2 === 0 
-                  ? 'hsla(var(--orange-500) / 0.2)' 
-                  : 'hsla(var(--offwhite) / 0.1)',
-                borderRadius: i % 2 === 0 ? '30%' : '50%',
-                transform: `rotate(${i * 15}deg)`,
-              }}
-              animate={{
-                y: [0, -20 - i * 5, 0],
-                rotate: [i * 15, i * 15 + 180, i * 15 + 360],
-                opacity: [0.15, 0.3, 0.15],
-              }}
-              transition={{
-                duration: 8 + i * 2,
-                repeat: Infinity,
-                ease: "linear",
-                delay: i * 0.5,
-              }}
-            />
-          ))}
+          {/* Layer 2 - Medium parallax */}
+          <motion.div style={{ y: particleY2 }} className="absolute inset-0">
+            {[...Array(4)].map((_, i) => (
+              <motion.div
+                key={`p2-${i}`}
+                className="absolute rounded-full"
+                style={{
+                  width: `${6 + (i % 2) * 3}px`,
+                  height: `${6 + (i % 2) * 3}px`,
+                  left: `${18 + i * 20}%`,
+                  top: `${30 + (i % 2) * 30}%`,
+                  background: 'hsla(var(--orange-500) / 0.35)',
+                  boxShadow: '0 0 12px hsla(var(--orange-500) / 0.25)',
+                }}
+                animate={{
+                  y: [0, -35, 0],
+                  x: [0, i % 2 === 0 ? 12 : -12, 0],
+                  opacity: [0.3, 0.7, 0.3],
+                  scale: [1, 1.15, 1],
+                }}
+                transition={{
+                  duration: 4 + i * 0.5,
+                  repeat: Infinity,
+                  ease: "easeInOut",
+                  delay: i * 0.3,
+                }}
+              />
+            ))}
+          </motion.div>
+          
+          {/* Layer 3 - Fastest parallax */}
+          <motion.div style={{ y: particleY3 }} className="absolute inset-0">
+            {[...Array(4)].map((_, i) => (
+              <motion.div
+                key={`p3-${i}`}
+                className="absolute rounded-full"
+                style={{
+                  width: `${8 + (i % 2) * 4}px`,
+                  height: `${8 + (i % 2) * 4}px`,
+                  left: `${5 + i * 25}%`,
+                  top: `${15 + (i % 3) * 20}%`,
+                  background: 'hsla(var(--orange-500) / 0.5)',
+                  boxShadow: '0 0 16px hsla(var(--orange-500) / 0.35)',
+                }}
+                animate={{
+                  y: [0, -45, 0],
+                  x: [0, i % 2 === 0 ? 18 : -18, 0],
+                  opacity: [0.4, 0.8, 0.4],
+                  scale: [1, 1.25, 1],
+                }}
+                transition={{
+                  duration: 3.5 + i * 0.4,
+                  repeat: Infinity,
+                  ease: "easeInOut",
+                  delay: i * 0.25,
+                }}
+              />
+            ))}
+          </motion.div>
+          
+          {/* Larger floating shapes with parallax */}
+          <motion.div style={{ y: shapeY, rotate: shapeRotate }} className="absolute inset-0">
+            {[...Array(5)].map((_, i) => (
+              <motion.div
+                key={`shape-${i}`}
+                className="absolute"
+                style={{
+                  width: `${20 + i * 8}px`,
+                  height: `${20 + i * 8}px`,
+                  left: `${10 + i * 18}%`,
+                  top: `${25 + (i % 3) * 25}%`,
+                  border: '1px solid',
+                  borderColor: i % 2 === 0 
+                    ? 'hsla(var(--orange-500) / 0.2)' 
+                    : 'hsla(var(--offwhite) / 0.1)',
+                  borderRadius: i % 2 === 0 ? '30%' : '50%',
+                }}
+                animate={{
+                  rotate: [0, 180, 360],
+                  opacity: [0.15, 0.3, 0.15],
+                }}
+                transition={{
+                  duration: 10 + i * 2,
+                  repeat: Infinity,
+                  ease: "linear",
+                  delay: i * 0.5,
+                }}
+              />
+            ))}
+          </motion.div>
         </div>
 
         {/* Grid pattern overlay */}
