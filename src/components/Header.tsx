@@ -1,6 +1,7 @@
 import { useState, useEffect, useCallback } from "react";
 import { Menu, X } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
+import ThemeToggle from "./ThemeToggle";
 
 const Header = () => {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -67,7 +68,7 @@ const Header = () => {
             onClick={(e) => scrollToSection(e, "#")}
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            className="text-lg sm:text-xl font-bold text-forest-deep flex items-baseline tracking-tight"
+            className="text-lg sm:text-xl font-bold text-foreground flex items-baseline tracking-tight"
           >
             <span className="hidden sm:inline">Mike T. Nichols</span>
             <span className="sm:hidden">MTN</span>
@@ -88,8 +89,8 @@ const Header = () => {
                     onClick={(e) => scrollToSection(e, link.href)}
                     className={`px-5 py-2.5 text-sm font-semibold rounded-full transition-all duration-300 inline-block ${
                       activeSection === link.href.replace("#", "")
-                        ? "bg-forest-deep text-white"
-                        : "text-forest-sage hover:text-forest-deep hover:bg-forest-sage/10"
+                        ? "bg-primary text-primary-foreground"
+                        : "text-muted-foreground hover:text-foreground hover:bg-muted"
                     }`}
                     initial={{ opacity: 0, y: -10 }}
                     animate={{ opacity: 1, y: 0 }}
@@ -104,16 +105,17 @@ const Header = () => {
             </ul>
           </motion.div>
 
-          {/* Right side CTA */}
+          {/* Right side CTA + Theme Toggle */}
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            className="hidden md:flex items-center gap-4"
+            className="hidden md:flex items-center gap-3"
           >
+            <ThemeToggle />
             <motion.a
               href="#contact"
               onClick={(e) => scrollToSection(e, "#contact")}
-              className="group inline-flex items-center gap-2 px-7 py-3 bg-forest-deep text-white text-sm font-semibold rounded-full hover:bg-forest-dark hover:shadow-lg hover:shadow-forest-deep/20 transition-all duration-300"
+              className="group inline-flex items-center gap-2 px-7 py-3 bg-primary text-primary-foreground text-sm font-semibold rounded-full hover:opacity-90 hover:shadow-lg hover:shadow-primary/20 transition-all duration-300"
               whileHover={{ scale: 1.03, y: -2 }}
               whileTap={{ scale: 0.98 }}
             >
@@ -128,14 +130,17 @@ const Header = () => {
             </motion.a>
           </motion.div>
 
-          {/* Mobile Menu Button */}
-          <button
-            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-            className="md:hidden p-2 text-foreground"
-            aria-label="Toggle menu"
-          >
-            {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
-          </button>
+          {/* Mobile Menu Button + Theme Toggle */}
+          <div className="flex items-center gap-2 md:hidden">
+            <ThemeToggle />
+            <button
+              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+              className="p-2 text-foreground"
+              aria-label="Toggle menu"
+            >
+              {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
+            </button>
+          </div>
         </nav>
 
         {/* Mobile Navigation */}
@@ -156,8 +161,8 @@ const Header = () => {
                       onClick={(e) => scrollToSection(e, link.href)}
                       className={`block px-5 py-3.5 text-lg font-semibold rounded-xl transition-colors duration-300 ${
                         activeSection === link.href.replace("#", "")
-                          ? "bg-forest-deep text-white"
-                          : "text-forest-sage hover:text-forest-deep hover:bg-forest-sage/10"
+                          ? "bg-primary text-primary-foreground"
+                          : "text-muted-foreground hover:text-foreground hover:bg-muted"
                       }`}
                     >
                       {link.label}
@@ -168,7 +173,7 @@ const Header = () => {
                   <a
                     href="#contact"
                     onClick={(e) => scrollToSection(e, "#contact")}
-                    className="block text-center text-sm font-bold px-6 py-3.5 bg-forest-deep text-white rounded-full hover:bg-forest-dark transition-colors duration-300"
+                    className="block text-center text-sm font-bold px-6 py-3.5 bg-primary text-primary-foreground rounded-full hover:opacity-90 transition-all duration-300"
                   >
                     Let's Talk
                   </a>
