@@ -1,4 +1,4 @@
-import { motion, useScroll, useTransform, useMotionValue, useSpring } from "framer-motion";
+import { motion, useScroll, useTransform, useMotionValue, useSpring, useReducedMotion } from "framer-motion";
 import { TrendingUp, Target, Zap } from "lucide-react";
 import MagneticButton from "./MagneticButton";
 import { StaggerContainer, StaggerItem } from "./StaggerReveal";
@@ -7,23 +7,24 @@ import headshot from "@/assets/headshot.png";
 
 const Hero = () => {
   const containerRef = useRef(null);
+  const shouldReduceMotion = useReducedMotion();
   const { scrollYProgress } = useScroll({
     target: containerRef,
     offset: ["start start", "end start"],
   });
 
-  const y = useTransform(scrollYProgress, [0, 1], [0, 80]);
-  const opacity = useTransform(scrollYProgress, [0, 0.5], [1, 0]);
-  const imageY = useTransform(scrollYProgress, [0, 1], [0, 50]);
-  const imageScale = useTransform(scrollYProgress, [0, 0.5], [1, 0.96]);
+  const y = useTransform(scrollYProgress, [0, 1], [0, shouldReduceMotion ? 0 : 80]);
+  const opacity = useTransform(scrollYProgress, [0, 0.5], [1, shouldReduceMotion ? 1 : 0]);
+  const imageY = useTransform(scrollYProgress, [0, 1], [0, shouldReduceMotion ? 0 : 50]);
+  const imageScale = useTransform(scrollYProgress, [0, 0.5], [1, shouldReduceMotion ? 1 : 0.96]);
 
   // Parallax for background elements
-  const bg1Y = useTransform(scrollYProgress, [0, 1], [0, 150]);
-  const bg2Y = useTransform(scrollYProgress, [0, 1], [0, -100]);
-  const bg3Y = useTransform(scrollYProgress, [0, 1], [0, 80]);
-  const bg4Y = useTransform(scrollYProgress, [0, 1], [0, -60]);
-  const bg1Scale = useTransform(scrollYProgress, [0, 1], [1, 1.2]);
-  const bg2Scale = useTransform(scrollYProgress, [0, 1], [1, 0.9]);
+  const bg1Y = useTransform(scrollYProgress, [0, 1], [0, shouldReduceMotion ? 0 : 150]);
+  const bg2Y = useTransform(scrollYProgress, [0, 1], [0, shouldReduceMotion ? 0 : -100]);
+  const bg3Y = useTransform(scrollYProgress, [0, 1], [0, shouldReduceMotion ? 0 : 80]);
+  const bg4Y = useTransform(scrollYProgress, [0, 1], [0, shouldReduceMotion ? 0 : -60]);
+  const bg1Scale = useTransform(scrollYProgress, [0, 1], [1, shouldReduceMotion ? 1 : 1.2]);
+  const bg2Scale = useTransform(scrollYProgress, [0, 1], [1, shouldReduceMotion ? 1 : 0.9]);
 
   // Mouse parallax
   const mouseX = useMotionValue(0);
@@ -33,6 +34,9 @@ const Hero = () => {
   const imageYSpring = useSpring(mouseY, springConfig);
 
   useEffect(() => {
+    if (shouldReduceMotion) {
+      return;
+    }
     const handleMouseMove = (e: MouseEvent) => {
       const { clientX, clientY } = e;
       const { innerWidth, innerHeight } = window;
@@ -44,7 +48,7 @@ const Hero = () => {
 
     window.addEventListener("mousemove", handleMouseMove);
     return () => window.removeEventListener("mousemove", handleMouseMove);
-  }, [mouseX, mouseY]);
+  }, [mouseX, mouseY, shouldReduceMotion]);
 
   return (
     <section ref={containerRef} className="min-h-screen flex flex-col justify-center relative overflow-hidden pt-20 sm:pt-0">
