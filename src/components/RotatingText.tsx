@@ -83,7 +83,12 @@ export const SkillTags = ({
       {skills.map((skillGroup, groupIndex) => (
         <motion.div
           key={groupIndex}
-          className={`px-4 py-2 rounded-full border overflow-hidden ${tagClassName}`}
+          className={`px-4 py-2 rounded-full overflow-hidden ${tagClassName}`}
+          style={{
+            background: 'hsl(var(--forest-900))',
+            border: '1px solid hsla(var(--offwhite) / 0.15)',
+            color: 'hsl(var(--offwhite))',
+          }}
           initial={{ opacity: 0, scale: 0.9 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ delay: groupIndex * 0.1, duration: 0.4 }}
@@ -101,6 +106,7 @@ export const SkillTags = ({
                   ease: [0.22, 1, 0.36, 1],
                 }}
                 className="absolute inset-0 flex items-center justify-center text-sm font-medium whitespace-nowrap"
+                style={{ color: 'hsl(var(--offwhite))' }}
               >
                 {skillGroup[indices[groupIndex]]}
               </motion.span>

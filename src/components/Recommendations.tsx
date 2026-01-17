@@ -57,27 +57,47 @@ const RecommendationCard = memo(({ recommendation, index }: {
       transition={{ duration: 0.5, delay: index * 0.08 }}
       className="group h-full"
     >
-      <div className="glass-card rounded-xl p-5 h-full flex flex-col hover:-translate-y-1 transition-transform duration-300">
+      <div 
+        className="glass-card rounded-xl p-5 h-full flex flex-col hover:-translate-y-1 transition-transform duration-300"
+      >
         {/* Quote icon */}
-        <div className="w-8 h-8 rounded-lg bg-orange-gold/10 flex items-center justify-center mb-4">
-          <Quote size={14} className="text-orange-gold" />
+        <div 
+          className="w-8 h-8 rounded-lg flex items-center justify-center mb-4"
+          style={{ background: 'hsla(var(--orange-500) / 0.15)' }}
+        >
+          <Quote size={14} style={{ color: 'hsl(var(--orange-500))' }} />
         </div>
 
         {/* Quote text */}
-        <blockquote className="text-muted-foreground text-sm leading-relaxed mb-4 flex-1 italic">
+        <blockquote 
+          className="text-sm leading-relaxed mb-4 flex-1 italic"
+          style={{ color: 'hsl(var(--softwhite))' }}
+        >
           "{recommendation.quote}"
         </blockquote>
 
         {/* Attribution */}
-        <footer className="border-t border-border pt-4">
+        <footer 
+          className="pt-4"
+          style={{ borderTop: '1px solid hsla(var(--offwhite) / 0.10)' }}
+        >
           <cite className="not-italic">
-            <div className="font-semibold text-foreground text-sm">
+            <div 
+              className="font-semibold text-sm"
+              style={{ color: 'hsl(var(--offwhite))' }}
+            >
               {recommendation.name}
             </div>
-            <div className="text-muted-foreground text-xs mt-0.5">
+            <div 
+              className="text-xs mt-0.5"
+              style={{ color: 'hsl(var(--softwhite))' }}
+            >
               {recommendation.title}
             </div>
-            <div className="text-orange-gold/70 text-[10px] font-medium mt-1 uppercase tracking-wider">
+            <div 
+              className="text-[10px] font-medium mt-1 uppercase tracking-wider"
+              style={{ color: 'hsla(var(--orange-500) / 0.7)' }}
+            >
               {recommendation.relationship}
             </div>
           </cite>
@@ -104,28 +124,41 @@ const Recommendations = () => {
       {/* Background */}
       <motion.div 
         style={{ y: bgY }}
-        className="absolute top-1/4 -right-20 w-[350px] h-[350px] bg-forest-sage/6 rounded-full blur-[100px]" 
-      />
+        className="absolute top-1/4 -right-20 w-[350px] h-[350px] rounded-full blur-[100px]"
+      >
+        <div className="w-full h-full rounded-full" style={{ background: 'hsla(var(--forest-900) / 0.3)' }} />
+      </motion.div>
       
       <div className="container mx-auto px-6 lg:px-8 relative">
         <StaggerContainer>
           {/* Section header */}
           <StaggerItem>
             <div className="text-center mb-4">
-              <span className="text-orange-gold text-xs font-bold tracking-[0.2em] uppercase">Testimonials</span>
+              <span 
+                className="text-xs font-bold tracking-[0.2em] uppercase"
+                style={{ color: 'hsl(var(--orange-500))' }}
+              >
+                Testimonials
+              </span>
             </div>
           </StaggerItem>
 
           <StaggerItem>
             <div className="text-center mb-3">
-              <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-foreground">
+              <h2 
+                className="text-3xl sm:text-4xl md:text-5xl font-bold"
+                style={{ color: 'hsl(var(--offwhite))' }}
+              >
                 What People Say
               </h2>
             </div>
           </StaggerItem>
 
           <StaggerItem>
-            <p className="text-muted-foreground text-base text-center max-w-lg mx-auto mb-10">
+            <p 
+              className="text-base text-center max-w-lg mx-auto mb-10"
+              style={{ color: 'hsl(var(--softwhite))' }}
+            >
               Feedback from colleagues, managers, and partners I've worked with.
             </p>
           </StaggerItem>
