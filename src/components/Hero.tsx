@@ -13,30 +13,63 @@ const Hero = () => {
     offset: ["start start", "end start"],
   });
 
-  const y = useTransform(scrollYProgress, [0, 1], [0, shouldReduceMotion ? 0 : 80]);
-  const opacity = useTransform(scrollYProgress, [0, 0.5], [1, shouldReduceMotion ? 1 : 0]);
-  const imageY = useTransform(scrollYProgress, [0, 1], [0, shouldReduceMotion ? 0 : 50]);
-  const imageScale = useTransform(scrollYProgress, [0, 0.5], [1, shouldReduceMotion ? 1 : 0.96]);
+  // Smooth spring config for parallax
+  const springConfig = { stiffness: 100, damping: 30, restDelta: 0.001 };
 
-  // Parallax for background elements
-  const bg1Y = useTransform(scrollYProgress, [0, 1], [0, shouldReduceMotion ? 0 : 150]);
-  const bg2Y = useTransform(scrollYProgress, [0, 1], [0, shouldReduceMotion ? 0 : -100]);
-  const bg3Y = useTransform(scrollYProgress, [0, 1], [0, shouldReduceMotion ? 0 : 80]);
-  const bg4Y = useTransform(scrollYProgress, [0, 1], [0, shouldReduceMotion ? 0 : -60]);
-  const bg1Scale = useTransform(scrollYProgress, [0, 1], [1, shouldReduceMotion ? 1 : 1.2]);
-  const bg2Scale = useTransform(scrollYProgress, [0, 1], [1, shouldReduceMotion ? 1 : 0.9]);
+  // Content parallax
+  const contentY = useSpring(
+    useTransform(scrollYProgress, [0, 1], [0, shouldReduceMotion ? 0 : 100]),
+    springConfig
+  );
+  const contentOpacity = useTransform(scrollYProgress, [0, 0.6], [1, shouldReduceMotion ? 1 : 0]);
+  
+  // Image parallax with spring smoothing
+  const imageYRaw = useTransform(scrollYProgress, [0, 1], [0, shouldReduceMotion ? 0 : 60]);
+  const imageY = useSpring(imageYRaw, springConfig);
+  const imageScale = useTransform(scrollYProgress, [0, 0.5], [1, shouldReduceMotion ? 1 : 0.95]);
 
-  // Mouse parallax
+  // Multi-layer parallax for background - different speeds create depth
+  const layer1Y = useSpring(
+    useTransform(scrollYProgress, [0, 1], [0, shouldReduceMotion ? 0 : 200]),
+    springConfig
+  );
+  const layer2Y = useSpring(
+    useTransform(scrollYProgress, [0, 1], [0, shouldReduceMotion ? 0 : -150]),
+    springConfig
+  );
+  const layer3Y = useSpring(
+    useTransform(scrollYProgress, [0, 1], [0, shouldReduceMotion ? 0 : 120]),
+    springConfig
+  );
+  const layer4Y = useSpring(
+    useTransform(scrollYProgress, [0, 1], [0, shouldReduceMotion ? 0 : -80]),
+    springConfig
+  );
+  const layer5Y = useSpring(
+    useTransform(scrollYProgress, [0, 1], [0, shouldReduceMotion ? 0 : 50]),
+    springConfig
+  );
+  
+  // Scale and rotation for added depth
+  const layer1Scale = useTransform(scrollYProgress, [0, 1], [1, shouldReduceMotion ? 1 : 1.3]);
+  const layer2Scale = useTransform(scrollYProgress, [0, 1], [1, shouldReduceMotion ? 1 : 0.85]);
+  const layer3Rotate = useTransform(scrollYProgress, [0, 1], [0, shouldReduceMotion ? 0 : 8]);
+  const layer4Rotate = useTransform(scrollYProgress, [0, 1], [0, shouldReduceMotion ? 0 : -5]);
+  
+  // Opacity shifts for atmospheric depth
+  const layer1Opacity = useTransform(scrollYProgress, [0, 0.7], [1, shouldReduceMotion ? 1 : 0.3]);
+  const layer2Opacity = useTransform(scrollYProgress, [0, 0.5], [1, shouldReduceMotion ? 1 : 0.5]);
+
+  // Mouse parallax for image
   const mouseX = useMotionValue(0);
   const mouseY = useMotionValue(0);
-  const springConfig = { damping: 30, stiffness: 120 };
-  const imageXSpring = useSpring(mouseX, springConfig);
-  const imageYSpring = useSpring(mouseY, springConfig);
+  const mouseSpringConfig = { damping: 30, stiffness: 120 };
+  const imageXSpring = useSpring(mouseX, mouseSpringConfig);
+  const imageYSpring = useSpring(mouseY, mouseSpringConfig);
 
   useEffect(() => {
-    if (shouldReduceMotion) {
-      return;
-    }
+    if (shouldReduceMotion) return;
+    
     const handleMouseMove = (e: MouseEvent) => {
       const { clientX, clientY } = e;
       const { innerWidth, innerHeight } = window;
@@ -46,61 +79,87 @@ const Hero = () => {
       mouseY.set(y);
     };
 
-    window.addEventListener("mousemove", handleMouseMove);
+    window.addEventListener("mousemove", handleMouseMove, { passive: true });
     return () => window.removeEventListener("mousemove", handleMouseMove);
   }, [mouseX, mouseY, shouldReduceMotion]);
 
   return (
     <section ref={containerRef} className="min-h-screen flex flex-col justify-center relative overflow-hidden pt-20 sm:pt-0">
-      {/* Enhanced parallax background elements */}
+      {/* Multi-layer parallax background */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        {/* Primary glow - forest green */}
+        {/* Layer 1: Deepest - slow moving, large, faded */}
         <motion.div 
-          style={{ y: bg1Y, scale: bg1Scale }}
-          className="absolute top-[10%] -left-32 w-[700px] h-[700px] rounded-full blur-[120px]"
+          style={{ 
+            y: layer1Y, 
+            scale: layer1Scale,
+            opacity: layer1Opacity 
+          }}
+          className="absolute top-[5%] -left-[20%] w-[900px] h-[900px] rounded-full will-change-transform"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 1.5 }}
         >
-          <div className="w-full h-full bg-gradient-radial from-forest-sage/20 via-forest-sage/8 to-transparent rounded-full" />
+          <div className="w-full h-full bg-gradient-radial from-forest-sage/25 via-forest-sage/10 to-transparent rounded-full blur-[150px]" />
         </motion.div>
         
-        {/* Secondary glow - accent orange */}
+        {/* Layer 2: Medium depth - accent color */}
         <motion.div 
-          style={{ y: bg2Y, scale: bg2Scale }}
-          className="absolute top-[5%] right-[-10%] w-[600px] h-[600px] rounded-full blur-[100px]"
+          style={{ 
+            y: layer2Y, 
+            scale: layer2Scale,
+            opacity: layer2Opacity 
+          }}
+          className="absolute top-[0%] right-[-15%] w-[700px] h-[700px] rounded-full will-change-transform"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          transition={{ duration: 1.5, delay: 0.2 }}
+          transition={{ duration: 1.5, delay: 0.15 }}
         >
-          <div className="w-full h-full bg-gradient-radial from-orange-gold/15 via-orange-gold/5 to-transparent rounded-full" />
+          <div className="w-full h-full bg-gradient-radial from-orange-gold/18 via-orange-gold/6 to-transparent rounded-full blur-[120px]" />
         </motion.div>
         
-        {/* Center ambient glow */}
+        {/* Layer 3: Mid-layer with rotation */}
         <motion.div 
-          style={{ y: bg3Y }}
-          className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[900px] h-[900px] rounded-full blur-[150px]"
-          initial={{ opacity: 0, scale: 0.8 }}
+          style={{ 
+            y: layer3Y,
+            rotate: layer3Rotate 
+          }}
+          className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[1000px] h-[1000px] rounded-full will-change-transform"
+          initial={{ opacity: 0, scale: 0.9 }}
           animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 2, delay: 0.4 }}
+          transition={{ duration: 2, delay: 0.3 }}
         >
-          <div className="w-full h-full bg-gradient-radial from-forest-deep/8 via-forest-sage/4 to-transparent rounded-full" />
+          <div className="w-full h-full bg-gradient-radial from-forest-deep/10 via-forest-sage/5 to-transparent rounded-full blur-[180px]" />
         </motion.div>
         
-        {/* Bottom left accent */}
+        {/* Layer 4: Foreground accent with counter-rotation */}
         <motion.div 
-          style={{ y: bg4Y }}
-          className="absolute bottom-[15%] left-[10%] w-[400px] h-[400px] rounded-full blur-[90px]"
+          style={{ 
+            y: layer4Y,
+            rotate: layer4Rotate 
+          }}
+          className="absolute bottom-[10%] left-[5%] w-[500px] h-[500px] rounded-full will-change-transform"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 1.5, delay: 0.45 }}
+        >
+          <div className="w-full h-full bg-gradient-radial from-orange-gold/15 via-orange-bright/5 to-transparent rounded-full blur-[100px]" />
+        </motion.div>
+        
+        {/* Layer 5: Nearest - fastest, subtle */}
+        <motion.div 
+          style={{ y: layer5Y }}
+          className="absolute top-[30%] right-[10%] w-[300px] h-[300px] rounded-full will-change-transform"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 1.5, delay: 0.6 }}
         >
-          <div className="w-full h-full bg-gradient-radial from-orange-gold/12 via-orange-bright/4 to-transparent rounded-full" />
+          <div className="w-full h-full bg-gradient-radial from-forest-sage/12 via-transparent to-transparent rounded-full blur-[80px]" />
         </motion.div>
 
-        {/* Floating particles/orbs */}
+        {/* Floating particles with varied parallax speeds */}
         <motion.div
-          className="absolute top-[20%] left-[15%] w-3 h-3 bg-orange-gold/40 rounded-full blur-[2px]"
+          style={{ y: useTransform(scrollYProgress, [0, 1], [0, shouldReduceMotion ? 0 : 40]) }}
+          className="absolute top-[20%] left-[15%] w-3 h-3 bg-orange-gold/40 rounded-full blur-[2px] will-change-transform"
           animate={{ 
             y: [-20, 20, -20], 
             x: [-10, 10, -10],
@@ -109,7 +168,8 @@ const Hero = () => {
           transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
         />
         <motion.div
-          className="absolute top-[40%] right-[20%] w-2 h-2 bg-forest-sage/50 rounded-full blur-[1px]"
+          style={{ y: useTransform(scrollYProgress, [0, 1], [0, shouldReduceMotion ? 0 : -30]) }}
+          className="absolute top-[40%] right-[20%] w-2 h-2 bg-forest-sage/50 rounded-full blur-[1px] will-change-transform"
           animate={{ 
             y: [15, -15, 15], 
             opacity: [0.3, 0.6, 0.3] 
@@ -117,7 +177,8 @@ const Hero = () => {
           transition={{ duration: 5, repeat: Infinity, ease: "easeInOut", delay: 1 }}
         />
         <motion.div
-          className="absolute bottom-[30%] left-[25%] w-2.5 h-2.5 bg-orange-gold/30 rounded-full blur-[2px]"
+          style={{ y: useTransform(scrollYProgress, [0, 1], [0, shouldReduceMotion ? 0 : 60]) }}
+          className="absolute bottom-[30%] left-[25%] w-2.5 h-2.5 bg-orange-gold/30 rounded-full blur-[2px] will-change-transform"
           animate={{ 
             y: [-15, 20, -15], 
             x: [5, -5, 5],
@@ -126,12 +187,33 @@ const Hero = () => {
           transition={{ duration: 7, repeat: Infinity, ease: "easeInOut", delay: 2 }}
         />
         <motion.div
-          className="absolute top-[60%] right-[35%] w-1.5 h-1.5 bg-forest-deep/40 rounded-full blur-[1px]"
+          style={{ y: useTransform(scrollYProgress, [0, 1], [0, shouldReduceMotion ? 0 : -20]) }}
+          className="absolute top-[60%] right-[35%] w-1.5 h-1.5 bg-forest-deep/40 rounded-full blur-[1px] will-change-transform"
           animate={{ 
             y: [10, -20, 10], 
             opacity: [0.3, 0.5, 0.3] 
           }}
           transition={{ duration: 4, repeat: Infinity, ease: "easeInOut", delay: 0.5 }}
+        />
+        
+        {/* Additional floating orbs at different depths */}
+        <motion.div
+          style={{ y: useTransform(scrollYProgress, [0, 1], [0, shouldReduceMotion ? 0 : 80]) }}
+          className="absolute top-[70%] left-[60%] w-4 h-4 bg-forest-sage/25 rounded-full blur-[3px] will-change-transform"
+          animate={{ 
+            y: [-10, 15, -10],
+            opacity: [0.2, 0.4, 0.2] 
+          }}
+          transition={{ duration: 8, repeat: Infinity, ease: "easeInOut", delay: 1.5 }}
+        />
+        <motion.div
+          style={{ y: useTransform(scrollYProgress, [0, 1], [0, shouldReduceMotion ? 0 : -50]) }}
+          className="absolute top-[15%] right-[40%] w-2 h-2 bg-orange-bright/35 rounded-full blur-[1px] will-change-transform"
+          animate={{ 
+            x: [-8, 8, -8],
+            opacity: [0.3, 0.5, 0.3] 
+          }}
+          transition={{ duration: 5.5, repeat: Infinity, ease: "easeInOut", delay: 0.8 }}
         />
         
         {/* Subtle connecting lines - desktop only */}
@@ -158,7 +240,7 @@ const Hero = () => {
       </div>
 
       <motion.div
-        style={{ y, opacity }}
+        style={{ y: contentY, opacity: contentOpacity }}
         className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10"
       >
         <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center max-w-7xl mx-auto">
