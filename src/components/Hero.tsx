@@ -2,7 +2,8 @@ import { motion, useScroll, useTransform, useMotionValue, useSpring, useReducedM
 import { TrendingUp, Target, Zap } from "lucide-react";
 import MagneticButton from "./MagneticButton";
 import { StaggerContainer, StaggerItem } from "./StaggerReveal";
-import { useRef, useEffect } from "react";
+import TypeWriter from "./TypeWriter";
+import { useRef, useEffect, useState } from "react";
 import headshot from "@/assets/headshot.png";
 
 const Hero = () => {
@@ -258,16 +259,31 @@ const Hero = () => {
               </motion.div>
             </StaggerItem>
 
-            {/* Main headline */}
+            {/* Main headline with typing animation */}
             <StaggerItem>
-              <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-[3.5rem] xl:text-7xl font-bold leading-[1.08] mb-3 text-forest-deep">
-                Hi, I'm{" "}
+              <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-[3.5rem] xl:text-7xl font-bold leading-[1.08] mb-3 text-foreground">
+                <TypeWriter 
+                  text="Hi, I'm " 
+                  delay={800}
+                  speed={80}
+                  cursor={false}
+                />
                 <motion.span 
                   className="relative inline-block"
                   whileHover={{ scale: 1.02 }}
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  transition={{ delay: 1.5, duration: 0.4 }}
                 >
                   <span className="text-gradient-brand">Mike</span>
-                  <span className="ml-2">👋🏾</span>
+                  <motion.span 
+                    className="ml-2 inline-block"
+                    initial={{ opacity: 0, scale: 0.5, rotate: -20 }}
+                    animate={{ opacity: 1, scale: 1, rotate: 0 }}
+                    transition={{ delay: 1.8, duration: 0.5, type: "spring", stiffness: 200 }}
+                  >
+                    👋🏾
+                  </motion.span>
                 </motion.span>
               </h1>
             </StaggerItem>
