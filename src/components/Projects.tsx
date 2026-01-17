@@ -1,6 +1,7 @@
 import { motion, useScroll, useTransform } from "framer-motion";
 import { useRef } from "react";
-import { TrendingUp, Users, Clock, Zap, BarChart3, Target } from "lucide-react";
+import { Link } from "react-router-dom";
+import { TrendingUp, Users, Zap, Target, ArrowRight } from "lucide-react";
 import { StaggerContainer, StaggerItem } from "./StaggerReveal";
 
 const nekoProject = {
@@ -151,7 +152,7 @@ const Projects = () => {
                   </div>
                   
                   {/* Tags */}
-                  <div className="flex flex-wrap gap-2">
+                  <div className="flex flex-wrap gap-2 mb-6">
                     {nekoProject.tags.map((tag) => (
                       <span 
                         key={tag}
@@ -161,6 +162,15 @@ const Projects = () => {
                       </span>
                     ))}
                   </div>
+
+                  {/* View Case Study Link */}
+                  <Link 
+                    to="/neko"
+                    className="inline-flex items-center gap-2 px-6 py-3 bg-orange-gold text-forest-deep font-bold rounded-full hover:bg-orange-gold/90 transition-colors group"
+                  >
+                    <span>View Full Case Study</span>
+                    <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform" />
+                  </Link>
                 </div>
               </div>
             </motion.div>
