@@ -59,7 +59,9 @@ const Header = () => {
   }, []);
 
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 py-4 sm:py-5">
+    <header className={`fixed top-0 left-0 right-0 z-50 py-4 sm:py-5 transition-all duration-300 ${
+      isScrolled ? 'bg-background/80 backdrop-blur-lg shadow-sm' : ''
+    }`}>
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <nav className="flex items-center justify-between">
           {/* Logo */}
@@ -70,7 +72,7 @@ const Header = () => {
             animate={{ opacity: 1 }}
             className="text-lg sm:text-xl font-bold flex items-baseline tracking-tight"
           >
-            <span className="text-forest-deep dark:text-white">Mike T. Nichols</span>
+            <span className="text-forest-deep">Mike T. Nichols</span>
             <span className="text-orange-gold ml-1 text-xl sm:text-2xl" style={{ fontFamily: 'Georgia, serif' }}>II</span>
           </motion.a>
 
