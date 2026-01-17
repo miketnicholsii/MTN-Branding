@@ -227,6 +227,14 @@ const Neko = () => {
                 {metrics.map((metric, idx) => (
                   <motion.div
                     key={idx}
+                    initial={{ opacity: 0, y: 30, scale: 0.95 }}
+                    whileInView={{ opacity: 1, y: 0, scale: 1 }}
+                    viewport={{ once: true, amount: 0.3 }}
+                    transition={{ 
+                      duration: 0.5, 
+                      delay: idx * 0.1,
+                      ease: [0.25, 0.46, 0.45, 0.94]
+                    }}
                     whileHover={{ y: -6, scale: 1.02 }}
                     className="text-center p-6 sm:p-8 backdrop-blur-md rounded-2xl relative overflow-hidden"
                     style={{
@@ -243,19 +251,39 @@ const Neko = () => {
                       }}
                     />
                     <div className="relative z-10">
-                      <metric.icon size={28} className="mx-auto mb-4" style={{ color: 'hsl(var(--orange-500))' }} />
-                      <div 
+                      <motion.div
+                        initial={{ scale: 0, rotate: -10 }}
+                        whileInView={{ scale: 1, rotate: 0 }}
+                        viewport={{ once: true }}
+                        transition={{ 
+                          duration: 0.4, 
+                          delay: idx * 0.1 + 0.2,
+                          type: "spring",
+                          stiffness: 200
+                        }}
+                      >
+                        <metric.icon size={28} className="mx-auto mb-4" style={{ color: 'hsl(var(--orange-500))' }} />
+                      </motion.div>
+                      <motion.div 
                         className="text-3xl sm:text-4xl lg:text-5xl font-bold mb-2 tracking-tight"
                         style={{ color: 'hsl(var(--offwhite))' }}
+                        initial={{ opacity: 0, y: 10 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true }}
+                        transition={{ duration: 0.4, delay: idx * 0.1 + 0.3 }}
                       >
                         {metric.value}
-                      </div>
-                      <div 
+                      </motion.div>
+                      <motion.div 
                         className="text-sm font-medium"
                         style={{ color: 'hsl(var(--softwhite))' }}
+                        initial={{ opacity: 0 }}
+                        whileInView={{ opacity: 1 }}
+                        viewport={{ once: true }}
+                        transition={{ duration: 0.3, delay: idx * 0.1 + 0.4 }}
                       >
                         {metric.label}
-                      </div>
+                      </motion.div>
                     </div>
                   </motion.div>
                 ))}
