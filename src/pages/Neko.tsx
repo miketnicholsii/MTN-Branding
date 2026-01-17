@@ -25,8 +25,8 @@ import Footer from "@/components/Footer";
 const metrics = [
   { icon: TrendingUp, value: "300%", label: "Faster Insights", description: "Reduced time-to-insight from days to hours" },
   { icon: Users, value: "10K+", label: "Beta Users", description: "Active users during closed beta phase" },
-  { icon: Zap, value: "AI", label: "Powered", description: "ML models for predictive analytics" },
-  { icon: Target, value: "98%", label: "Accuracy", description: "Prediction accuracy across key metrics" },
+  { icon: Zap, value: "$8K", label: "Avg Build", description: "Average project value delivered" },
+  { icon: Target, value: "99.9%", label: "Uptime", description: "Platform reliability and availability" },
 ];
 
 const features = [
@@ -207,7 +207,7 @@ const Neko = () => {
                 className="text-xl sm:text-2xl md:text-3xl font-medium mb-4"
                 style={{ color: 'hsla(var(--offwhite) / 0.8)' }}
               >
-                AI-Powered Product Intelligence
+                Digital Strategy & Product Intelligence
               </p>
             </StaggerItem>
             
